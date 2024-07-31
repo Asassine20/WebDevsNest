@@ -1,41 +1,45 @@
 // pages/[...slug].js
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import { createConnection } from '../../lib/db';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
 
+// Function to generate a slug from a title
+const generateSlug = (title) => {
+  if (!title) return '';
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+};
+
 export async function getStaticPaths() {
-  const postsDirectory = path.join(process.cwd(), 'posts');
+  const connection = await createConnection();
+  const [rows] = await connection.execute('SELECT Category, Slug FROM Posts');
+  await connection.end();
 
-  function getPaths(dir) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    const files = entries
-      .filter(file => !file.isDirectory())
-      .map(file => path.relative(postsDirectory, path.join(dir, file.name)));  // Use file.name
-    const directories = entries.filter(folder => folder.isDirectory());
-    for (const directory of directories) {
-      files.push(...getPaths(path.join(dir, directory.name)));
-    }
-    return files;
-  }
+  const paths = rows.map(post => ({
+    params: { slug: [post.Category, post.Slug] },
+  }));
 
-  const files = getPaths(postsDirectory);
-
-  const paths = files.map((file) => {
-    const slug = file.replace(/\.md$/, '').split(path.sep);
-    return {
-      params: { slug },
-    };
-  });
-
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
-  const filePath = path.join(process.cwd(), 'posts', ...params.slug) + '.md';
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(fileContents);
+  const category = params.slug[0];
+  const slug = params.slug[1];
+
+  const connection = await createConnection();
+  const [rows] = await connection.execute('SELECT * FROM Posts WHERE Category = ? AND Slug = ?', [category, slug]);
+  await connection.end();
+
+  if (rows.length === 0) {
+    return { notFound: true };
+  }
+
+  const post = rows[0];
+  const data = {
+    title: post.Title,
+    description: post.Content,
+    date: post.Created_at.toISOString(), // Convert date to ISO string
+  };
+  const content = post.Content;
 
   return { props: { data, content } };
 }
@@ -49,7 +53,7 @@ const Post = ({ data, content }) => {
     "datePublished": data.date,
     "author": {
       "@type": "Person",
-      "name": "Andrew Sassine"  
+      "name": "Andrew Sassine"
     }
   };
 
