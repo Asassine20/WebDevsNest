@@ -43,6 +43,17 @@ const EditPost = () => {
     router.push('/admin');
   };
 
+  const handleDelete = async () => {
+    await fetch('/api/posts', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    });
+    router.push('/admin');
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPost(prevPost => ({
@@ -84,6 +95,7 @@ const EditPost = () => {
           onChange={handleChange}
         />
         <button type="submit">Update</button>
+        <button type="button" onClick={handleDelete} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>Delete</button>
       </form>
     </div>
   );
