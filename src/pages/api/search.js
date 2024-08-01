@@ -9,7 +9,7 @@ export default async (req, res) => {
 
   const connection = await createConnection();
   const [rows] = await connection.execute(
-    'SELECT Id, Title, Category, Slug FROM Posts WHERE Title LIKE ? OR Content LIKE ?',
+    'SELECT Id, Title, Category, Slug FROM Post WHERE Title LIKE ? OR Content LIKE ?',
     [`%${query}%`, `%${query}%`]
   );
   await connection.end();

@@ -8,3 +8,4 @@ npm install @prisma/client
 npm install nookies
 npm install bcryptjs
 npm install jsonwebtoken
+npm install nodemailer

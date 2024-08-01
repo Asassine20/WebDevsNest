@@ -15,6 +15,7 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.0",
     "next": "14.2.5",
+    "nodemailer": "^6.9.14",
     "nookies": "^2.5.2",
     "prismjs": "^1.29.0",
     "react": "^18",
