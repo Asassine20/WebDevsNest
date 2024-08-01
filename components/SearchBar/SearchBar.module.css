@@ -1,13 +1,40 @@
-.searchContainer {
+.navbarContainer {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
+  }
+  
+  .logo {
+    margin-right: 10px;
+  }
+  
+  .searchContainer {
     position: relative;
     width: 100%;
   }
   
-  .searchInput {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+  .searchBar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px 10px;
     box-sizing: border-box;
+  }
+  
+  .searchInput {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 25px;
+    box-sizing: border-box;
+  }
+  
+  .searchIcon {
+    color: #888;
+    font-size: 1.5em;
+    cursor: pointer; /* Add cursor pointer */
   }
   
   .suggestionsList {
