@@ -16,8 +16,8 @@ const Admin = () => {
       <Link href="/admin/new">Create New Post</Link>
       <ul>
         {posts.map(post => (
-          <li key={post.id}>
-            <Link href={`/admin/edit/${post.id}`}>{post.title}</Link>
+          <li key={post.Id}> {/* Use the unique Id field as the key */}
+            <Link href={`/admin/edit/${post.Id}`}>{post.Title}</Link>
           </li>
         ))}
       </ul>

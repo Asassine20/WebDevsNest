@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 
 const EditPost = () => {
   const [post, setPost] = useState({ title: '', content: '', category: '' });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const router = useRouter();
   const { id } = router.query;
 
@@ -10,7 +12,22 @@ const EditPost = () => {
     if (id) {
       fetch(`/api/posts?id=${id}`)
         .then(res => res.json())
-        .then(data => setPost(data));
+        .then(data => {
+          if (data && data.length > 0) {
+            setPost({
+              title: data[0].Title || '',
+              content: data[0].Content || '',
+              category: data[0].Category || ''
+            });
+          } else {
+            setError('Post not found');
+          }
+          setLoading(false);
+        })
+        .catch(err => {
+          setError('Failed to load post data.');
+          setLoading(false);
+        });
     }
   }, [id]);
 
@@ -26,26 +43,45 @@ const EditPost = () => {
     router.push('/admin');
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPost(prevPost => ({
+      ...prevPost,
+      [name]: value
+    }));
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div>
       <h1>Edit Post</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          name="title"
           placeholder="Title"
           value={post.title}
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
+          onChange={handleChange}
         />
         <input
           type="text"
+          name="category"
           placeholder="Category"
           value={post.category}
-          onChange={(e) => setPost({ ...post, category: e.target.value })}
+          onChange={handleChange}
         />
         <textarea
+          name="content"
           placeholder="Content"
           value={post.content}
-          onChange={(e) => setPost({ ...post, content: e.target.value })}
+          onChange={handleChange}
         />
         <button type="submit">Update</button>
       </form>
