@@ -1,16 +1,9 @@
 import { useState, useEffect } from 'react';
-import { createConnection } from '../../lib/db';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
 import styles from '../styles/Post.module.css';
 import Script from 'next/script';
 import categoryLinks from '../../links'; // Adjust the path as needed
-
-// Function to generate a slug from a title
-const generateSlug = (title) => {
-  if (!title) return '';
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-};
 
 export async function getStaticPaths() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
@@ -27,24 +20,38 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const category = params.slug[0];
   const slug = params.slug[1];
+
   // Check if category and slug are defined
   if (!category || !slug) {
     return { notFound: true };
   }
 
-  const connection = await createConnection();
-  const [rows] = await connection.execute('SELECT * FROM Post WHERE Category = ? AND Slug = ?', [category, slug]);
-  await connection.end();
-
-  if (rows.length === 0) {
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseURL}/api/postData`);
+  
+  if (!res.ok) {
     return { notFound: true };
   }
 
-  const post = rows[0];
+  const posts = await res.json();
+  const post = posts.find(post => post.Category === category && post.Slug === slug);
+
+  if (!post) {
+    return { notFound: true };
+  }
+
+  // Convert CreatedAt to Date object if necessary
+  const createdAtDate = new Date(post.CreatedAt);
+
+  // Check if the conversion was successful
+  if (isNaN(createdAtDate.getTime())) {
+    return { notFound: true }; // If not a valid date, return 404
+  }
+
   const data = {
     title: post.Title,
     description: post.Content,
-    date: post.CreatedAt.toISOString(), // Convert date to ISO string
+    date: createdAtDate.toISOString(), // Convert date to ISO string
   };
   const content = post.Content;
 
@@ -59,7 +66,7 @@ const Post = ({ data, content, category, slug }) => {
       setIsSmallScreen(window.innerWidth <= 1067);
     };
 
-    handleResize(); // Check the screen size on initial render
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
@@ -77,7 +84,6 @@ const Post = ({ data, content, category, slug }) => {
     }
   };
 
-  // Get relevant links for the current category
   const relevantLinks = categoryLinks[category] || {};
 
   return (

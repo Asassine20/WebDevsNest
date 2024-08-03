@@ -15,12 +15,12 @@ const MarkdownRenderer = ({ content }) => {
           const language = match ? match[1] : '';
 
           return !inline && match ? (
-            <div style={{ position: 'relative', marginBottom: '1em', border: '1px solid #4b0082', borderRadius: '4px' }}>
+            <div style={{ position: 'relative', marginBottom: '1em', border: '3px solid #682bd7', borderRadius: '4px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5em', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}>
-                <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#4b0082' }}>{language}</span>
+                <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#682bd7' }}>{language}</span>
                 <CopyToClipboard text={String(children).replace(/\n$/, '')}>
                   <button style={{ borderRadius: '4px', cursor: 'pointer', padding: '0.2em' }}>
-                    <FaRegCopy size={20} color="#4b0082" />
+                    <FaRegCopy size={20} color="#682bd7" />
                   </button>
                 </CopyToClipboard>
               </div>
