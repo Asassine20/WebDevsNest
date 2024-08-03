@@ -22,6 +22,7 @@
   border-radius: 10px;
   padding: 3px 8px; /* Reduced padding to make it less tall */
   box-sizing: border-box;
+  background-color: white; /* Ensure background is white */
 }
 
 .searchInput {
@@ -29,14 +30,16 @@
   border: none;
   outline: none;
   padding: 5px 8px; /* Reduced padding to make it less tall */
-  border-radius: 25px;
+  border-radius: 10px;
   box-sizing: border-box;
+  background-color: white; /* Ensure input background is white */
 }
 
 .searchIcon {
   color: #888;
   font-size: 1.5em;
   cursor: pointer;
+  margin-left: 5px; /* Ensure some space around the icon */
 }
 
 .suggestionsList {
@@ -48,6 +51,9 @@
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  text-align: left; /* Ensure text is left-aligned */
+  border-radius: 10px; /* Add border radius */
+  overflow: hidden; /* Ensure child elements respect the border radius */
 }
 
 .suggestionItem {
@@ -57,6 +63,7 @@
   color: grey;
   text-decoration: none;
   cursor: pointer;
+  text-align: left; /* Ensure text is left-aligned */
 }
 
 .suggestionItem a {
@@ -69,16 +76,16 @@
 }
 
 .suggestionItem:first-child {
-  background-color: rgba(249, 247, 119, 0.3);
+  background-color: #d7f7f4;
   color: black;
 }
 
 .suggestionItem:first-child .highlight {
-  background-color: rgba(249, 247, 119, 1);
+  background-color: #5fe1d5;
 }
 
 .highlight {
-  background-color: rgba(249, 247, 119, 1);
+  background-color: #5fe1d5;
 }
 
 .authButton {

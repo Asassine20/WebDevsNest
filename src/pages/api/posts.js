@@ -12,30 +12,30 @@ export default async (req, res) => {
   if (req.method === 'GET') {
     const { id } = req.query;
     if (id) {
-      const [rows] = await connection.execute('SELECT * FROM Posts WHERE Id = ?', [id]);
+      const [rows] = await connection.execute('SELECT * FROM Post WHERE Id = ?', [id]);
       await connection.end();
       return res.status(200).json(rows);
     } else {
-      const [rows] = await connection.execute('SELECT * FROM Posts');
+      const [rows] = await connection.execute('SELECT * FROM Post');
       await connection.end();
       return res.status(200).json(rows);
     }
   } else if (req.method === 'POST') {
     const { title, content, category } = req.body;
     const slug = generateSlug(title);
-    await connection.execute('INSERT INTO Posts (Title, Content, Category, Slug) VALUES (?, ?, ?, ?)', [title, content, category, slug]);
+    await connection.execute('INSERT INTO Post (Title, Content, Category, Slug) VALUES (?, ?, ?, ?)', [title, content, category, slug]);
     await connection.end();
     res.status(201).json({ message: 'Post created' });
   } else if (req.method === 'PUT') {
     const { id, title, content, category } = req.body;
     const slug = generateSlug(title);
     const currentTime = new Date();
-    await connection.execute('UPDATE Posts SET Title = ?, Content = ?, Category = ?, Slug = ?, Last_updated = ? WHERE Id = ?', [title, content, category, slug, currentTime, id]);
+    await connection.execute('UPDATE Post SET Title = ?, Content = ?, Category = ?, Slug = ?, Last_updated = ? WHERE Id = ?', [title, content, category, slug, currentTime, id]);
     await connection.end();
     res.status(200).json({ message: 'Post updated' });
   } else if (req.method === 'DELETE') {
     const { id } = req.body;
-    await connection.execute('DELETE FROM Posts WHERE Id = ?', [id]);
+    await connection.execute('DELETE FROM Post WHERE Id = ?', [id]);
     await connection.end();
     res.status(200).json({ message: 'Post deleted' });
   } else {

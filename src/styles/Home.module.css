@@ -1,0 +1,42 @@
+/* styles/Home.module.css */
+
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align the container towards the top */
+    min-height: 100vh; /* Ensure it takes up the full height of the viewport */
+    padding-top: 50px; /* Optional padding to adjust vertical alignment */
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically within the container */
+    height: auto; /* Adjust the height to take up a portion of the page */
+    width: 80vw; /* Adjust the width to take up a large portion of the page */
+    text-align: center;
+    background-color: #682bd7; /* Set background color */
+    padding: 50px 20px; /* Add some padding */
+    border-radius: 10px; /* Add border radius for better aesthetics */
+    margin-top: 20px; /* Adjust position from the top */
+  }
+  
+  .mainHeader {
+    font-size: 4rem; /* Make the main header larger */
+    font-weight: bold; /* Make the text much thicker */
+    color: white; /* Set the color to white */
+    margin-bottom: 1.5rem; /* Increase vertical padding between headers */
+  }
+  
+  .subHeader {
+    font-size: 1.5rem;
+    font-weight: bold; /* Make the text much thicker */
+    color:#5fe1d5; /* Set the color */
+    margin-bottom: 2rem;
+  }
+  
+  .searchContainer {
+    width: 100%;
+  }
+  
