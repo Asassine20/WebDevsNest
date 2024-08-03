@@ -8,6 +8,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin-right: 20px; /* Add margin to separate from side panel */
 }
 
 .sidePanel {
@@ -25,30 +26,41 @@
 
 .sidePanel h2 {
   margin-top: 0;
+  font-size: 1.6rem; /* Adjust the size of the category header */
+  margin-left: -10px; /* Move the category header further to the left */
 }
 
 .sidePanel h3 {
-  margin: 20px 0 10px;
+  margin: 10px 0 5px; /* Smaller margin for the headings */
+  font-size: 1.4rem; /* Adjust the size of the subheaders */
+  margin-left: -10px; /* Move the subheaders further to the left */
 }
 
 .sidePanel ul {
   list-style: none;
   padding: 0;
+  margin: 0; /* Remove default margin */
 }
 
 .sidePanel li {
-  margin-bottom: 10px;
+  margin: 0; /* Remove margin between list items */
+  background-color: #f0f0f0; /* Same background color as the side panel */
+  width: calc(100% + 40px); /* Ensure the li covers the full width, accounting for padding */
+  margin-left: -20px; /* Adjust margin to ensure the li starts from the edge */
+  margin-right: -20px; /* Adjust margin to ensure the li ends at the edge */
+  padding: 0; /* Remove any default padding */
 }
 
-.sidePanel a {
+.sidePanel li a {
   color: #333;
   text-decoration: none;
-  display: block; /* Make the link cover the entire row */
-  padding: 5px 10px;
-  border-radius: 5px; /* Add some border-radius */
+  display: block; /* Make the link cover the entire li */
+  padding: 5px 30px; /* Adjust padding for the links */
+  font-weight: bold; /* Make the links bold */
+  margin-left: 0; /* Remove margin-left to align with the headers */
 }
 
-.sidePanel a:hover {
+.sidePanel li a:hover {
   background-color: #e0e0e0; /* Change background color on hover */
 }
 
@@ -57,10 +69,13 @@
   color: white;
 }
 
+.sidePanel .activeLink a:hover {
+  background-color: #682bd7; /* Maintain the active link's background color on hover */
+}
+
 .postContainer {
-  flex: 1;
-  max-width: 800px;
-  margin: 0 auto;
+  flex: 1; /* Allow the post container to grow and fill available space */
+  margin: 20px 0; /* Add margin to separate from ad section and side panel */
   padding: 20px;
   line-height: 1.6;
 }
@@ -113,16 +128,31 @@
 }
 
 .adSection {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px; /* Adjust width as needed */
+  height: 100vh; /* Make the adSection take full height */
+  background-color: lightblue; /* For visualization, remove or adjust as needed */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding-top: 20px; /* Ensure padding at the top */
 }
 
 .ad {
+  width: 100%;
+  background-color: purple; /* For visualization, remove or adjust as needed */
   margin-bottom: 20px;
 }
 
-/* Media query to handle small screens */
+.adTop {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 @media (max-width: 1067px) {
   .sidePanel {
     display: none; /* Hide side panel on small screens */
@@ -130,5 +160,17 @@
 
   .contentWrapper {
     width: 100%; /* Ensure content wrapper takes the full width */
+    margin-right: 0; /* Remove right margin */
+  }
+
+  .adSection {
+    position: static; /* Change to static position on small screens */
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: lightblue; /* Ensure background color on small screens */
+  }
+
+  .postContainer {
+    margin: 0 20px; /* Maintain margin to separate from ad section */
   }
 }

@@ -92,8 +92,8 @@ const Post = ({ data, content, category, slug }) => {
       </Head>
       <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
       <div className={styles.pageContainer}>
-        <div className={`${styles.sidePanel} ${isSmallScreen ? styles.closed : ''}`}>
-          <h2>Related Links</h2>
+        <div className={styles.sidePanel}>
+          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           {Object.keys(relevantLinks).map((miniTitle, index) => (
             <div key={index}>
               <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
@@ -108,45 +108,34 @@ const Post = ({ data, content, category, slug }) => {
           ))}
         </div>
         <div className={styles.contentWrapper}>
-          <div className={styles.mainContent}>
-            <div className={styles.ad} style={{ textAlign: 'center' }}>
-              <ins className="adsbygoogle"
-                   style={{ display: 'block', width: '100%', height: '90px' }}
-                   data-ad-client="ca-pub-6059555296443681"
-                   data-ad-slot="xxxxxxxxxx"></ins>
-              <Script>
-                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-              </Script>
-            </div>
-            <div className={styles.postContainer}>
-              <header className={styles.postHeader}>
-                <h1 className={styles.postTitle}>{data.title}</h1>
-                <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
-              </header>
-              <div className={styles.postContent}>
-                <MarkdownRenderer content={content} />
-              </div>
+          <div className={styles.adTop} style={{ textAlign: 'center' }}>
+            <ins className="adsbygoogle"
+                 style={{ display: 'block', width: '100%', height: '90px' }}
+                 data-ad-client="ca-pub-6059555296443681"
+                 data-ad-slot="xxxxxxxxxx"></ins>
+            <Script>
+              {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+            </Script>
+          </div>
+          <div className={styles.postContainer}>
+            <header className={styles.postHeader}>
+              <h1 className={styles.postTitle}>{data.title}</h1>
+              <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
+            </header>
+            <div className={styles.postContent}>
+              <MarkdownRenderer content={content} />
             </div>
           </div>
-          <div className={styles.adSection}>
-            <div className={styles.ad}>
-              <ins className="adsbygoogle"
-                   style={{ display: 'block', width: '300px', height: '250px' }}
-                   data-ad-client="ca-pub-6059555296443681"
-                   data-ad-slot="xxxxxxxxxx"></ins>
-              <Script>
-                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-              </Script>
-            </div>
-            <div className={styles.ad}>
-              <ins className="adsbygoogle"
-                   style={{ display: 'block', width: '300px', height: '250px' }}
-                   data-ad-client="ca-pub-6059555296443681"
-                   data-ad-slot="xxxxxxxxxx"></ins>
-              <Script>
-                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-              </Script>
-            </div>
+        </div>
+        <div className={styles.adSection}>
+          <div className={styles.ad}>
+            <ins className="adsbygoogle"
+                 style={{ display: 'block', width: '300px', height: '250px' }}
+                 data-ad-client="ca-pub-6059555296443681"
+                 data-ad-slot="xxxxxxxxxx"></ins>
+            <Script>
+              {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+            </Script>
           </div>
         </div>
       </div>
