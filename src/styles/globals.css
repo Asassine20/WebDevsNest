@@ -90,7 +90,7 @@ body {
 
 .custom-link {
   color: #682bd7;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .custom-link:hover,

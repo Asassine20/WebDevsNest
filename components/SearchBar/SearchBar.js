@@ -1,4 +1,3 @@
-// components/SearchBar.js
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { IoIosSearch } from 'react-icons/io';
@@ -129,7 +128,7 @@ const SearchBar = () => {
       </div>
       <div className={styles.authButtons}>
         <Link href="/login" passHref>
-          <button className={`${styles.authButton}`}>Login</button>
+          <button className={`${styles.authButton} no-underline`}>Login</button>
         </Link>
       </div>
     </div>

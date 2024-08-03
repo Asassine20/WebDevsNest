@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align the container towards the top */
-    min-height: 100vh; /* Ensure it takes up the full height of the viewport */
+    min-height: 200vh; /* Ensure it takes up the full height of the viewport */
     padding-top: 50px; /* Optional padding to adjust vertical alignment */
   }
   

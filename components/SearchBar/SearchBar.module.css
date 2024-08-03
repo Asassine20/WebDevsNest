@@ -108,3 +108,14 @@
 .authButton:hover {
   background-color: #5d27c2; /* Even darker purple */
 }
+
+/* Custom class to override Bootstrap underline link styles */
+.no-underline {
+  text-decoration: none !important;
+  color: white !important; /* Ensure the link color is white */
+}
+
+.no-underline:hover {
+  text-decoration: none !important;
+  color: white !important; /* Ensure the link color is white */
+}

@@ -1,4 +1,3 @@
-// pages/api/auth/signup.js
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 import { query } from '../../../../lib/db';
@@ -9,6 +8,13 @@ export default async function handler(req, res) {
   }
 
   const { email, name, password } = req.body;
+
+  // Check if email already exists
+  const existingUser = await query('SELECT * FROM Users WHERE Email = ?', [email]);
+
+  if (existingUser.length > 0) {
+    return res.status(409).json({ error: 'Email already in use' }); // Conflict
+  }
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const userId = uuidv4();

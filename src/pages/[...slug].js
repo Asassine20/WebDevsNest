@@ -1,7 +1,9 @@
-// pages/[...slug].js
 import { createConnection } from '../../lib/db';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
+import styles from '../styles/Post.module.css';
+import Script from 'next/script';
+import categoryLinks from '../../links'; // Adjust the path as needed
 
 // Function to generate a slug from a title
 const generateSlug = (title) => {
@@ -46,14 +48,14 @@ export async function getStaticProps({ params }) {
   const data = {
     title: post.Title,
     description: post.Content,
-    date: post.Created_at.toISOString(), // Convert date to ISO string
+    date: post.CreatedAt.toISOString(), // Convert date to ISO string
   };
   const content = post.Content;
 
-  return { props: { data, content } };
+  return { props: { data, content, category } };
 }
 
-const Post = ({ data, content }) => {
+const Post = ({ data, content, category }) => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -66,6 +68,9 @@ const Post = ({ data, content }) => {
     }
   };
 
+  // Get relevant links for the current category
+  const relevantLinks = categoryLinks[category] || {};
+
   return (
     <>
       <Head>
@@ -76,7 +81,66 @@ const Post = ({ data, content }) => {
           {JSON.stringify(structuredData)}
         </script>
       </Head>
-      <MarkdownRenderer content={content} />
+      <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
+      <div className={styles.pageContainer}>
+        <div className={styles.contentWrapper}>
+          <div className={styles.sidePanel}>
+            <h2>Related Links</h2>
+            {Object.keys(relevantLinks).map((miniTitle, index) => (
+              <div key={index}>
+                <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
+                <ul>
+                  {relevantLinks[miniTitle].map((link, idx) => (
+                    <li key={idx}>
+                      <a href={link.url}>{link.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className={styles.mainContent}>
+            <div className={styles.ad} style={{ textAlign: 'center' }}>
+              <ins className="adsbygoogle"
+                   style={{ display: 'block', width: '100%', height: '90px' }}
+                   data-ad-client="ca-pub-xxxxxxxxxx"
+                   data-ad-slot="xxxxxxxxxx"></ins>
+              <Script>
+                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+              </Script>
+            </div>
+            <div className={styles.postContainer}>
+              <header className={styles.postHeader}>
+                <h1 className={styles.postTitle}>{data.title}</h1>
+                <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
+              </header>
+              <div className={styles.postContent}>
+                <MarkdownRenderer content={content} />
+              </div>
+            </div>
+          </div>
+          <div className={styles.adSection}>
+            <div className={styles.ad}>
+              <ins className="adsbygoogle"
+                   style={{ display: 'block', width: '300px', height: '250px' }}
+                   data-ad-client="ca-pub-xxxxxxxxxx"
+                   data-ad-slot="xxxxxxxxxx"></ins>
+              <Script>
+                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+              </Script>
+            </div>
+            <div className={styles.ad}>
+              <ins className="adsbygoogle"
+                   style={{ display: 'block', width: '300px', height: '250px' }}
+                   data-ad-client="ca-pub-xxxxxxxxxx"
+                   data-ad-slot="xxxxxxxxxx"></ins>
+              <Script>
+                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+              </Script>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
