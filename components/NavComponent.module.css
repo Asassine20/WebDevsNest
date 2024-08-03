@@ -1,7 +1,7 @@
 .navContainer {
     display: flex;
     align-items: center;
-    background-color: #1d1b26;
+    background-color: #333333;
     padding: 10px 20px;
     width: 100%;
     z-index: 1001; /* Ensure the nav is above the side panel */
@@ -20,11 +20,11 @@
   }
   
   .toggleButton {
-    background-color: #682bd7;
-    color: white;
+    background: none;
     border: none;
-    padding: 10px 20px;
+    padding: 0;
     cursor: pointer;
+    color: white;
     margin-right: 15px;
   }
   
@@ -34,7 +34,7 @@
     left: 0;
     width: 250px; /* Maintain 250px width */
     height: 100vh; /* Extend to the full height of the viewport */
-    background-color: rgba(240, 240, 240, 0.95);
+    background-color: rgba(240, 240, 240, 1);
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;

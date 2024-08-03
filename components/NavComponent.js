@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from './NavComponent.module.css';
 import categoryLinks from '../links'; // Adjust the path as needed
 
@@ -14,33 +15,25 @@ const NavComponent = ({ category, slug, isSlugPage }) => {
       setIsSmallScreen(window.innerWidth <= 1067);
     };
 
-    // Set initial value
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = (e) => {
+    const handleScroll = () => {
       if (isPanelOpen && sidePanelRef.current) {
         const sidePanel = sidePanelRef.current;
         const navHeight = navRef.current ? navRef.current.offsetHeight : 0;
         sidePanel.style.top = `${navHeight}px`;
 
         const { top, bottom } = sidePanel.getBoundingClientRect();
-        if (e.target !== sidePanel && (window.scrollY > bottom || window.scrollY < top)) {
+        if (window.scrollY < top || window.scrollY > bottom) {
           setIsPanelOpen(false);
         }
       }
     };
 
+    handleResize();
+    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
   }, [isPanelOpen]);
@@ -60,7 +53,7 @@ const NavComponent = ({ category, slug, isSlugPage }) => {
       <div ref={navRef} className={styles.navContainer}>
         {isSlugPage && isSmallScreen && (
           <button onClick={togglePanel} className={styles.toggleButton}>
-            {isPanelOpen ? 'Close Panel' : 'Open Panel'}
+            <RxHamburgerMenu size={24} />
           </button>
         )}
         <div className={styles.linksContainer}>
