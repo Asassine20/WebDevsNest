@@ -1,14 +1,7 @@
-/* Post.module.css */
 .pageContainer {
   display: flex;
   min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
-}
-
-.contentWrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-right: 20px; /* Add margin to separate from side panel */
+  position: relative; /* Make the page container relative */
 }
 
 .sidePanel {
@@ -73,9 +66,23 @@
   background-color: #682bd7; /* Maintain the active link's background color on hover */
 }
 
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px; /* Add margin to separate from ad section */
+}
+
+.adTop {
+  width: calc(100% - 160px); /* Extend to cover the full width except the width of the adSide */
+  height: 100px; /* Adjust height for the top ad */
+  background-color: pink; /* For visualization */
+  text-align: center;
+}
+
 .postContainer {
   flex: 1; /* Allow the post container to grow and fill available space */
-  margin: 20px 0; /* Add margin to separate from ad section and side panel */
+  margin: 10px 0; /* Add margin to separate from ad section and side panel */
   padding: 20px;
   line-height: 1.6;
 }
@@ -128,29 +135,22 @@
 }
 
 .adSection {
-  position: fixed;
+  position: absolute;
   right: 0;
-  top: 0;
-  width: 300px; /* Adjust width as needed */
-  height: 100vh; /* Make the adSection take full height */
+  top: 0; /* Ensure the adSection starts at the top */
+  width: 160px; /* Adjust width as needed */
+  height: 100vh; /* Make the adSection take the full height */
   background-color: lightblue; /* For visualization, remove or adjust as needed */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 20px; /* Ensure padding at the top */
+  justify-content: flex-start; /* Align items to the top */
 }
 
-.ad {
-  width: 100%;
+.adSide {
+  width: 200px; /* Adjust width for the side ad */
+  height: 100vh; /* Adjust height for the side ad */
   background-color: purple; /* For visualization, remove or adjust as needed */
-  margin-bottom: 20px;
-}
-
-.adTop {
-  width: 100%;
-  margin-bottom: 20px;
-  text-align: center;
 }
 
 @media (max-width: 1067px) {
@@ -158,16 +158,17 @@
     display: none; /* Hide side panel on small screens */
   }
 
-  .contentWrapper {
-    width: 100%; /* Ensure content wrapper takes the full width */
+  .adSection {
+    display: none; /* Hide ad section on small screens */
+  }
+
+  .mainContent {
+    width: 100%; /* Ensure main content takes the full width */
     margin-right: 0; /* Remove right margin */
   }
 
-  .adSection {
-    position: static; /* Change to static position on small screens */
-    width: 100%;
-    margin-bottom: 20px;
-    background-color: lightblue; /* Ensure background color on small screens */
+  .adTop {
+    width: 100%; /* Take full width on small screens */
   }
 
   .postContainer {

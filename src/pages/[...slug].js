@@ -107,10 +107,10 @@ const Post = ({ data, content, category, slug }) => {
             </div>
           ))}
         </div>
-        <div className={styles.contentWrapper}>
-          <div className={styles.adTop} style={{ textAlign: 'center' }}>
+        <div className={styles.mainContent}>
+          <div className={styles.adTop}>
             <ins className="adsbygoogle"
-                 style={{ display: 'block', width: '100%', height: '90px' }}
+                 style={{ display: 'block', width: '100%', height: '60px' }}
                  data-ad-client="ca-pub-6059555296443681"
                  data-ad-slot="xxxxxxxxxx"></ins>
             <Script>
@@ -128,9 +128,9 @@ const Post = ({ data, content, category, slug }) => {
           </div>
         </div>
         <div className={styles.adSection}>
-          <div className={styles.ad}>
+          <div className={styles.adSide}>
             <ins className="adsbygoogle"
-                 style={{ display: 'block', width: '300px', height: '250px' }}
+                 style={{ display: 'block', width: '160px', height: '600px' }}
                  data-ad-client="ca-pub-6059555296443681"
                  data-ad-slot="xxxxxxxxxx"></ins>
             <Script>
