@@ -13,11 +13,11 @@ const generateSlug = (title) => {
 };
 
 export async function getStaticPaths() {
-  const connection = await createConnection();
-  const [rows] = await connection.execute('SELECT Category, Slug FROM Post');
-  await connection.end();
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseURL}/api/postData`);
+  const posts = await res.json();
 
-  const paths = rows.map(post => ({
+  const paths = posts.map(post => ({
     params: { slug: [post.Category, post.Slug] },
   }));
 
@@ -107,23 +107,25 @@ const Post = ({ data, content, category, slug }) => {
             </div>
           ))}
         </div>
-        <div className={styles.mainContent}>
-          <div className={styles.adTop}>
-            <ins className="adsbygoogle"
-                 style={{ display: 'block', width: '100%', height: '60px' }}
-                 data-ad-client="ca-pub-6059555296443681"
-                 data-ad-slot="xxxxxxxxxx"></ins>
-            <Script>
-              {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-            </Script>
-          </div>
-          <div className={styles.postContainer}>
-            <header className={styles.postHeader}>
-              <h1 className={styles.postTitle}>{data.title}</h1>
-              <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
-            </header>
-            <div className={styles.postContent}>
-              <MarkdownRenderer content={content} />
+        <div className={styles.mainContentWrapper}>
+          <div className={styles.mainContent}>
+            <div className={styles.adTop}>
+              <ins className="adsbygoogle"
+                   style={{ display: 'block', width: '100%', height: '60px' }}
+                   data-ad-client="ca-pub-6059555296443681"
+                   data-ad-slot="xxxxxxxxxx"></ins>
+              <Script>
+                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+              </Script>
+            </div>
+            <div className={styles.postContainer}>
+              <header className={styles.postHeader}>
+                <h1 className={styles.postTitle}>{data.title}</h1>
+                <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
+              </header>
+              <div className={styles.postContent}>
+                <MarkdownRenderer content={content} />
+              </div>
             </div>
           </div>
         </div>

@@ -1,20 +1,14 @@
 .pageContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: 250px 1fr 160px; /* Define the columns: sidePanel, mainContent, adSide */
+  grid-template-rows: auto; /* Auto height for rows */
+  gap: 0; /* No gap between columns */
   min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
-  position: relative; /* Make the page container relative */
 }
 
 .sidePanel {
   background-color: #f0f0f0;
   padding: 20px;
-  width: 250px;
-  transition: transform 0.3s ease;
-  height: 100vh; /* Extend the side panel to the bottom of the page */
-  overflow-y: auto; /* Add scrolling if the content exceeds the height */
-}
-
-.sidePanel.closed {
-  transform: translateX(-250px); /* Ensure the side panel is fully hidden */
 }
 
 .sidePanel h2 {
@@ -66,15 +60,18 @@
   background-color: #682bd7; /* Maintain the active link's background color on hover */
 }
 
-.mainContent {
-  flex: 1;
+.mainContentWrapper {
   display: flex;
   flex-direction: column;
-  margin-right: 20px; /* Add margin to separate from ad section */
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
 }
 
 .adTop {
-  width: calc(100% - 160px); /* Extend to cover the full width except the width of the adSide */
+  width: 100%; /* Extend to cover the full width */
   height: 100px; /* Adjust height for the top ad */
   background-color: pink; /* For visualization */
   text-align: center;
@@ -85,6 +82,7 @@
   margin: 10px 0; /* Add margin to separate from ad section and side panel */
   padding: 20px;
   line-height: 1.6;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .postHeader {
@@ -135,11 +133,6 @@
 }
 
 .adSection {
-  position: absolute;
-  right: 0;
-  top: 0; /* Ensure the adSection starts at the top */
-  width: 160px; /* Adjust width as needed */
-  height: 100vh; /* Make the adSection take the full height */
   background-color: lightblue; /* For visualization, remove or adjust as needed */
   display: flex;
   flex-direction: column;
@@ -148,9 +141,8 @@
 }
 
 .adSide {
-  width: 200px; /* Adjust width for the side ad */
+  width: 160px; /* Adjust width for the side ad */
   height: 100vh; /* Adjust height for the side ad */
-  background-color: purple; /* For visualization, remove or adjust as needed */
 }
 
 @media (max-width: 1067px) {
@@ -162,9 +154,13 @@
     display: none; /* Hide ad section on small screens */
   }
 
+  .pageContainer {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
   .mainContent {
     width: 100%; /* Ensure main content takes the full width */
-    margin-right: 0; /* Remove right margin */
+    margin: 0; /* Remove right and left margin */
   }
 
   .adTop {
