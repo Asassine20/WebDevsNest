@@ -1,6 +1,6 @@
+/* Post.module.css */
 .pageContainer {
   display: flex;
-  flex-wrap: wrap;
   min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
 }
 
@@ -13,10 +13,14 @@
 .sidePanel {
   background-color: #f0f0f0;
   padding: 20px;
-  flex: 0 0 250px;
+  width: 250px;
   transition: transform 0.3s ease;
   height: 100vh; /* Extend the side panel to the bottom of the page */
   overflow-y: auto; /* Add scrolling if the content exceeds the height */
+}
+
+.sidePanel.closed {
+  transform: translateX(-250px); /* Ensure the side panel is fully hidden */
 }
 
 .sidePanel h2 {
@@ -54,6 +58,7 @@
 }
 
 .postContainer {
+  flex: 1;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -115,4 +120,15 @@
 
 .ad {
   margin-bottom: 20px;
+}
+
+/* Media query to handle small screens */
+@media (max-width: 1067px) {
+  .sidePanel {
+    display: none; /* Hide side panel on small screens */
+  }
+
+  .contentWrapper {
+    width: 100%; /* Ensure content wrapper takes the full width */
+  }
 }

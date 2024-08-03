@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { createConnection } from '../../lib/db';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
@@ -51,6 +52,19 @@ export async function getStaticProps({ params }) {
 }
 
 const Post = ({ data, content, category, slug }) => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 1067);
+    };
+
+    handleResize(); // Check the screen size on initial render
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -78,7 +92,7 @@ const Post = ({ data, content, category, slug }) => {
       </Head>
       <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
       <div className={styles.pageContainer}>
-        <div className={styles.sidePanel}>
+        <div className={`${styles.sidePanel} ${isSmallScreen ? styles.closed : ''}`}>
           <h2>Related Links</h2>
           {Object.keys(relevantLinks).map((miniTitle, index) => (
             <div key={index}>

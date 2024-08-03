@@ -2,14 +2,19 @@ import { useState, useEffect } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from './CategoryNav.module.css';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import categoryLinks from '../../links'; // Adjust the path as needed
 
 const CategoryNav = ({ onToggleSidePanel }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [sidePanelOpen, setSidePanelOpen] = useState(false);
+  const router = useRouter();
 
   const toggleSidePanel = () => {
     setSidePanelOpen(!sidePanelOpen);
+    if (onToggleSidePanel) {
+      onToggleSidePanel();
+    }
   };
 
   useEffect(() => {
@@ -31,7 +36,7 @@ const CategoryNav = ({ onToggleSidePanel }) => {
 
   return (
     <div className={styles.categoryNavContainer}>
-      {isSmallScreen && (
+      {isSmallScreen && router.pathname !== '/' && (
         <button className={styles.toggleButton} onClick={toggleSidePanel}>
           <RxHamburgerMenu size={24} />
         </button>
