@@ -1,25 +1,23 @@
-import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
+// middleware/auth.js
+import { query } from '../lib/db';
+import cookie from 'cookie';
 
-const prisma = new PrismaClient();
+export default async function auth(req, res, next) {
+  const cookies = cookie.parse(req.headers.cookie || '');
+  const userId = cookies.user;
 
-export const authenticated = fn => async (req, res) => {
-  const { auth } = req.cookies;
-
-  if (!auth) {
-    return res.status(401).json({ error: 'Not authenticated' });
+  if (!userId) {
+    return res.status(401).end(); // Unauthorized
   }
 
-  try {
-    const decoded = jwt.verify(auth, process.env.JWT_SECRET);
-    req.user = await prisma.user.findUnique({ where: { id: decoded.id } });
+  const results = await query(`
+    SELECT * FROM Users WHERE Id = ?
+  `, [userId]);
 
-    if (!req.user) {
-      return res.status(401).json({ error: 'Not authenticated' });
-    }
-
-    return await fn(req, res);
-  } catch (error) {
-    return res.status(401).json({ error: 'Not authenticated' });
+  if (results.length === 0) {
+    return res.status(401).end(); // Unauthorized
   }
-};
+
+  req.user = results[0];
+  next();
+}

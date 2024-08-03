@@ -58,3 +58,43 @@ body {
   font-weight: 900;
   font-style: normal;
 }
+
+/* styles/globals.css */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Custom styles */
+.btn-primary {
+  background-color: #682bd7 !important;
+  border-color: #682bd7 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #520dc2 !important; /* Slightly darker shade of #6610f2 */
+  border-color: #520dc2 !important;
+}
+
+/* Custom secondary button color */
+.btn-secondary {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background-color: #e0a800 !important;
+  border-color: #e0a800 !important;
+}
+
+.custom-link {
+  color: #682bd7;
+  text-decoration: none;
+}
+
+.custom-link:hover,
+.custom-link:focus {
+  color: #520dc2; /* Slightly darker shade of #6610f2 */
+  text-decoration: underline;
+}

@@ -11,7 +11,7 @@ const generateSlug = (title) => {
 
 export async function getStaticPaths() {
   const connection = await createConnection();
-  const [rows] = await connection.execute('SELECT Category, Slug FROM Posts');
+  const [rows] = await connection.execute('SELECT Category, Slug FROM Post');
   await connection.end();
 
   const paths = rows.map(post => ({
@@ -25,8 +25,17 @@ export async function getStaticProps({ params }) {
   const category = params.slug[0];
   const slug = params.slug[1];
 
+  // Add logging to debug the values
+  console.log('Category:', category);
+  console.log('Slug:', slug);
+
+  // Check if category and slug are defined
+  if (!category || !slug) {
+    return { notFound: true };
+  }
+
   const connection = await createConnection();
-  const [rows] = await connection.execute('SELECT * FROM Posts WHERE Category = ? AND Slug = ?', [category, slug]);
+  const [rows] = await connection.execute('SELECT * FROM Post WHERE Category = ? AND Slug = ?', [category, slug]);
   await connection.end();
 
   if (rows.length === 0) {

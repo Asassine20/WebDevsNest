@@ -1,81 +1,103 @@
+/* components/SearchBar.module.css */
+
 .navbarContainer {
-    display: flex;
-    align-items: center;
-    padding: 5px 5px;
-  }
-  
-  .logo {
-    margin-right: 10px;
-  }
-  
-  .searchContainer {
-    position: relative;
-    width: 100%;
-  }
-  
-  .searchBar {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 5px 10px;
-    box-sizing: border-box;
-  }
-  
-  .searchInput {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    padding: 10px;
-    border-radius: 25px;
-    box-sizing: border-box;
-  }
-  
-  .searchIcon {
-    color: #888;
-    font-size: 1.5em;
-    cursor: pointer; /* Add cursor pointer */
-  }
-  
-  .suggestionsList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    width: 100%;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
-  
-  .suggestionItem {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    font-weight: bold;
-    color: grey;
-    text-decoration: none;
-    cursor: pointer; /* Add cursor pointer */
-  }
-  
-  .suggestionItem a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .suggestionItem:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .suggestionItem:first-child {
-    background-color: rgba(249, 247, 119, 0.3);
-    color: black;
-  }
-  
-  .suggestionItem:first-child .highlight {
-    background-color: rgba(249, 247, 119, 1); /* More transparent */
-  }
-  
-  .highlight {
-    background-color: rgba(249, 247, 119, 1); /* More transparent */
-  }
-  
+  display: flex;
+  align-items: center;
+  padding: 5px 5px;
+}
+
+.logo {
+  margin-right: 10px;
+}
+
+.searchContainer {
+  position: relative;
+  width: 100%;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 3px 8px; /* Reduced padding to make it less tall */
+  box-sizing: border-box;
+}
+
+.searchInput {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 5px 8px; /* Reduced padding to make it less tall */
+  border-radius: 25px;
+  box-sizing: border-box;
+}
+
+.searchIcon {
+  color: #888;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.suggestionsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.suggestionItem {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.suggestionItem a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.suggestionItem:hover {
+  background-color: #f0f0f0;
+}
+
+.suggestionItem:first-child {
+  background-color: rgba(249, 247, 119, 0.3);
+  color: black;
+}
+
+.suggestionItem:first-child .highlight {
+  background-color: rgba(249, 247, 119, 1);
+}
+
+.highlight {
+  background-color: rgba(249, 247, 119, 1);
+}
+
+.authButton {
+  padding: 20px 20px; /* Slightly larger button */
+  margin-left: 10px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px; /* Slightly larger height */
+  background-color: #682bd7; /* Darker shade of purple */
+  color: white;
+  border-radius: 10px;
+  text-decoration: none; /* Remove underline */
+}
+
+.authButton:hover {
+  background-color: #5d27c2; /* Even darker purple */
+}

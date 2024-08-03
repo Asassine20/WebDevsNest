@@ -1,33 +1,31 @@
-import { PrismaClient } from '@prisma/client';
+// pages/api/auth/login.js
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import { serialize } from 'cookie';
-
-const prisma = new PrismaClient();
+import { query } from '../../../../lib/db';
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { email, password } = req.body;
-
-    const user = await prisma.user.findUnique({ where: { Email: email } });
-
-    if (user && await bcrypt.compare(password, user.Password)) {
-      const token = jwt.sign({ id: user.Id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-      res.setHeader('Set-Cookie', serialize('auth', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== 'development',
-        sameSite: 'strict',
-        maxAge: 3600,
-        path: '/',
-      }));
-
-      res.status(200).json({ message: 'Logged in' });
-    } else {
-      res.status(401).json({ error: 'Invalid credentials' });
-    }
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
   }
+
+  const { email, password } = req.body;
+
+  const results = await query(`
+    SELECT * FROM Users WHERE Email = ?
+  `, [email]);
+
+  if (results.length === 0) {
+    return res.status(401).json({ error: 'Invalid email or password' });
+  }
+
+  const user = results[0];
+
+  const isPasswordMatch = await bcrypt.compare(password, user.Password);
+  if (!isPasswordMatch) {
+    return res.status(401).json({ error: 'Invalid email or password' });
+  }
+
+  // Set a cookie for session management
+  res.setHeader('Set-Cookie', `user=${user.Id}; HttpOnly; Path=/; Max-Age=3600`);
+
+  res.status(200).json({ userId: user.Id });
 }
