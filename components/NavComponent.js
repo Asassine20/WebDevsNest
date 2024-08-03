@@ -4,7 +4,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from './NavComponent.module.css';
 import categoryLinks from '../links'; // Adjust the path as needed
 
-const NavComponent = ({ category, slug, isSlugPage }) => {
+const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const navRef = useRef(null);
@@ -12,7 +12,13 @@ const NavComponent = ({ category, slug, isSlugPage }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 1067);
+      const smallScreen = window.innerWidth <= 1067;
+      setIsSmallScreen(smallScreen);
+
+      if (!smallScreen && isPanelOpen) {
+        setIsPanelOpen(false);
+        onSidePanelToggle(false); // Notify parent to open slug side panel
+      }
     };
 
     const handleScroll = () => {
@@ -36,17 +42,21 @@ const NavComponent = ({ category, slug, isSlugPage }) => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isPanelOpen]);
+  }, [isPanelOpen, onSidePanelToggle]);
 
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
+    onSidePanelToggle(!isPanelOpen);
   };
 
   const closePanel = () => {
     setIsPanelOpen(false);
+    onSidePanelToggle(false);
   };
 
   const relevantLinks = categoryLinks[category] || {};
+
+  const linkSections = Object.keys(relevantLinks).filter(key => Array.isArray(relevantLinks[key]));
 
   return (
     <div>
@@ -58,7 +68,7 @@ const NavComponent = ({ category, slug, isSlugPage }) => {
         )}
         <div className={styles.linksContainer}>
           {Object.keys(categoryLinks).map((category, idx) => (
-            <Link href={`/${category}`} key={idx} className={styles.categoryLink}>
+            <Link href={categoryLinks[category].defaultUrl} key={idx} className={styles.categoryLink}>
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </Link>
           ))}
@@ -68,7 +78,7 @@ const NavComponent = ({ category, slug, isSlugPage }) => {
         <div ref={sidePanelRef} className={styles.sidePanel}>
           <button onClick={closePanel} className={styles.closeButton}>×</button>
           <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-          {Object.keys(relevantLinks).map((miniTitle, index) => (
+          {linkSections.map((miniTitle, index) => (
             <div key={index}>
               <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
               <ul>

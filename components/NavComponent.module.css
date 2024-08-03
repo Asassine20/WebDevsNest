@@ -54,23 +54,29 @@
   .sidePanel ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0; /* Remove default margin */
   }
   
   .sidePanel li {
-    margin: 0;
+    margin: 0; /* Remove margin between list items */
+    background-color: #f0f0f0; /* Same background color as the side panel */
+    width: calc(100% + 40px); /* Ensure the li covers the full width, accounting for padding */
+    margin-left: -20px; /* Adjust margin to ensure the li starts from the edge */
+    margin-right: -20px; /* Adjust margin to ensure the li ends at the edge */
+    padding: 0; /* Remove any default padding */
   }
   
   .sidePanel li a {
     color: #333;
     text-decoration: none;
-    display: block;
-    padding: 5px 10px;
-    font-weight: bold;
+    display: block; /* Make the link cover the entire li */
+    padding: 5px 30px; /* Adjust padding for the links */
+    font-weight: bold; /* Make the links bold */
+    margin-left: 0; /* Remove margin-left to align with the headers */
   }
   
   .sidePanel li a:hover {
-    background-color: #e0e0e0;
+    background-color: #e0e0e0; /* Change background color on hover */
   }
   
   .sidePanel .activeLink a {
@@ -79,7 +85,7 @@
   }
   
   .sidePanel .activeLink a:hover {
-    background-color: #682bd7;
+    background-color: #682bd7; /* Maintain the active link's background color on hover */
   }
   
   .hidden {

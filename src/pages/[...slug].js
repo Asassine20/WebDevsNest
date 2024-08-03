@@ -86,6 +86,8 @@ const Post = ({ data, content, category, slug }) => {
 
   const relevantLinks = categoryLinks[category] || {};
 
+  const linkSections = Object.keys(relevantLinks).filter(key => Array.isArray(relevantLinks[key]));
+
   return (
     <>
       <Head>
@@ -98,21 +100,23 @@ const Post = ({ data, content, category, slug }) => {
       </Head>
       <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
       <div className={styles.pageContainer}>
-        <div className={styles.sidePanel}>
-          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-          {Object.keys(relevantLinks).map((miniTitle, index) => (
-            <div key={index}>
-              <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
-              <ul>
-                {relevantLinks[miniTitle].map((link, idx) => (
-                  <li key={idx} className={link.url === `/${category}/${slug}` ? styles.activeLink : ''}>
-                    <a href={link.url}>{link.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        {!isSmallScreen && (
+          <div className={styles.sidePanel}>
+            <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+            {linkSections.map((miniTitle, index) => (
+              <div key={index}>
+                <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
+                <ul>
+                  {relevantLinks[miniTitle].map((link, idx) => (
+                    <li key={idx} className={link.url === `/${category}/${slug}` ? styles.activeLink : ''}>
+                      <a href={link.url}>{link.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
         <div className={styles.mainContentWrapper}>
           <div className={styles.mainContent}>
             <div className={styles.adTop}>

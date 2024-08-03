@@ -36,10 +36,14 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router.events]);
 
+  const handleSidePanelToggle = (isOpen) => {
+    // Pass this function to the NavComponent to handle side panel state
+  };
+
   return (
     <>
       <SearchBar />
-      <NavComponent category={category} slug={slug} isSlugPage={isSlugPage} />
+      <NavComponent category={category} slug={slug} isSlugPage={isSlugPage} onSidePanelToggle={handleSidePanelToggle} />
       <Component {...pageProps} />
     </>
   );
