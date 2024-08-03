@@ -26,11 +26,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const category = params.slug[0];
   const slug = params.slug[1];
-
-  // Add logging to debug the values
-  console.log('Category:', category);
-  console.log('Slug:', slug);
-
   // Check if category and slug are defined
   if (!category || !slug) {
     return { notFound: true };
@@ -52,10 +47,10 @@ export async function getStaticProps({ params }) {
   };
   const content = post.Content;
 
-  return { props: { data, content, category } };
+  return { props: { data, content, category, slug } };
 }
 
-const Post = ({ data, content, category }) => {
+const Post = ({ data, content, category, slug }) => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -83,27 +78,27 @@ const Post = ({ data, content, category }) => {
       </Head>
       <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
       <div className={styles.pageContainer}>
+        <div className={styles.sidePanel}>
+          <h2>Related Links</h2>
+          {Object.keys(relevantLinks).map((miniTitle, index) => (
+            <div key={index}>
+              <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
+              <ul>
+                {relevantLinks[miniTitle].map((link, idx) => (
+                  <li key={idx} className={link.url === `/${category}/${slug}` ? styles.activeLink : ''}>
+                    <a href={link.url}>{link.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
         <div className={styles.contentWrapper}>
-          <div className={styles.sidePanel}>
-            <h2>Related Links</h2>
-            {Object.keys(relevantLinks).map((miniTitle, index) => (
-              <div key={index}>
-                <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
-                <ul>
-                  {relevantLinks[miniTitle].map((link, idx) => (
-                    <li key={idx}>
-                      <a href={link.url}>{link.title}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
           <div className={styles.mainContent}>
             <div className={styles.ad} style={{ textAlign: 'center' }}>
               <ins className="adsbygoogle"
                    style={{ display: 'block', width: '100%', height: '90px' }}
-                   data-ad-client="ca-pub-xxxxxxxxxx"
+                   data-ad-client="ca-pub-6059555296443681"
                    data-ad-slot="xxxxxxxxxx"></ins>
               <Script>
                 {`(adsbygoogle = window.adsbygoogle || []).push({});`}
@@ -123,7 +118,7 @@ const Post = ({ data, content, category }) => {
             <div className={styles.ad}>
               <ins className="adsbygoogle"
                    style={{ display: 'block', width: '300px', height: '250px' }}
-                   data-ad-client="ca-pub-xxxxxxxxxx"
+                   data-ad-client="ca-pub-6059555296443681"
                    data-ad-slot="xxxxxxxxxx"></ins>
               <Script>
                 {`(adsbygoogle = window.adsbygoogle || []).push({});`}
@@ -132,7 +127,7 @@ const Post = ({ data, content, category }) => {
             <div className={styles.ad}>
               <ins className="adsbygoogle"
                    style={{ display: 'block', width: '300px', height: '250px' }}
-                   data-ad-client="ca-pub-xxxxxxxxxx"
+                   data-ad-client="ca-pub-6059555296443681"
                    data-ad-slot="xxxxxxxxxx"></ins>
               <Script>
                 {`(adsbygoogle = window.adsbygoogle || []).push({});`}

@@ -8,7 +8,6 @@ export default function Dashboard() {
   const { data, error } = useSWR('/api/auth/user', fetcher);
 
   useEffect(() => {
-    console.log('User data:', data);
     if (error) {
       Router.push('/login');
     }

@@ -15,7 +15,7 @@ const categoryLinks = {
     },
     python: {
         syntax: [
-            { title: 'Introduction to python', url: '/javascript/syntax/intro' },
+            { title: 'Python', url: '/python/python' },
             { title: 'Variables and Types', url: '/javascript/syntax/variables' },
           ],
           functions: [
