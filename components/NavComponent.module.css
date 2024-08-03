@@ -1,0 +1,104 @@
+.navContainer {
+    display: flex;
+    align-items: center;
+    background-color: #1d1b26;
+    padding: 10px 20px;
+    width: 100%;
+    z-index: 1001; /* Ensure the nav is above the side panel */
+  }
+  
+  .linksContainer {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .categoryLink {
+    margin-right: 15px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .toggleButton {
+    background-color: #682bd7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 15px;
+  }
+  
+  .sidePanel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Maintain 250px width */
+    height: 100vh; /* Extend to the full height of the viewport */
+    background-color: rgba(240, 240, 240, 0.95);
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  .sidePanel h2 {
+    margin-top: 0;
+    font-size: 1.6rem;
+  }
+  
+  .sidePanel h3 {
+    margin: 10px 0 5px;
+    font-size: 1.4rem;
+  }
+  
+  .sidePanel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidePanel li {
+    margin: 0;
+  }
+  
+  .sidePanel li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    font-weight: bold;
+  }
+  
+  .sidePanel li a:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .sidePanel .activeLink a {
+    background-color: #682bd7;
+    color: white;
+  }
+  
+  .sidePanel .activeLink a:hover {
+    background-color: #682bd7;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 1068px) {
+    .closeButton {
+      display: none;
+    }
+  }
+  
