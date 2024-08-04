@@ -89,7 +89,7 @@ const SearchBarWithoutLogin = () => {
       <div className={styles.searchBar}>
         <input
           type="text"
-          placeholder="Learn a new language"
+          placeholder="Learn a new programming language"
           value={query}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

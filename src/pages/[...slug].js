@@ -102,7 +102,6 @@ const Post = ({ data, content, category, slug }) => {
       <div className={styles.pageContainer}>
         {!isSmallScreen && (
           <div className={styles.sidePanel}>
-            <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
             {linkSections.map((miniTitle, index) => (
               <div key={index}>
                 <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>

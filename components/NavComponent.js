@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from './NavComponent.module.css';
 import categoryLinks from '../links'; // Adjust the path as needed
@@ -9,6 +10,7 @@ const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const navRef = useRef(null);
   const sidePanelRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,7 +57,6 @@ const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   };
 
   const relevantLinks = categoryLinks[category] || {};
-
   const linkSections = Object.keys(relevantLinks).filter(key => Array.isArray(relevantLinks[key]));
 
   return (
@@ -67,17 +68,19 @@ const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
           </button>
         )}
         <div className={styles.linksContainer}>
-          {Object.keys(categoryLinks).map((category, idx) => (
-            <Link href={categoryLinks[category].defaultUrl} key={idx} className={styles.categoryLink}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </Link>
-          ))}
+          {Object.keys(categoryLinks).map((category, idx) => {
+            const isActive = router.asPath === categoryLinks[category].defaultUrl;
+            return (
+              <Link href={categoryLinks[category].defaultUrl} key={idx} className={`${styles.categoryLink} ${isActive ? styles.activeLink : ''}`}>
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </Link>
+            );
+          })}
         </div>
       </div>
       {isPanelOpen && (
         <div ref={sidePanelRef} className={styles.sidePanel}>
           <button onClick={closePanel} className={styles.closeButton}>×</button>
-          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           {linkSections.map((miniTitle, index) => (
             <div key={index}>
               <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
