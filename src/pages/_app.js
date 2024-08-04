@@ -54,12 +54,14 @@ function MyApp({ Component, pageProps }) {
     // Pass this function to the NavComponent to handle side panel state
   };
 
+  const shouldShowFooter = !['/login', '/signup'].includes(router.pathname);
+
   return (
     <>
       <SearchBar />
       <NavComponent category={category} slug={slug} isSlugPage={isSlugPage} onSidePanelToggle={handleSidePanelToggle} />
       <Component {...pageProps} />
-      <Footer />
+      {shouldShowFooter && <Footer />}
     </>
   );
 }

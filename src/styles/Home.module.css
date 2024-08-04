@@ -1,8 +1,9 @@
 .pageContainer {
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align the container towards the top */
-  min-height: 200vh; /* Ensure it takes up the full height of the viewport */
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /* Center the content horizontally */
+  min-height: 100vh; /* Ensure it takes up the full height of the viewport */
   padding-top: 50px; /* Optional padding to adjust vertical alignment */
 }
 
@@ -39,11 +40,12 @@
 }
 
 /* Media Queries for responsiveness */
-@media (max-width: 775px ){
+@media (max-width: 775px) {
   .subHeader {
     font-size: 1.25rem;
   }
 }
+
 @media (max-width: 680px) {
   .mainHeader {
     font-size: 3rem; /* Decrease font size for smaller screens */
@@ -62,4 +64,109 @@
   .subHeader {
     font-size: 1rem; /* Decrease font size further for even smaller screens */
   }
+}
+
+/* New styles for sections */
+.sectionsContainer {
+  width: 80vw; /* Adjust the width to take up a large portion of the page */
+  margin-top: 50px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sectionHeader h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: black;
+}
+
+.viewAll {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.viewAll:hover {
+  color: #682bd7;
+}
+
+.itemsContainer {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-bottom: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.itemsContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.bgColor1 .item {
+  background-color: #5fe1d5;
+  color: black;
+}
+
+.bgColor1 .item:hover {
+  background-color: #682bd7;
+  color: white;
+}
+
+.bgColor2 .item {
+  background-color: #682bd7;
+  color: white;
+}
+
+.bgColor2 .item:hover {
+  background-color: #282c34;
+  color: white;
+}
+
+.bgColor3 .item {
+  background-color: #282c34;
+  color: white;
+}
+
+.bgColor3 .item:hover {
+  background-color: #5fe1d5;
+  color: black;
+}
+
+.item {
+  flex: 0 0 auto; /* Prevent items from shrinking */
+  width: 200px; /* Adjust the width of the items */
+  height: 130px; /* Adjust the height of the items */
+  margin-right: 10px; /* Space between items */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none; /* Remove underline from items */
+  color: #333;
+  cursor: pointer;
+  font-weight: bold; /* Make text bold */
+  font-size: 1.25rem; /* Increase font size */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflowed text */
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+.item span {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
