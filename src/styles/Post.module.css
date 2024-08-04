@@ -89,12 +89,25 @@
 
 .postHeader {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postHeaderContent {
+  flex: 1;
 }
 
 .postTitle {
   font-size: 2.5rem;
   margin-bottom: 10px;
   color: #333;
+}
+
+.favoriteIcon {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #682bd7;
 }
 
 .postMeta {

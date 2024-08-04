@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { FaStar } from 'react-icons/fa';
+import { FaRegStar } from 'react-icons/fa';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
 import styles from '../styles/Post.module.css';
@@ -165,13 +165,15 @@ const Post = ({ data, content, category, slug }) => {
             </div>
             <div className={styles.postContainer}>
               <header className={styles.postHeader}>
-                <h1 className={styles.postTitle}>{data.title}</h1>
-                <FaStar
+                <div className={styles.postHeaderContent}>
+                  <h1 className={styles.postTitle}>{data.title}</h1>
+                  <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
+                </div>
+                <FaRegStar
                   className={styles.favoriteIcon}
                   onClick={handleFavoriteClick}
                   title="Add to Favorites"
                 />
-                <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
               </header>
               <div className={styles.postContent}>
                 <MarkdownRenderer content={content} />
