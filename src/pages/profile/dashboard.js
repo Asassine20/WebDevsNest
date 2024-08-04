@@ -1,24 +1,39 @@
-// pages/profile/dashboard.js
 import { useEffect } from 'react';
 import Router from 'next/router';
 import useSWR from 'swr';
 import fetcher from '../../../lib/fetcher';
+import styles from '../../Styles/Dashboard.module.css';
 
 export default function Dashboard() {
-  const { data, error } = useSWR('/api/auth/user', fetcher);
+  const { data: user, error: userError } = useSWR('/api/auth/user', fetcher);
+  const { data: streakData, error: streakError } = useSWR(user ? `/api/visit?userId=${user.Id}` : null, fetcher);
 
   useEffect(() => {
-    if (error) {
+    if (userError) {
       Router.push('/login');
     }
-  }, [data, error]);
+  }, [user, userError]);
 
-  if (!data) return <div>Loading...</div>;
-  if (error) return <div>Error loading dashboard</div>;
+  if (!user) return <div>Loading...</div>;
+  if (userError || streakError) return <div>Error loading dashboard</div>;
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', {
+      method: 'POST',
+    });
+    Router.push('/login');
+  };
 
   return (
-    <div>
-      <h1>Welcome, {data.Name}</h1> {/* Use data.Name here */}
+    <div className={styles.dashboardContainer}>
+      <h1>Welcome, {user.Name}</h1>
+      <div className={styles.visitBox}>
+        <h2>{streakData?.streak || 0}</h2>
+        <p>Days in a row you've visited the website</p>
+      </div>
+      <button className={styles.logoutButton} onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }

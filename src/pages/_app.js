@@ -5,12 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import * as gtag from '../../lib/gtag';
+import useSWR from 'swr';
+import fetcher from '../../lib/fetcher';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [category, setCategory] = useState('');
   const [slug, setSlug] = useState('');
   const [isSlugPage, setIsSlugPage] = useState(false);
+  const { data: user } = useSWR('/api/auth/user', fetcher);
 
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -25,6 +28,16 @@ function MyApp({ Component, pageProps }) {
         setSlug('');
         setIsSlugPage(false);
       }
+
+      if (user) {
+        fetch('/api/visit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId: user.Id }),
+        });
+      }
     };
 
     // Set initial value
@@ -34,7 +47,7 @@ function MyApp({ Component, pageProps }) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events]);
+  }, [router.events, user]);
 
   const handleSidePanelToggle = (isOpen) => {
     // Pass this function to the NavComponent to handle side panel state
