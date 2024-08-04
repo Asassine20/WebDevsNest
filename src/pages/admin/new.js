@@ -1,5 +1,7 @@
+// pages/admin/new.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import withAdminAuth from '../../../components/WithAdminAuth';
 
 const NewPost = () => {
   const [title, setTitle] = useState('');
@@ -46,4 +48,4 @@ const NewPost = () => {
   );
 };
 
-export default NewPost;
+export default withAdminAuth(NewPost);

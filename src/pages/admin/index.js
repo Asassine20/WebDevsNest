@@ -1,5 +1,7 @@
+// pages/admin/index.js
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import withAdminAuth from '../../../components/WithAdminAuth';
 
 const Admin = () => {
   const [posts, setPosts] = useState([]);
@@ -25,4 +27,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default withAdminAuth(Admin);

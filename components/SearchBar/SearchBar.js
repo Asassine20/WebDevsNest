@@ -1,3 +1,4 @@
+import { FaUserCircle } from "react-icons/fa";
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { IoIosSearch } from 'react-icons/io';
@@ -9,6 +10,8 @@ const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const router = useRouter();
   const searchBarRef = useRef(null);
 
@@ -32,6 +35,7 @@ const SearchBar = () => {
     const handleClickOutside = (event) => {
       if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
         setShowSuggestions(false);
+        setShowProfileMenu(false);
       }
     };
 
@@ -40,6 +44,18 @@ const SearchBar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    const checkLoggedInStatus = async () => {
+      const res = await fetch('/api/auth/user');
+      if (res.ok) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+    checkLoggedInStatus();
   }, []);
 
   const handleInputChange = (e) => {
@@ -88,6 +104,18 @@ const SearchBar = () => {
     }
   };
 
+  const handleProfileIconClick = () => {
+    setShowProfileMenu(!showProfileMenu);
+  };
+
+  const handleLogout = async () => {
+    const res = await fetch('/api/auth/logout', { method: 'POST' });
+    if (res.ok) {
+      setIsLoggedIn(false);
+      router.push('/');
+    }
+  };
+
   if (excludedRoutes.includes(router.pathname)) {
     return null;
   }
@@ -127,9 +155,28 @@ const SearchBar = () => {
         )}
       </div>
       <div className={styles.authButtons}>
-        <Link href="/login" passHref>
-          <button className={`${styles.authButton} no-underline`}>Login</button>
-        </Link>
+        {isLoggedIn ? (
+          <div className={styles.profileMenu}>
+            <FaUserCircle
+              className={styles.profileIcon}
+              onClick={handleProfileIconClick}
+            />
+            {showProfileMenu && (
+              <div className={styles.profileDropdown}>
+                <Link href="/profile/dashboard">
+                  <span className={styles.profileLink}>Profile</span>
+                </Link>
+                <span className={styles.profileLink} onClick={handleLogout}>
+                  Logout
+                </span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link href="/login">
+            <span className={`${styles.authButton} ${styles.noUnderline}`}>Login</span>
+          </Link>
+        )}
       </div>
     </div>
   );

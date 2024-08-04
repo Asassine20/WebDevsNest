@@ -20,26 +20,26 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 10px;
-  padding: 3px 8px; /* Reduced padding to make it less tall */
+  padding: 3px 8px;
   box-sizing: border-box;
-  background-color: white; /* Ensure background is white */
+  background-color: white;
 }
 
 .searchInput {
   flex-grow: 1;
   border: none;
   outline: none;
-  padding: 5px 8px; /* Reduced padding to make it less tall */
+  padding: 5px 8px;
   border-radius: 10px;
   box-sizing: border-box;
-  background-color: white; /* Ensure input background is white */
+  background-color: white;
 }
 
 .searchIcon {
   color: #888;
   font-size: 1.5em;
   cursor: pointer;
-  margin-left: 5px; /* Ensure some space around the icon */
+  margin-left: 5px;
 }
 
 .suggestionsList {
@@ -51,9 +51,9 @@
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  text-align: left; /* Ensure text is left-aligned */
-  border-radius: 10px; /* Add border radius */
-  overflow: hidden; /* Ensure child elements respect the border radius */
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .suggestionItem {
@@ -63,7 +63,7 @@
   color: grey;
   text-decoration: none;
   cursor: pointer;
-  text-align: left; /* Ensure text is left-aligned */
+  text-align: left;
 }
 
 .suggestionItem a {
@@ -89,7 +89,7 @@
 }
 
 .authButton {
-  padding: 20px 20px; /* Slightly larger button */
+  padding: 20px 20px;
   margin-left: 10px;
   margin-right: 10px;
   border: none;
@@ -98,24 +98,56 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px; /* Slightly larger height */
-  background-color: #682bd7; /* Darker shade of purple */
+  height: 40px;
+  background-color: #682bd7;
   color: white;
   border-radius: 10px;
-  text-decoration: none; /* Remove underline */
+  text-decoration: none;
 }
 
 .authButton:hover {
-  background-color: #5d27c2; /* Even darker purple */
+  background-color: #5d27c2;
 }
 
-/* Custom class to override Bootstrap underline link styles */
-.no-underline {
+.noUnderline {
   text-decoration: none !important;
-  color: white !important; /* Ensure the link color is white */
+  color: white !important;
 }
 
-.no-underline:hover {
+.noUnderline:hover {
   text-decoration: none !important;
-  color: white !important; /* Ensure the link color is white */
+  color: white !important;
+}
+
+.profileMenu {
+  position: relative;
+}
+
+.profileIcon {
+  color: #888;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.profileDropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profileLink {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profileLink:hover {
+  background-color: #f0f0f0;
 }

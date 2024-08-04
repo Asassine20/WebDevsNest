@@ -1,5 +1,7 @@
+// pages/admin/edit/[id].js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import withAdminAuth from '../../../../components/WithAdminAuth';
 
 const EditPost = () => {
   const [post, setPost] = useState({ title: '', content: '', category: '' });
@@ -101,4 +103,4 @@ const EditPost = () => {
   );
 };
 
-export default EditPost;
+export default withAdminAuth(EditPost);
