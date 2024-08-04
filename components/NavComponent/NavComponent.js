@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from './NavComponent.module.css';
-import categoryLinks from '../links'; // Adjust the path as needed
+import categoryLinks from '../../links'; // Adjust the path as needed
 
 const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);

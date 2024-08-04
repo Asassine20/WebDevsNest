@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import NavComponent from '../../components/NavComponent';
+import NavComponent from '../../components/NavComponent/NavComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
