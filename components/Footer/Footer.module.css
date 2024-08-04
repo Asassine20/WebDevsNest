@@ -1,0 +1,159 @@
+.footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #282c34;
+    color: white;
+    padding: 20px;
+    position: relative;
+    flex-wrap: nowrap; /* Do not wrap in normal state */
+  }
+  
+  .leftContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px; /* Add some space to the right */
+  }
+  
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    margin-bottom: 20px;
+  }
+  
+  .siteName {
+    margin-left: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #5fe1d5;
+  }
+  
+  .divider {
+    width: 1px;
+    height: 100%;
+    background-color: white;
+    margin: 0 20px;
+    align-self: stretch; /* Ensure divider stretches full height */
+  }
+  
+  .sectionsContainer {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically in normal state */
+    width: 100%;
+  }
+  
+  .sections {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap; /* Allow wrapping */
+  }
+  
+  .section {
+    flex: 1;
+    text-align: left;
+    margin: 0 10px; /* Reduce gaps between sections */
+  }
+  
+  .section h4 {
+    margin-bottom: 10px;
+    font-size: 1.05rem; /* Smaller font size for mini headers */
+    color: #5fe1d5;
+  }
+  
+  .section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .section li {
+    margin: 5px 0;
+  }
+  
+  .section a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem; /* Smaller font size for links */
+  }
+  
+  .section a:hover {
+    text-decoration: underline;
+  }
+  
+  .socials {
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100px; /* Make the socials div wider */
+  }
+  
+  .socialLinks {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .socialLink {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Media query for screens below 920px wide */
+  @media (max-width: 920px) {
+    .footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .leftContainer {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center; /* Align items in the center vertically */
+    }
+  
+    .logoContainer {
+      margin-bottom: 0;
+      justify-content: center;
+      width: auto;
+      flex: 1;
+    }
+  
+    .siteName {
+      margin-left: 0;
+      font-size: 1.5rem;
+      color: #5fe1d5;
+      text-align: center;
+      order: 1; /* Ensure site name appears between logo and social icons */
+      flex: 1;
+    }
+  
+    .socials {
+      order: 2; /* Ensure social icons appear after the site name */
+      text-align: right;
+    }
+  
+    .sectionsContainer {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two-column layout */
+      gap: 10px;
+      width: 100%;
+    }
+  
+    .sections {
+      display: contents; /* Display as contents to use grid layout */
+    }
+  
+    .section {
+      text-align: left; /* Maintain left-aligned style */
+    }
+  
+    .divider {
+      display: none; /* Hide divider on small screens */
+    }
+  }
+  

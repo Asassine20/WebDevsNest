@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import NavComponent from '../../components/NavComponent/NavComponent';
+import Footer from '../../components/Footer/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -58,6 +59,7 @@ function MyApp({ Component, pageProps }) {
       <SearchBar />
       <NavComponent category={category} slug={slug} isSlugPage={isSlugPage} onSidePanelToggle={handleSidePanelToggle} />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }
