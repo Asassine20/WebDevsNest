@@ -24,6 +24,7 @@ export default function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.authWrapper}>
+        <button className={styles.closeButton} onClick={() => Router.push('/')}>×</button>
         <div className={styles.authPerks}>
           <h2>Perks of Joining</h2>
           <ul>
