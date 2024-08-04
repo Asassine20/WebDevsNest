@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   padding: 5px 5px;
+  position: relative;
+  z-index: 1000; /* Ensure this is higher than overlapping elements */
 }
 
 .logo {
@@ -102,7 +104,9 @@
   background-color: #682bd7;
   color: white;
   border-radius: 10px;
+  z-index: 2000; /* Ensure this is higher than overlapping elements */
   text-decoration: none;
+  position: relative;
 }
 
 .authButton:hover {
@@ -125,9 +129,10 @@
   color: #682bd7;
   font-size: 2em;
   cursor: pointer;
+  z-index: 2000; /* Ensure this is higher than overlapping elements */
+  position: relative;
 }
 
 .profileIcon:hover {
   color: #8444fa;
 }
-

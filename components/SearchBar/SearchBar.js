@@ -46,11 +46,19 @@ const SearchBar = () => {
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
-      const res = await fetch('/api/auth/user');
-      if (res.ok) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
+      try {
+        const res = await fetch('/api/auth/user');
+        if (res.ok) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        if (error.status === 401) {
+          setIsLoggedIn(false);
+        } else {
+          console.error('An error occurred while checking login status:', error);
+        }
       }
     };
     checkLoggedInStatus();
