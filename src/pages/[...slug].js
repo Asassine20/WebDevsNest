@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { FaStar } from 'react-icons/fa';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
 import styles from '../styles/Post.module.css';
 import Script from 'next/script';
 import categoryLinks from '../../links'; // Adjust the path as needed
+import useSWR from 'swr';
+import fetcher from '../../lib/fetcher';
 
 export async function getStaticPaths() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
@@ -21,14 +25,13 @@ export async function getStaticProps({ params }) {
   const category = params.slug[0];
   const slug = params.slug[1];
 
-  // Check if category and slug are defined
   if (!category || !slug) {
     return { notFound: true };
   }
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   const res = await fetch(`${baseURL}/api/postData`);
-  
+
   if (!res.ok) {
     return { notFound: true };
   }
@@ -40,18 +43,17 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   }
 
-  // Convert CreatedAt to Date object if necessary
   const createdAtDate = new Date(post.CreatedAt);
 
-  // Check if the conversion was successful
   if (isNaN(createdAtDate.getTime())) {
-    return { notFound: true }; // If not a valid date, return 404
+    return { notFound: true };
   }
 
   const data = {
+    id: post.Id,
     title: post.Title,
     description: post.Content,
-    date: createdAtDate.toISOString(), // Convert date to ISO string
+    date: createdAtDate.toISOString(),
   };
   const content = post.Content;
 
@@ -60,6 +62,13 @@ export async function getStaticProps({ params }) {
 
 const Post = ({ data, content, category, slug }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  const { data: user } = useSWR('/api/auth/user', fetcher);
+
+  useEffect(() => {
+    setIsLoggedIn(!!user);
+  }, [user]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -71,6 +80,34 @@ const Post = ({ data, content, category, slug }) => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleFavoriteClick = async () => {
+    if (isLoggedIn) {
+      try {
+        const res = await fetch('/api/addToFavorites', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ postId: data.id }),
+        });
+
+        if (res.ok) {
+          alert('Post added to favorites');
+        } else {
+          const errorData = await res.json();
+          alert(`Error: ${errorData.error}`);
+        }
+      } catch (error) {
+        console.error('Error adding favorite:', error);
+        alert('An error occurred while adding to favorites');
+      }
+    } else {
+      if (confirm('Log in to access this feature')) {
+        router.push('/login');
+      }
+    }
+  };
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -85,7 +122,6 @@ const Post = ({ data, content, category, slug }) => {
   };
 
   const relevantLinks = categoryLinks[category] || {};
-
   const linkSections = Object.keys(relevantLinks).filter(key => Array.isArray(relevantLinks[key]));
 
   return (
@@ -130,6 +166,11 @@ const Post = ({ data, content, category, slug }) => {
             <div className={styles.postContainer}>
               <header className={styles.postHeader}>
                 <h1 className={styles.postTitle}>{data.title}</h1>
+                <FaStar
+                  className={styles.favoriteIcon}
+                  onClick={handleFavoriteClick}
+                  title="Add to Favorites"
+                />
                 <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
               </header>
               <div className={styles.postContent}>

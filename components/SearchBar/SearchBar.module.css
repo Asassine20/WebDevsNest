@@ -119,35 +119,15 @@
   color: white !important;
 }
 
-.profileMenu {
-  position: relative;
-}
-
 .profileIcon {
-  color: #888;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #682bd7;
   font-size: 2em;
   cursor: pointer;
 }
 
-.profileDropdown {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  z-index: 1000;
+.profileIcon:hover {
+  color: #8444fa;
 }
 
-.profileLink {
-  display: block;
-  padding: 10px;
-  color: #333;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.profileLink:hover {
-  background-color: #f0f0f0;
-}

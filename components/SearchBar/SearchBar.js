@@ -11,7 +11,6 @@ const SearchBar = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const router = useRouter();
   const searchBarRef = useRef(null);
 
@@ -35,7 +34,6 @@ const SearchBar = () => {
     const handleClickOutside = (event) => {
       if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
         setShowSuggestions(false);
-        setShowProfileMenu(false);
       }
     };
 
@@ -105,7 +103,9 @@ const SearchBar = () => {
   };
 
   const handleProfileIconClick = () => {
-    setShowProfileMenu(!showProfileMenu);
+    if (isLoggedIn) {
+      router.push('/profile/dashboard');
+    }
   };
 
   const handleLogout = async () => {
@@ -161,16 +161,6 @@ const SearchBar = () => {
               className={styles.profileIcon}
               onClick={handleProfileIconClick}
             />
-            {showProfileMenu && (
-              <div className={styles.profileDropdown}>
-                <Link href="/profile/dashboard">
-                  <span className={styles.profileLink}>Profile</span>
-                </Link>
-                <span className={styles.profileLink} onClick={handleLogout}>
-                  Logout
-                </span>
-              </div>
-            )}
           </div>
         ) : (
           <Link href="/login">
