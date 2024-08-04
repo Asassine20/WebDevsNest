@@ -1,0 +1,78 @@
+/* /Users/andrewsassine/webdevsnest/src/styles/AuthForm.module.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .authWrapper {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .authForm {
+    flex: 1;
+    max-width: 400px;
+    margin-left: 2rem;
+  }
+  
+  .authPerks {
+    flex: 1;
+    padding-right: 2rem;
+    border-right: 1px solid #dee2e6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .authPerks h2 {
+    color: #682bd7;
+    margin-bottom: 1rem;
+  }
+  
+  .authPerks ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .authPerks li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .authPerks li::before {
+    content: '✔️';
+    margin-right: 0.5rem;
+  }
+  
+  .authForm form {
+    width: 100%;
+  }
+  
+  .authForm .form-label {
+    margin-bottom: 0.5rem;
+  }
+  
+  .authForm .form-control {
+    margin-bottom: 1rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+  
+  .authForm .btn {
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+  
+  .authForm .customLink:hover {
+    text-decoration: underline;
+  }
+  
