@@ -1,7 +1,8 @@
-// pages/admin/edit/[id].js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import withAdminAuth from '../../../../components/WithAdminAuth';
+import styles from '../../../styles/Admin.module.css';
+import Link from 'next/link'
 
 const EditPost = () => {
   const [post, setPost] = useState({ title: '', content: '', category: '' });
@@ -65,39 +66,58 @@ const EditPost = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className={styles.error}>{error}</div>;
   }
 
   return (
-    <div>
-      <h1>Edit Post</h1>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <Link href="/">
+          <img src="/logo.png" alt="Logo" className={styles.logo} />
+        </Link>
+        <h1 className={styles.title}>Edit Post</h1>
+      </header>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h4>Title</h4>
         <input
           type="text"
           name="title"
           placeholder="Title"
           value={post.title}
           onChange={handleChange}
+          className={styles.input}
         />
+        <h4>Category</h4>
         <input
           type="text"
           name="category"
           placeholder="Category"
           value={post.category}
           onChange={handleChange}
+          className={styles.input}
         />
+        <h4>Content</h4>
         <textarea
           name="content"
           placeholder="Content"
           value={post.content}
           onChange={handleChange}
+          className={styles.textarea}
         />
-        <button type="submit">Update</button>
-        <button type="button" onClick={handleDelete} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>Delete</button>
+        <div className={styles.buttonContainer}>
+          <button type="submit" className={styles.button}>Update</button>
+          <button
+            type="button"
+            onClick={handleDelete}
+            className={`${styles.button} ${styles.deleteButton}`}
+          >
+            Delete
+          </button>
+        </div>
       </form>
     </div>
   );

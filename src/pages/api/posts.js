@@ -30,7 +30,7 @@ export default async (req, res) => {
     const { id, title, content, category } = req.body;
     const slug = generateSlug(title);
     const currentTime = new Date();
-    await connection.execute('UPDATE Post SET Title = ?, Content = ?, Category = ?, Slug = ?, Last_updated = ? WHERE Id = ?', [title, content, category, slug, currentTime, id]);
+    await connection.execute('UPDATE Post SET Title = ?, Content = ?, Category = ?, Slug = ?, UpdatedAt = ? WHERE Id = ?', [title, content, category, slug, currentTime, id]);
     await connection.end();
     res.status(200).json({ message: 'Post updated' });
   } else if (req.method === 'DELETE') {

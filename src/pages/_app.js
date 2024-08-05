@@ -54,12 +54,16 @@ function MyApp({ Component, pageProps }) {
     // Pass this function to the NavComponent to handle side panel state
   };
 
-  const shouldShowNav = !['/login', '/signup'].includes(router.pathname);
+  const adminRoutes = ['/admin', '/admin/new', '/admin/edit/[id]'];
+  const isAdminRoute = adminRoutes.some(route => router.pathname.startsWith(route));
+
+  const shouldShowNav = !['/login', '/signup'].includes(router.pathname) && !isAdminRoute;
   const shouldShowFooter = shouldShowNav;
+  const shouldShowSearchBar = !isAdminRoute;
 
   return (
     <>
-      <SearchBar />
+      {shouldShowSearchBar && <SearchBar />}
       {shouldShowNav && (
         <NavComponent
           category={category}
