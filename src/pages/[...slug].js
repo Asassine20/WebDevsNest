@@ -11,12 +11,20 @@ import fetcher from '../../lib/fetcher';
 
 export async function getStaticPaths() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const res = await fetch(`${baseURL}/api/postData`);
-  const posts = await res.json();
+  let paths = [];
 
-  const paths = posts.map(post => ({
-    params: { slug: [post.Category, post.Slug] },
-  }));
+  try {
+    const res = await fetch(`${baseURL}/api/postData`);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch paths: ${res.statusText}`);
+    }
+    const posts = await res.json();
+    paths = posts.map(post => ({
+      params: { slug: [post.Category, post.Slug] },
+    }));
+  } catch (error) {
+    console.error('Error fetching paths:', error);
+  }
 
   return { paths, fallback: 'blocking' };
 }
@@ -30,21 +38,24 @@ export async function getStaticProps({ params }) {
   }
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const res = await fetch(`${baseURL}/api/postData`);
+  let post = null;
 
-  if (!res.ok) {
-    return { notFound: true };
+  try {
+    const res = await fetch(`${baseURL}/api/postData`);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.statusText}`);
+    }
+    const posts = await res.json();
+    post = posts.find(post => post.Category === category && post.Slug === slug);
+  } catch (error) {
+    console.error('Error fetching data:', error);
   }
-
-  const posts = await res.json();
-  const post = posts.find(post => post.Category === category && post.Slug === slug);
 
   if (!post) {
     return { notFound: true };
   }
 
   const createdAtDate = new Date(post.CreatedAt);
-
   if (isNaN(createdAtDate.getTime())) {
     return { notFound: true };
   }
