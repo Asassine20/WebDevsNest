@@ -1,8 +1,7 @@
-// components/MarkdownRenderer.js
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { defaultStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'; // You can change this to any other theme
+import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism'; // Use the 'prism' theme
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from 'react-icons/fa6';
 
@@ -24,7 +23,7 @@ const MarkdownRenderer = ({ content }) => {
                   </button>
                 </CopyToClipboard>
               </div>
-              <SyntaxHighlighter style={defaultStyle} language={language} PreTag="div" {...props}>
+              <SyntaxHighlighter style={prism} language={language} PreTag="div" {...props}>
                 {String(children).replace(/\n$/, '')}
               </SyntaxHighlighter>
             </div>
