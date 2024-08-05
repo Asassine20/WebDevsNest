@@ -24,6 +24,7 @@ export default function Dashboard() {
       method: 'POST',
     });
     Router.push('/login');
+    window.location.reload(); // Refresh the page
   };
 
   return (
@@ -38,14 +39,18 @@ export default function Dashboard() {
         <div className={styles.favoritesBox}>
           <h2>Your Favorite Posts</h2>
           <div className={styles.favoritesList}>
-            {favoritesData?.favorites.map((post) => (
-              <Link key={post.Id} href={`/${post.Category}/${post.Slug}`}>
-                <div className={styles.favoriteItem}>
-                  <h3>{post.Title}</h3>
-                  <p>{post.Category}</p>
-                </div>
-              </Link>
-            ))}
+            {favoritesData?.favorites && favoritesData.favorites.length > 0 ? (
+              favoritesData.favorites.map((post) => (
+                <Link key={post.Id} href={`/${post.Category}/${post.Slug}`}>
+                  <div className={styles.favoriteItem}>
+                    <h3>{post.Title}</h3>
+                    <p>{post.Category}</p>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <p>You have no favorite posts at the moment</p>
+            )}
           </div>
         </div>
       </div>

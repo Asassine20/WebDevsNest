@@ -116,14 +116,6 @@ const SearchBar = () => {
     }
   };
 
-  const handleLogout = async () => {
-    const res = await fetch('/api/auth/logout', { method: 'POST' });
-    if (res.ok) {
-      setIsLoggedIn(false);
-      router.push('/');
-    }
-  };
-
   if (excludedRoutes.includes(router.pathname)) {
     return null;
   }
@@ -164,12 +156,10 @@ const SearchBar = () => {
       </div>
       <div className={styles.authButtons}>
         {isLoggedIn ? (
-          <div className={styles.profileMenu}>
-            <FaUserCircle
-              className={styles.profileIcon}
-              onClick={handleProfileIconClick}
-            />
-          </div>
+          <FaUserCircle
+            className={styles.profileIcon}
+            onClick={handleProfileIconClick}
+          />
         ) : (
           <Link href="/login">
             <span className={`${styles.authButton} ${styles.noUnderline}`}>Login</span>

@@ -17,7 +17,7 @@ export default function Login() {
     });
 
     if (res.ok) {
-      Router.push('/profile/dashboard');
+      window.location.href = '/profile/dashboard'; // Redirect to dashboard with page refresh
     }
   };
 
