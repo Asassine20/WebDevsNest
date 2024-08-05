@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { IoIosSearch } from 'react-icons/io';
 import Link from 'next/link';
-import styles from './SearchBar.module.css';
+import styles from '../components/SearchBar/SearchBar.module.css';
 import Image from 'next/image';
 
 const SearchBar = () => {

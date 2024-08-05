@@ -3,7 +3,7 @@ import Router from 'next/router';
 import useSWR from 'swr';
 import Link from 'next/link';
 import fetcher from '../../../lib/fetcher';
-import styles from '../../Styles/Dashboard.module.css';
+import styles from '../../styles/Dashboard.module.css';
 
 export default function Dashboard() {
   const { data: user, error: userError } = useSWR('/api/auth/user', fetcher);
