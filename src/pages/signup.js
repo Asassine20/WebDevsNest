@@ -19,7 +19,9 @@ export default function Signup() {
     });
 
     if (res.ok) {
-      Router.push('/profile/dashboard');
+      Router.push('/').then(() => {
+        Router.reload();
+      });
     } else {
       const data = await res.json();
       setError(data.error);
