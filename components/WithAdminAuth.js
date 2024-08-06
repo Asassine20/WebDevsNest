@@ -14,10 +14,10 @@ const withAdminAuth = (WrappedComponent) => {
           if (user.Role === 'admin') {
             setLoading(false);
           } else {
-            Router.push('/login');
+            Router.push('/');
           }
         } else {
-          Router.push('/login');
+          Router.push('/');
         }
       };
 

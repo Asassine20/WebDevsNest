@@ -19,9 +19,7 @@ export default function Signup() {
     });
 
     if (res.ok) {
-      Router.push('/').then(() => {
-        Router.reload();
-      });
+      Router.push('/verify');
     } else {
       const data = await res.json();
       setError(data.error);

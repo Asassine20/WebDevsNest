@@ -1,0 +1,40 @@
+/* styles/Verify.module.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .authWrapper {
+    padding: 2rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .authWrapper h1 {
+    color: #343a40;
+  }
+  
+  .authWrapper p {
+    color: #6c757d;
+  }
+  
+  .btn-primary {
+    background-color: #682bd7 !important;
+    border-color: #682bd7 !important;
+  }
+  
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .btn-primary:active {
+    background-color: #520dc2 !important;
+    border-color: #520dc2 !important;
+  }
+  

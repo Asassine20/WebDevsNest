@@ -79,15 +79,15 @@ body {
 
 /* Custom secondary button color */
 .btn-secondary {
-  background-color: #ffc107 !important;
-  border-color: #ffc107 !important;
+  background-color: #5fe1d5 !important;
+  border-color: #5fe1d5 !important;
 }
 
 .btn-secondary:hover,
 .btn-secondary:focus,
 .btn-secondary:active {
-  background-color: #e0a800 !important;
-  border-color: #e0a800 !important;
+  background-color: #5fe1d5 !important;
+  border-color: #5fe1d5 !important;
 }
 
 .custom-link {
