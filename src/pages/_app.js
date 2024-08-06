@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import * as gtag from '../../lib/gtag';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -74,6 +76,8 @@ function MyApp({ Component, pageProps }) {
       )}
       <Component {...pageProps} />
       {shouldShowFooter && <Footer />}
+      <SpeedInsights />
+      <Analytics />
     </>
   );
 }
