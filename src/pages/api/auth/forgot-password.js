@@ -1,7 +1,20 @@
-// pages/api/auth/forgot-password.js
 import { query } from '../../../../lib/db';
 import nodemailer from 'nodemailer';
+import aws from 'aws-sdk';
 import crypto from 'crypto';
+
+// Configure AWS SDK
+aws.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
+});
+
+const ses = new aws.SES({ apiVersion: '2010-12-01' });
+
+const transporter = nodemailer.createTransport({
+  SES: { ses, aws }
+});
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -22,22 +35,12 @@ export default async function handler(req, res) {
   const token = crypto.randomBytes(20).toString('hex');
   const resetLink = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${token}`;
 
-  // Save the token and its expiration time in the database
   await query(`
     UPDATE Users SET ResetToken = ?, ResetTokenExpiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE Id = ?
   `, [token, user.Id]);
 
-  // Send the email
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.GOOGLE_EMAIL,
-      pass: process.env.GOOGLE_APP_PASSWORD,
-    },
-  });
-
   const mailOptions = {
-    from: process.env.GOOGLE_EMAIL,
+    from: process.env.SES_FROM_EMAIL,
     to: email,
     subject: 'Password Reset Request',
     html: `
@@ -50,12 +53,13 @@ export default async function handler(req, res) {
         <p style="color: #555;">Thanks,<br />The WebDevsNest Team</p>
       </div>
     `,
-  };  
+  };
 
   try {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'A reset link has been sent to your email address.' });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to send the email.' });
   }
 }

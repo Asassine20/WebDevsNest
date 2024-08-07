@@ -2,13 +2,19 @@ import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 import { query } from '../../../../lib/db';
 import nodemailer from 'nodemailer';
+import aws from 'aws-sdk';
+
+// Configure AWS SDK
+aws.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
+});
+
+const ses = new aws.SES({ apiVersion: '2010-12-01' });
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GOOGLE_EMAIL,
-    pass: process.env.GOOGLE_APP_PASSWORD,
-  },
+  SES: { ses, aws }
 });
 
 export default async function handler(req, res) {
@@ -18,11 +24,10 @@ export default async function handler(req, res) {
 
   const { email, name, password } = req.body;
 
-  // Check if email already exists
   const existingUser = await query('SELECT * FROM Users WHERE Email = ?', [email]);
 
   if (existingUser.length > 0) {
-    return res.status(409).json({ error: 'Email already in use' }); // Conflict
+    return res.status(409).json({ error: 'Email already in use' });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -37,7 +42,7 @@ export default async function handler(req, res) {
   const verificationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/verify?token=${verificationToken}`;
 
   const mailOptions = {
-    from: process.env.GOOGLE_EMAIL,
+    from: process.env.SES_FROM_EMAIL,
     to: email,
     subject: 'Verify your email',
     html: `
@@ -52,13 +57,11 @@ export default async function handler(req, res) {
     `,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Failed to send verification email' });
-    }
-    console.log('Verification email sent: ' + info.response);
-  });
-
-  res.status(201).json({ message: 'User created, please verify your email' });
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(201).json({ message: 'User created, please verify your email' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to send verification email' });
+  }
 }
