@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Home = () => {
   const sections = [
-    { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'Flutter', 'GoLang'] },
+    { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'Flutter', 'GoLang'] },
     { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Stacks', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables'] },
     { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer'] },
     { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'PHP', 'ReactJS', 'NextJS', 'Bootstrap'] },
@@ -28,11 +28,11 @@ const Home = () => {
       </div>
       <div className={styles.sectionsContainer}>
         {sections.map((section, index) => (
-          <div key={index} className={styles.section}>
+          <div key={index} className={`${styles.section} ${bgColors[index % bgColors.length]}`}>
             <div className={styles.sectionHeader}>
               <h3>{section.title}</h3>
               <Link href={section.link} passHref>
-                <span className={styles.viewAll}>View All</span>
+                <span className={`${styles.viewAll} ${bgColors[index % bgColors.length]}-link`}>View All</span>
               </Link>
             </div>
             <div className={`${styles.itemsContainer} ${bgColors[index % bgColors.length]}`}>

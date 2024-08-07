@@ -2,36 +2,36 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center; /* Center the content horizontally */
-  min-height: 100vh; /* Ensure it takes up the full height of the viewport */
-  padding-top: 50px; /* Optional padding to adjust vertical alignment */
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 50px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center content vertically within the container */
-  height: auto; /* Adjust the height to take up a portion of the page */
-  width: 80vw; /* Adjust the width to take up a large portion of the page */
+  justify-content: center;
+  height: auto;
+  width: 80vw;
   text-align: center;
-  background-color: #682bd7; /* Set background color */
-  padding: 50px 20px; /* Add some padding */
-  border-radius: 10px; /* Add border radius for better aesthetics */
-  margin-top: 20px; /* Adjust position from the top */
+  background-color: #682bd7;
+  padding: 50px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 .mainHeader {
-  font-size: 4rem; /* Make the main header larger */
-  font-weight: bold; /* Make the text much thicker */
-  color: white; /* Set the color to white */
-  margin-bottom: 1.5rem; /* Increase vertical padding between headers */
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.5rem;
 }
 
 .subHeader {
   font-size: 1.5rem;
-  font-weight: bold; /* Make the text much thicker */
-  color: #5fe1d5; /* Set the color */
+  font-weight: bold;
+  color: #5fe1d5;
   margin-bottom: 2rem;
 }
 
@@ -39,41 +39,15 @@
   width: 100%;
 }
 
-/* Media Queries for responsiveness */
-@media (max-width: 775px) {
-  .subHeader {
-    font-size: 1.25rem;
-  }
-}
-
-@media (max-width: 680px) {
-  .mainHeader {
-    font-size: 3rem; /* Decrease font size for smaller screens */
-  }
-  
-  .subHeader {
-    font-size: 1.05rem; /* Decrease font size for smaller screens */
-  }
-}
-
-@media (max-width: 600px) {
-  .mainHeader {
-    font-size: 3rem; /* Decrease font size further for even smaller screens */
-  }
-  
-  .subHeader {
-    font-size: 1rem; /* Decrease font size further for even smaller screens */
-  }
-}
-
-/* New styles for sections */
 .sectionsContainer {
-  width: 80vw; /* Adjust the width to take up a large portion of the page */
+  width: 80vw;
   margin-top: 50px;
 }
 
 .section {
   margin-bottom: 40px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .sectionHeader {
@@ -92,25 +66,37 @@
 .viewAll {
   font-size: 1rem;
   font-weight: bold;
-  color: black;
   text-decoration: none;
   cursor: pointer;
+  color: black;
 }
 
 .viewAll:hover {
+  color: white;
+}
+
+.bgColor1 .viewAll:hover {
+  color: #5fe1d5;
+}
+
+.bgColor2 .viewAll:hover {
   color: #682bd7;
+}
+
+.bgColor3 .viewAll:hover {
+  color: #282c34;
 }
 
 .itemsContainer {
   display: flex;
-  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-x: auto;
   padding-bottom: 10px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .itemsContainer::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
+  display: none;
 }
 
 .bgColor1 .item {
@@ -144,23 +130,23 @@
 }
 
 .item {
-  flex: 0 0 auto; /* Prevent items from shrinking */
-  width: 200px; /* Adjust the width of the items */
-  height: 130px; /* Adjust the height of the items */
-  margin-right: 10px; /* Space between items */
+  flex: 0 0 auto;
+  width: 200px;
+  height: 130px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-decoration: none; /* Remove underline from items */
+  text-decoration: none;
   color: #333;
   cursor: pointer;
-  font-weight: bold; /* Make text bold */
-  font-size: 1.25rem; /* Increase font size */
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden; /* Hide overflowed text */
-  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+  font-weight: bold;
+  font-size: 1.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item span {
@@ -169,4 +155,43 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .item {
+    width: 150px;
+    height: 80px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 775px) {
+  .subHeader {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .mainHeader {
+    font-size: 3rem;
+  }
+  
+  .subHeader {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .item {
+    width: 100px;
+    height: 60px;
+    font-size: 0.875rem;
+  }
+  .mainHeader {
+    font-size: 3rem;
+  }
+  
+  .subHeader {
+    font-size: 1rem;
+  }
 }
