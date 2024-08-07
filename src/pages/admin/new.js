@@ -3,6 +3,9 @@ import { useRouter } from 'next/router';
 import withAdminAuth from '../../../components/WithAdminAuth';
 import styles from '../../styles/Admin.module.css';
 import Link from 'next/link';
+import ReactMde from 'react-mde';
+import * as Showdown from 'showdown';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 const NewPost = () => {
   const [title, setTitle] = useState('');
@@ -21,6 +24,13 @@ const NewPost = () => {
     });
     router.push('/admin');
   };
+
+  const converter = new Showdown.Converter({
+    tables: true,
+    simplifiedAutoLink: true,
+    strikethrough: true,
+    tasklists: true,
+  });
 
   return (
     <div className={styles.container}>
@@ -45,12 +55,25 @@ const NewPost = () => {
           onChange={(e) => setCategory(e.target.value)}
           className={styles.input}
         />
-        <textarea
-          placeholder="Content"
+        <ReactMde
           value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className={styles.textarea}
+          onChange={setContent}
+          selectedTab="write"
+          generateMarkdownPreview={(markdown) =>
+            Promise.resolve(converter.makeHtml(markdown))
+          }
+          childProps={{
+            writeButton: {
+              tabIndex: -1,
+            },
+          }}
         />
+        <div className={styles.preview}>
+          <h3>Preview</h3>
+          <div
+            dangerouslySetInnerHTML={{ __html: converter.makeHtml(content) }}
+          />
+        </div>
         <button type="submit" className={styles.button}>Create</button>
       </form>
     </div>

@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import withAdminAuth from '../../../../components/WithAdminAuth';
 import styles from '../../../styles/Admin.module.css';
-import Link from 'next/link'
+import Link from 'next/link';
+import ReactMde from 'react-mde';
+import * as Showdown from 'showdown';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 const EditPost = () => {
   const [post, setPost] = useState({ title: '', content: '', category: '' });
@@ -57,13 +60,19 @@ const EditPost = () => {
     router.push('/admin');
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (value, field) => {
     setPost(prevPost => ({
       ...prevPost,
-      [name]: value
+      [field]: value
     }));
   };
+
+  const converter = new Showdown.Converter({
+    tables: true,
+    simplifiedAutoLink: true,
+    strikethrough: true,
+    tasklists: true,
+  });
 
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
@@ -88,7 +97,7 @@ const EditPost = () => {
           name="title"
           placeholder="Title"
           value={post.title}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e.target.value, 'title')}
           className={styles.input}
         />
         <h4>Category</h4>
@@ -97,17 +106,29 @@ const EditPost = () => {
           name="category"
           placeholder="Category"
           value={post.category}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e.target.value, 'category')}
           className={styles.input}
         />
         <h4>Content</h4>
-        <textarea
-          name="content"
-          placeholder="Content"
+        <ReactMde
           value={post.content}
-          onChange={handleChange}
-          className={styles.textarea}
+          onChange={(value) => handleChange(value, 'content')}
+          selectedTab="write"
+          generateMarkdownPreview={(markdown) =>
+            Promise.resolve(converter.makeHtml(markdown))
+          }
+          childProps={{
+            writeButton: {
+              tabIndex: -1,
+            },
+          }}
         />
+        <div className={styles.preview}>
+          <h3>Preview</h3>
+          <div
+            dangerouslySetInnerHTML={{ __html: converter.makeHtml(post.content) }}
+          />
+        </div>
         <div className={styles.buttonContainer}>
           <button type="submit" className={styles.button}>Update</button>
           <button
