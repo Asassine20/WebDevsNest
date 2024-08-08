@@ -28,6 +28,9 @@ body {
   overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
+p {
+  font-size: 15px;
+}
 html, body {
   width: 100%;
   overflow-x: hidden; /* Prevent horizontal overflow */
