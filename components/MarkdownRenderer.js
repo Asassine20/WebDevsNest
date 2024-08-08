@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism'; // Use the 'prism' theme
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from 'react-icons/fa6';
 import remarkGfm from 'remark-gfm'; // Import the GFM plugin
+import { okaidia } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 const MarkdownRenderer = ({ content }) => {
   return (
@@ -16,16 +16,25 @@ const MarkdownRenderer = ({ content }) => {
           const language = match ? match[1] : '';
 
           return !inline && match ? (
-            <div style={{ position: 'relative', marginBottom: '1em', border: '3px solid #682bd7', borderRadius: '4px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5em', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}>
-                <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#682bd7' }}>{language}</span>
-                <CopyToClipboard text={String(children).replace(/\n$/, '')}>
-                  <button style={{ borderRadius: '4px', cursor: 'pointer', padding: '0.2em' }}>
-                    <FaRegCopy size={20} color="#682bd7" />
-                  </button>
-                </CopyToClipboard>
-              </div>
-              <SyntaxHighlighter style={prism} language={language} PreTag="div" {...props}>
+            <div style={{ position: 'relative', marginBottom: '1em' }}>
+              <CopyToClipboard text={String(children).replace(/\n$/, '')}>
+                <button
+                  style={{
+                    position: 'absolute',
+                    top: '0.5em',
+                    right: '0.5em',
+                    borderRadius: '0.3em',
+                    cursor: 'pointer',
+                    padding: '0.2em',
+                    background: 'none',
+                    border: 'none',
+                    color: '#5fe1d5',
+                  }}
+                >
+                  <FaRegCopy size={20} />
+                </button>
+              </CopyToClipboard>
+              <SyntaxHighlighter style={okaidia} language={language} PreTag="div" {...props}>
                 {String(children).replace(/\n$/, '')}
               </SyntaxHighlighter>
             </div>
