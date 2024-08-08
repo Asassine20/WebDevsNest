@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import withAdminAuth from '../../../../components/WithAdminAuth';
 import styles from '../../../styles/Admin.module.css';
 import Link from 'next/link';
-import ReactMde from 'react-mde';
+import dynamic from 'next/dynamic';
 import * as Showdown from 'showdown';
-import 'react-mde/lib/styles/css/react-mde-all.css';
+import 'easymde/dist/easymde.min.css';
+
+// Dynamically import SimpleMDE
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
 
 const EditPost = () => {
   const [post, setPost] = useState({ title: '', content: '', category: '' });
@@ -67,12 +70,24 @@ const EditPost = () => {
     }));
   };
 
-  const converter = new Showdown.Converter({
+  const handleContentChange = useCallback((value) => {
+    setPost(prevPost => ({
+      ...prevPost,
+      content: value
+    }));
+  }, []);
+
+  const converter = useMemo(() => new Showdown.Converter({
     tables: true,
     simplifiedAutoLink: true,
     strikethrough: true,
     tasklists: true,
-  });
+  }), []);
+
+  const options = useMemo(() => ({
+    spellChecker: false,
+    showIcons: ["code", "table"],
+  }), []);
 
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
@@ -110,18 +125,10 @@ const EditPost = () => {
           className={styles.input}
         />
         <h4>Content</h4>
-        <ReactMde
+        <SimpleMDE
           value={post.content}
-          onChange={(value) => handleChange(value, 'content')}
-          selectedTab="write"
-          generateMarkdownPreview={(markdown) =>
-            Promise.resolve(converter.makeHtml(markdown))
-          }
-          childProps={{
-            writeButton: {
-              tabIndex: -1,
-            },
-          }}
+          onChange={handleContentChange}
+          options={options}
         />
         <div className={styles.preview}>
           <h3>Preview</h3>

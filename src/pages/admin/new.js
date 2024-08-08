@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import withAdminAuth from '../../../components/WithAdminAuth';
 import styles from '../../styles/Admin.module.css';
 import Link from 'next/link';
-import ReactMde from 'react-mde';
+import dynamic from 'next/dynamic';
 import * as Showdown from 'showdown';
-import 'react-mde/lib/styles/css/react-mde-all.css';
+import 'easymde/dist/easymde.min.css';
+
+// Dynamically import SimpleMDE
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
 
 const NewPost = () => {
   const [title, setTitle] = useState('');
@@ -25,12 +28,21 @@ const NewPost = () => {
     router.push('/admin');
   };
 
-  const converter = new Showdown.Converter({
+  const handleContentChange = useCallback((value) => {
+    setContent(value);
+  }, []);
+
+  const converter = useMemo(() => new Showdown.Converter({
     tables: true,
     simplifiedAutoLink: true,
     strikethrough: true,
     tasklists: true,
-  });
+  }), []);
+
+  const options = useMemo(() => ({
+    spellChecker: false,
+    showIcons: ["code", "table"],
+  }), []);
 
   return (
     <div className={styles.container}>
@@ -55,18 +67,10 @@ const NewPost = () => {
           onChange={(e) => setCategory(e.target.value)}
           className={styles.input}
         />
-        <ReactMde
+        <SimpleMDE
           value={content}
-          onChange={setContent}
-          selectedTab="write"
-          generateMarkdownPreview={(markdown) =>
-            Promise.resolve(converter.makeHtml(markdown))
-          }
-          childProps={{
-            writeButton: {
-              tabIndex: -1,
-            },
-          }}
+          onChange={handleContentChange}
+          options={options}
         />
         <div className={styles.preview}>
           <h3>Preview</h3>
