@@ -48,7 +48,7 @@ const MarkdownRenderer = ({ content }) => {
                 padding: '0.2em 0.4em',
                 borderRadius: '3px',
                 fontWeight: 'bold',
-                fontSize: '105%',
+                fontSize: '15px !important',
               }}
             >
               {children}

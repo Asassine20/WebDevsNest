@@ -6,6 +6,11 @@ const generateSlug = (title) => {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 };
 
+// Function to generate a URL from the category and slug
+const generateUrl = (category, slug) => {
+  return `/${category.toLowerCase()}/${slug}`;
+};
+
 export default async (req, res) => {
   const connection = await createConnection();
 
@@ -21,16 +26,24 @@ export default async (req, res) => {
       return res.status(200).json(rows);
     }
   } else if (req.method === 'POST') {
-    const { title, content, category } = req.body;
+    const { title, content, category, subCategory } = req.body;
     const slug = generateSlug(title);
-    await connection.execute('INSERT INTO Post (Title, Content, Category, Slug) VALUES (?, ?, ?, ?)', [title, content, category, slug]);
+    const url = generateUrl(category, slug);
+    await connection.execute(
+      'INSERT INTO Post (Title, Content, Category, SubCategory, Slug, Url) VALUES (?, ?, ?, ?, ?, ?)', 
+      [title, content, category, subCategory, slug, url]
+    );
     await connection.end();
     res.status(201).json({ message: 'Post created' });
   } else if (req.method === 'PUT') {
-    const { id, title, content, category } = req.body;
+    const { id, title, content, category, subCategory } = req.body;
     const slug = generateSlug(title);
+    const url = generateUrl(category, slug);
     const currentTime = new Date();
-    await connection.execute('UPDATE Post SET Title = ?, Content = ?, Category = ?, Slug = ?, UpdatedAt = ? WHERE Id = ?', [title, content, category, slug, currentTime, id]);
+    await connection.execute(
+      'UPDATE Post SET Title = ?, Content = ?, Category = ?, SubCategory = ?, Slug = ?, Url = ?, UpdatedAt = ? WHERE Id = ?', 
+      [title, content, category, subCategory, slug, url, currentTime, id]
+    );
     await connection.end();
     res.status(200).json({ message: 'Post updated' });
   } else if (req.method === 'DELETE') {

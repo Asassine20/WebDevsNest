@@ -14,16 +14,15 @@ const NewPost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
+  const [subCategory, setSubCategory] = useState(''); // New SubCategory field
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetch('/api/posts', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title, content, category }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, content, category, subCategory }), // Include subCategory
     });
     router.push('/admin');
   };
@@ -65,6 +64,13 @@ const NewPost = () => {
           placeholder="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="SubCategory" // New SubCategory field
+          value={subCategory}
+          onChange={(e) => setSubCategory(e.target.value)}
           className={styles.input}
         />
         <SimpleMDE

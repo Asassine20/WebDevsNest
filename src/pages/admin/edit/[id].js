@@ -11,7 +11,7 @@ import 'easymde/dist/easymde.min.css';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
 
 const EditPost = () => {
-  const [post, setPost] = useState({ title: '', content: '', category: '' });
+  const [post, setPost] = useState({ title: '', content: '', category: '', subCategory: '' }); // Add subCategory field
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -26,7 +26,8 @@ const EditPost = () => {
             setPost({
               title: data[0].Title || '',
               content: data[0].Content || '',
-              category: data[0].Category || ''
+              category: data[0].Category || '',
+              subCategory: data[0].SubCategory || '', // Include subCategory
             });
           } else {
             setError('Post not found');
@@ -122,6 +123,15 @@ const EditPost = () => {
           placeholder="Category"
           value={post.category}
           onChange={(e) => handleChange(e.target.value, 'category')}
+          className={styles.input}
+        />
+        <h4>SubCategory</h4> {/* Add SubCategory input */}
+        <input
+          type="text"
+          name="subCategory"
+          placeholder="SubCategory"
+          value={post.subCategory}
+          onChange={(e) => handleChange(e.target.value, 'subCategory')}
           className={styles.input}
         />
         <h4>Content</h4>

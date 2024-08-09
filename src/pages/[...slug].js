@@ -5,7 +5,6 @@ import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
 import styles from '../styles/Post.module.css';
 import Script from 'next/script';
-import categoryLinks from '../../links'; // Adjust the path as needed
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
 
@@ -76,6 +75,7 @@ const Post = ({ data, content, category, slug }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   const { data: user } = useSWR('/api/auth/user', fetcher);
+  const { data: categoryPosts } = useSWR(`/api/postData?category=${category}`, fetcher);
 
   useEffect(() => {
     setIsLoggedIn(!!user);
@@ -132,9 +132,6 @@ const Post = ({ data, content, category, slug }) => {
     }
   };
 
-  const relevantLinks = categoryLinks[category] || {};
-  const linkSections = Object.keys(relevantLinks).filter(key => Array.isArray(relevantLinks[key]));
-
   return (
     <>
       <Head>
@@ -149,18 +146,28 @@ const Post = ({ data, content, category, slug }) => {
       <div className={styles.pageContainer}>
         {!isSmallScreen && (
           <div className={styles.sidePanel}>
-            {linkSections.map((miniTitle, index) => (
-              <div key={index}>
-                <h3>{miniTitle.charAt(0).toUpperCase() + miniTitle.slice(1)}</h3>
-                <ul>
-                  {relevantLinks[miniTitle].map((link, idx) => (
-                    <li key={idx} className={link.url === `/${category}/${slug}` ? styles.activeLink : ''}>
-                      <a href={link.url}>{link.title}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {categoryPosts && categoryPosts.length > 0 ? (
+              Object.keys(categoryPosts.reduce((acc, post) => {
+                acc[post.SubCategory] = acc[post.SubCategory] || [];
+                acc[post.SubCategory].push(post);
+                return acc;
+              }, {})).map((subCategory, index) => (
+                <div key={index}>
+                  <h3>{subCategory}</h3>
+                  <ul>
+                    {categoryPosts
+                      .filter(post => post.SubCategory === subCategory)
+                      .map((post, idx) => (
+                        <li key={idx} className={post.Slug === slug ? styles.activeLink : ''}>
+                          <a href={`/${post.Category}/${post.Slug}`}>{post.Title}</a>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <p>No posts available in this category.</p>
+            )}
           </div>
         )}
         <div className={styles.mainContentWrapper}>
