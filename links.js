@@ -1,8 +1,7 @@
 const categoryLinks = {
   python: {
-    defaultUrl: '/python/python',
+    defaultUrl: '/python/python-intro',
     basics: [
-      { title: 'Python Introduction', url: '/python/python'},
       { title: 'Python Data Types', url: '/python/python-data-types' },
     ],
     functions: [

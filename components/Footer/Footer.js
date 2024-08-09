@@ -49,7 +49,7 @@ const Footer = () => {
                         <h4>Languages</h4>
                         <ul>
                             <li>
-                                <Link href="/python/python" passHref>Python</Link>
+                                <Link href="/python/python-intro" passHref>Python</Link>
                             </li>
                             <li>
                                 <Link href="/java/java" passHref>Java</Link>
