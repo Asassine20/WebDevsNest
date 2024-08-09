@@ -89,7 +89,19 @@ const Post = ({ data, content, category, slug }) => {
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    // Detect if there is a table on the page
+    const tables = document.querySelectorAll('table');
+    if (tables.length > 0) {
+      document.querySelector(`.${styles.postContainer}`).style.overflowX = 'auto';
+      document.querySelector(`.${styles.pageContainer}`).style.overflowX = 'auto';
+    } else {
+      document.querySelector(`.${styles.postContainer}`).style.overflowX = 'initial';
+      document.querySelector(`.${styles.pageContainer}`).style.overflowX = 'initial';
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const handleFavoriteClick = async () => {
