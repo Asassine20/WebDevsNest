@@ -49,19 +49,22 @@ const Footer = () => {
                         <h4>Languages</h4>
                         <ul>
                             <li>
-                                <Link href="/languages/python" passHref>Python</Link>
+                                <Link href="/python/python" passHref>Python</Link>
                             </li>
                             <li>
-                                <Link href="/languages/java" passHref>Java</Link>
+                                <Link href="/java/java" passHref>Java</Link>
                             </li>
                             <li>
-                                <Link href="/languages/cpp" passHref>C++</Link>
+                                <Link href="/cpp/cpp" passHref>C++</Link>
                             </li>
                             <li>
-                                <Link href="/languages/sql" passHref>SQL</Link>
+                                <Link href="/sql/sql" passHref>SQL</Link>
                             </li>
                             <li>
-                                <Link href="/languages/php" passHref>PHP</Link>
+                                <Link href="/php/php" passHref>PHP</Link>
+                            </li>
+                            <li>
+                                <Link href="/c/c" passHref>C</Link>
                             </li>
                         </ul>
                     </div>
@@ -69,25 +72,25 @@ const Footer = () => {
                         <h4>Data Structures</h4>
                         <ul>
                             <li>
-                                <Link href="/data-structures" passHref>Arrays</Link>
+                                <Link href="/arrays/arrays" passHref>Arrays</Link>
                             </li>
                             <li>
-                                <Link href="/data-structures" passHref>Stacks</Link>
+                                <Link href="/stacks/stacks" passHref>Stacks</Link>
                             </li>
                             <li>
-                                <Link href="/data-structures" passHref>Queues</Link>
+                                <Link href="/queues/queues" passHref>Queues</Link>
                             </li>
                             <li>
-                                <Link href="/data-structures" passHref>Linked Lists</Link>
+                                <Link href="/linked-lists/linked-lists" passHref>Linked Lists</Link>
                             </li>
                             <li>
-                                <Link href="/data-structures" passHref>Trees</Link>
+                                <Link href="/trees/trees" passHref>Trees</Link>
                             </li>
                             <li>
-                                <Link href="/data-structures" passHref>Graphs</Link>
+                                <Link href="/graphs/graphs" passHref>Graphs</Link>
                             </li>
                             <li>
-                                <Link href="/data-structures" passHref>Hash Tables</Link>
+                                <Link href="/has-tables/hash-tables" passHref>Hash Tables</Link>
                             </li>
                         </ul>
                     </div>
@@ -95,22 +98,22 @@ const Footer = () => {
                         <h4>Algorithms</h4>
                         <ul>
                             <li>
-                                <Link href="/algorithms" passHref>Searching Algorithm</Link>
+                                <Link href="/searching-algorithms/searching-algorithms" passHref>Searching Algorithm</Link>
                             </li>
                             <li>
-                                <Link href="/algorithms" passHref>Sorting Algorithm</Link>
+                                <Link href="/sorting-algorithms/sorting-algorithms" passHref>Sorting Algorithm</Link>
                             </li>
                             <li>
-                                <Link href="/algorithms" passHref>Recursion Algorithm</Link>
+                                <Link href="/recursion-algorithms/recursion-algorithms" passHref>Recursion Algorithm</Link>
                             </li>
                             <li>
-                                <Link href="/algorithms" passHref>Greedy Algorithm</Link>
+                                <Link href="/greedy-algorithms/greedy-algorithms" passHref>Greedy Algorithm</Link>
                             </li>
                             <li>
-                                <Link href="/algorithms" passHref>Dynamic Programming</Link>
+                                <Link href="/dynamic-programming/dynamic-programming" passHref>Dynamic Programming</Link>
                             </li>
                             <li>
-                                <Link href="/algorithms" passHref>Divide and Conquer</Link>
+                                <Link href="/divide-and-conquer/divide-and-conquer" passHref>Divide and Conquer</Link>
                             </li>
                         </ul>
                     </div>
@@ -118,22 +121,25 @@ const Footer = () => {
                         <h4>Web Development</h4>
                         <ul>
                             <li>
-                                <Link href="/web-development/html" passHref>HTML</Link>
+                                <Link href="/html/html" passHref>HTML</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/css" passHref>CSS</Link>
+                                <Link href="/css/css" passHref>CSS</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/javascript" passHref>JavaScript</Link>
+                                <Link href="/javascript/javascript" passHref>JavaScript</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/reactjs" passHref>ReactJS</Link>
+                                <Link href="/reactjs/reactjs" passHref>ReactJS</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/nextjs" passHref>NextJS</Link>
+                                <Link href="/nextjs/nextjs" passHref>NextJS</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/bootstrap" passHref>Bootstrap</Link>
+                                <Link href="/nodejs/nodejs" passHref>NodeJS</Link>
+                            </li>
+                            <li>
+                                <Link href="/bootstrap/bootstrap" passHref>Bootstrap</Link>
                             </li>
                         </ul>
                     </div>
@@ -141,16 +147,19 @@ const Footer = () => {
                         <h4>DevOps</h4>
                         <ul>
                             <li>
-                                <Link href="/web-development/html" passHref>GitHub</Link>
+                                <Link href="/gtihub/github" passHref>GitHub</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/css" passHref>Git</Link>
+                                <Link href="/git/git" passHref>Git</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/javascript" passHref>AWS</Link>
+                                <Link href="/amazon-web-services/amazon-web-services" passHref>AWS</Link>
                             </li>
                             <li>
-                                <Link href="/web-development/reactjs" passHref>Azure</Link>
+                                <Link href="/azure/azure" passHref>Azure</Link>
+                            </li>
+                            <li>
+                                <Link href="/docker/docker" passHref>Docker</Link>
                             </li>
                         </ul>
                     </div>

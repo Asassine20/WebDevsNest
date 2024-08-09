@@ -1,6 +1,6 @@
 .pageContainer {
   display: grid;
-  grid-template-columns: 250px 1fr 160px; /* Define the columns: sidePanel, mainContent, adSide */
+  grid-template-columns: 250px 1fr 300px; /* Define the columns: sidePanel, mainContent, adSide */
   grid-template-rows: auto; /* Auto height for rows */
   gap: 0; /* No gap between columns */
   min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
@@ -76,7 +76,7 @@
 
 .adTop {
   width: 100%; /* Extend to cover the full width */
-  height: 100px; /* Adjust height for the top ad */
+  height: 150px; /* Adjust height for the top ad */
   background-color: pink; /* For visualization */
   text-align: center;
 }
@@ -115,7 +115,6 @@
 .postMeta {
   color: #666;
   font-size: 0.9rem;
-  margin-bottom: 20px;
 }
 
 .postContent {
@@ -132,6 +131,7 @@
 
 .postContent p {
   margin-bottom: 15px;
+  font-size: 20px !important;
 }
 
 .postContent img {
@@ -160,7 +160,7 @@
 }
 
 .adSide {
-  width: 160px; /* Adjust width for the side ad */
+  width: 300px; /* Adjust width for the side ad */
   height: 100vh; /* Adjust height for the side ad */
   position: fixed; /* Fix position so it doesn't cause overflow */
   right: 0; /* Align to the right */

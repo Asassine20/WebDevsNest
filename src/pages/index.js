@@ -18,6 +18,17 @@ const Home = () => {
     styles.bgColor3,
   ];
 
+  // Custom alias mapping for certain items
+  const aliasMapping = {
+    'C++': 'cpp',
+    'C#': 'csharp'
+  };
+
+  const generateLink = (item) => {
+    const alias = aliasMapping[item] || item.toLowerCase().replace(/\s+/g, '-');
+    return `/${alias}/${alias}`;
+  };
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>
@@ -38,7 +49,7 @@ const Home = () => {
             </div>
             <div className={`${styles.itemsContainer} ${bgColors[index % bgColors.length]}`}>
               {section.items.map((item, idx) => (
-                <Link key={idx} href={`/${item.toLowerCase().replace(/\s+/g, '-')}/${item.toLowerCase().replace(/\s+/g, '-')}`} passHref>
+                <Link key={idx} href={generateLink(item)} passHref>
                   <div className={styles.item}><span>{item}</span></div>
                 </Link>
               ))}
