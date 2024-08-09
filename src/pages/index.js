@@ -26,7 +26,7 @@ const Home = () => {
 
   const generateLink = (item) => {
     const alias = aliasMapping[item] || item.toLowerCase().replace(/\s+/g, '-');
-    return `/${alias}/${alias}`;
+    return `/${alias}/${alias}-introduction`;
   };
 
   return (
@@ -43,9 +43,6 @@ const Home = () => {
           <div key={index} className={`${styles.section} ${bgColors[index % bgColors.length]}`}>
             <div className={styles.sectionHeader}>
               <h3>{section.title}</h3>
-              <Link href={section.link} passHref>
-                <span className={`${styles.viewAll} ${bgColors[index % bgColors.length]}-link`}>View All</span>
-              </Link>
             </div>
             <div className={`${styles.itemsContainer} ${bgColors[index % bgColors.length]}`}>
               {section.items.map((item, idx) => (

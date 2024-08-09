@@ -1,0 +1,62 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .creatorSection, .coreValuesSection {
+    margin-bottom: 40px;
+  }
+  
+  .title {
+    color: #682bd7;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .creatorContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .creatorImage {
+    margin-right: 20px;
+  }
+  
+  .creatorImage img {
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure the image covers the entire area */
+  }
+  
+  .creatorText {
+    flex: 1;
+    color: #333;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .valuesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .valuesList li {
+    background-color: #f9f9f9;
+    border-left: 5px solid #5fe1d5;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #333;
+    font-size: 1.1rem;
+  }
+  
+  .valuesList li strong {
+    color: #682bd7;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
