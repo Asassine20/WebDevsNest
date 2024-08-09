@@ -1,4 +1,3 @@
-// pages/api/auth/login.js
 import bcrypt from 'bcryptjs';
 import { query } from '../../../../lib/db';
 
@@ -18,6 +17,11 @@ export default async function handler(req, res) {
   }
 
   const user = results[0];
+
+  // Check if the user's email is verified
+  if (!user.EmailVerified) {  // If EmailVerified is NULL
+    return res.status(403).json({ error: 'Please verify your email before logging in' });
+  }
 
   const isPasswordMatch = await bcrypt.compare(password, user.Password);
   if (!isPasswordMatch) {

@@ -54,6 +54,13 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      {user.Role === 'admin' && (
+        <Link href="/admin">
+          <button className={styles.adminButton}>
+            Admin Dashboard
+          </button>
+        </Link>
+      )}
       <button className={styles.logoutButton} onClick={handleLogout}>
         Logout
       </button>

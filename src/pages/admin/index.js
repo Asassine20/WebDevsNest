@@ -34,9 +34,14 @@ const Admin = () => {
               {categorizedPosts[category].map(post => (
                 <li key={post.Id} className={styles.postItem}>
                   <div>
-                    <Link href={`/admin/edit/${post.Id}`} className={styles.postLink}>
+                    <a
+                      href={`/${post.Category}/${post.Slug}`} // Link to the actual post
+                      target="_blank" // Open in a new tab
+                      rel="noopener noreferrer" // For security
+                      className={styles.postLink}
+                    >
                       {post.Title}
-                    </Link>
+                    </a>
                     <span className={styles.postDate}>
                       {new Date(post.CreatedAt).toLocaleDateString()}
                     </span>
