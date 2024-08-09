@@ -1,12 +1,11 @@
 const categoryLinks = {
-  Python: {
-    defaultUrl: '/javascript/javascript',
-    syntax: [
-      { title: 'Introduction to Syntax', url: '/javascript/syntax/intro' },
-      { title: 'Variables and Types', url: '/javascript/syntax/variables' },
+  python: {
+    defaultUrl: '/python/python',
+    basics: [
+      { title: 'Python Introduction', url: '/python/python'},
+      { title: 'Python Data Types', url: '/python/python-data-types' },
     ],
     functions: [
-      { title: 'Function Basics', url: '/javascript/functions/basics' },
       { title: 'Arrow Functions', url: '/javascript/functions/arrow' },
     ],
     objects: [
@@ -14,214 +13,184 @@ const categoryLinks = {
       { title: 'Object Methods', url: '/javascript/objects/methods' },
     ],
   },
-  JavaScript: {
-    defaultUrl: '/python/python',
+  javascript: {
+    defaultUrl: '/javascript/javascript',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'JavaScript', url: '/javascript/javascript' },
     ],
   },
-  Java: {
-    defaultUrl: '/python/python',
+  java: {
+    defaultUrl: '/java/java',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Java', url: '/java/java' },
     ],
   },
-  'C++': {
-    defaultUrl: '/python/python',
+  'c++': {
+    defaultUrl: '/cpp/cpp',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'cpp', url: '/cpp/cpp' },
     ],
   },
-  SQL: {
-    defaultUrl: '/python/python',
+  sql: {
+    defaultUrl: '/sql/sql',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'SQL', url: '/sql/sql' },
     ],
   },
-  C: {
-    defaultUrl: '/python/python',
+  c: {
+    defaultUrl: '/c/c',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'C', url: '/c/c' },
     ],
   },
-  'C#': {
-    defaultUrl: '/python/python',
+  'c#': {
+    defaultUrl: '/csharp/csharp',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'C#', url: '/csharp/csharp' },
     ],
   },
-  'Data Structures': {
-    defaultUrl: '/python/python',
+  'data structures': {
+    defaultUrl: '/data-structures/data-structures',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Data Structures', url: '/data-structures/data-structures' },
     ],
   },
-  Algorithms: {
-    defaultUrl: '/python/python',
+  algorithms: {
+    defaultUrl: '/algorithms/algorithms',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Algorithms', url: '/algorithms/algorithms' },
     ],
   },
-  Git: {
-    defaultUrl: '/python/python',
+  git: {
+    defaultUrl: '/git/git',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Git', url: '/git/git' },
     ],
   },
-  GitHub: {
-    defaultUrl: '/python/python',
+  github: {
+    defaultUrl: '/github/github',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'GitHub', url: '/github/github' },
     ],
   },
-  PostgreSQL: {
-    defaultUrl: '/python/python',
+  postgresql: {
+    defaultUrl: '/postgresql/postgresql',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Postgresql', url: '/postgresql/postgresql' },
     ],
   },
-  PHP: {
-    defaultUrl: '/python/python',
+  php: {
+    defaultUrl: '/php/php',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'PHP', url: '/php/php' },
     ],
   },
-  React: {
-    defaultUrl: '/python/python',
+  react: {
+    defaultUrl: '/react/react',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'ReactJS', url: '/react/react' },
     ],
   },
-  MySQL: {
-    defaultUrl: '/python/python',
+  mysql: {
+    defaultUrl: '/mysql/mysql',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'MySQL', url: '/mysql/mysql' },
     ],
   },
-  AWS: {
-    defaultUrl: '/python/python',
+  aws: {
+    defaultUrl: '/amazon-web-services/amazon-web-services',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Amazon Web Services', url: '/amazon-web-services/amazon-web-services' },
     ],
   },
-  NextJS: {
-    defaultUrl: '/python/python',
+  nextjs: {
+    defaultUrl: '/nextjs/nextjs',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'NextJS', url: '/nextjs/nextjs' },
     ],
   },
-  NodeJS: {
-    defaultUrl: '/python/python',
+  nodejs: {
+    defaultUrl: '/nodejs/nodejs',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Nodejs', url: '/nodejs/nodejs' },
     ],
   },
-  TypeScript: {
-    defaultUrl: '/python/python',
+  typescript: {
+    defaultUrl: '/typescript/typescript',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'TypeScript', url: '/typescript/typescript' },
     ],
   },
-  Redis: {
-    defaultUrl: '/python/python',
+  redis: {
+    defaultUrl: '/redis/redis',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Redis', url: '/redis/redis' },
     ],
   },
-  Django: {
-    defaultUrl: '/python/python',
+  django: {
+    defaultUrl: '/django/django',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Django', url: '/django/python' },
     ],
   },
-  Go: {
-    defaultUrl: '/python/python',
+  go: {
+    defaultUrl: '/go/go',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Go', url: '/go/go' },
     ],
   },
-  MongoDB: {
-    defaultUrl: '/python/python',
+  mongodb: {
+    defaultUrl: '/mongodb/mongodb',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'MongoDB', url: '/mongodb/mongodb' },
     ],
   },
-  Flutter: {
-    defaultUrl: '/python/python',
+  flutter: {
+    defaultUrl: '/flutter/flutter',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Flutter', url: '/flutter/flutter' },
     ],
   },
-  AngularJS: {
-    defaultUrl: '/python/python',
+  angularjs: {
+    defaultUrl: '/angularjs/angularjs',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'AngularJS', url: '/angularjs/angularjs' },
     ],
   },
-  VueJS: {
-    defaultUrl: '/python/python',
+  vuejs: {
+    defaultUrl: '/vuejs/vuejs',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'VueJS', url: '/vuejs/vuejs' },
     ],
   },
-  PowerShell: {
-    defaultUrl: '/python/python',
+  powershell: {
+    defaultUrl: '/powershell/powershell',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'PowerShell', url: '/powershell/powershell' },
     ],
   },
-  'Ruby on Rails': {
-    defaultUrl: '/python/python',
+  'ruby on rails': {
+    defaultUrl: '/ruby-on-rails/ruby-on-rails',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Ruby on Rails', url: '/ruby-on-rails/ruby-on-rails' },
     ],
   },
-  jQuery: {
-    defaultUrl: '/python/python',
+  jquery: {
+    defaultUrl: '/jquery/jquery',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'JQuery', url: '/jquery/jquery' },
     ],
   },
-  'ASP.NET': {
-    defaultUrl: '/python/python',
+  'asp.net': {
+    defaultUrl: '/aspnet/aspnet',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'ASP.NET', url: '/aspnet/aspnet' },
     ],
   },
-  Flask: {
-    defaultUrl: '/python/python',
+  flask: {
+    defaultUrl: '/flask/flask',
     syntax: [
-      { title: 'Python', url: '/python/python' },
-      { title: 'Variables and Types', url: '/python/syntax/variables' },
+      { title: 'Flask', url: '/flask/flask' },
     ],
   },
 };
