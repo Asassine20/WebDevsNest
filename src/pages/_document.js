@@ -1,6 +1,5 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-
-import { GA_TRACKING_ID } from '../../lib/gtag'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { GA_TRACKING_ID } from '../../lib/gtag';
 
 export default class MyDocument extends Document {
   render() {
@@ -8,8 +7,11 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           {/* Google Adsense */}
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5256730967472287"
-            crossorigin="anonymous"></script>
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5256730967472287"
+            crossOrigin="anonymous"
+          ></script>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
@@ -33,6 +35,6 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
