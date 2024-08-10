@@ -5,7 +5,7 @@
   gap: 0; /* No gap between columns */
   min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
   max-width: 100vw; /* Prevent horizontal overflow */
-  overflow-x: hidden; /* Hide horizontal overflow */
+  overflow-x: auto; /* Allow horizontal overflow */
   position: relative;
   z-index: 1; /* Lower z-index to ensure authButton is on top */
 }
@@ -72,6 +72,7 @@
 .mainContent {
   display: flex;
   flex-direction: column;
+  overflow-x: auto; /* Ensure main content can scroll horizontally */
 }
 
 .adTop {
@@ -87,6 +88,7 @@
   padding: 20px;
   line-height: 1.6;
   box-sizing: border-box; /* Include padding and border in element's total width and height */
+  overflow-x: auto; /* Ensure that horizontal scrolling is allowed if needed */
 }
 
 .postHeader {
@@ -120,6 +122,7 @@
 .postContent {
   font-size: 1rem;
   color: #444;
+  overflow-x: auto; /* Allow horizontal scrolling for post content if needed */
 }
 
 .postContent h2 {
@@ -179,11 +182,13 @@
 
   .pageContainer {
     grid-template-columns: 1fr; /* Single column layout for small screens */
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
   }
 
   .mainContent {
-    width: 100%; /* Ensure main content takes the full width */
-    margin: 0; /* Remove right and left margin */
+    width: 100%;
+    margin: 0;
+    overflow-x: auto; /* Ensure main content can scroll horizontally */
   }
 
   .adTop {
@@ -191,6 +196,11 @@
   }
 
   .postContainer {
-    margin: 0 20px; /* Maintain margin to separate from ad section */
+    margin: 0 20px;
+    overflow-x: auto; /* Allow horizontal scrolling in the post container */
+  }
+
+  .postContent {
+    overflow-x: auto; /* Allow horizontal scrolling for post content */
   }
 }
