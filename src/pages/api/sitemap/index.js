@@ -1,4 +1,4 @@
-import { createConnection } from '../../../lib/db';
+import { createConnection } from '../../../../lib/db';
 import fs from 'fs';
 import path from 'path';
 
