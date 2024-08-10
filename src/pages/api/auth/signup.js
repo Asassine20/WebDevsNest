@@ -70,8 +70,6 @@ export default async function handler(req, res) {
     `,
   };
 
-  console.log('SES_FROM_EMAIL:', process.env.SES_FROM_EMAIL);
-
   try {
     await transporter.sendMail(mailOptions);
     res.status(201).json({ message: 'User created, please verify your email' });

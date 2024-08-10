@@ -1,0 +1,51 @@
+/* /Users/andrewsassine/webdevsnest/src/styles/ThankYou.module.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 20px; /* Add some padding for smaller screens */
+}
+
+.thankYouWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.thankYouWrapper img {
+    margin-bottom: 20px;
+}
+
+.thankYouWrapper h1 {
+    color: #682bd7;
+    margin-bottom: 20px;
+}
+
+.thankYouWrapper p {
+    color: #555;
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.thankYouWrapper .btn {
+    margin-top: 20px;
+    background-color: #682bd7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.thankYouWrapper .btn:hover {
+    background-color: #5d27c2;
+}
