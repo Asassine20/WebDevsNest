@@ -172,6 +172,12 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
     };
   }, []);
 
+  const handleProfileIconClick = () => {
+    if (isLoggedIn) {
+      router.push('/profile/dashboard');
+    }
+  };
+
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.navbarContainer}>

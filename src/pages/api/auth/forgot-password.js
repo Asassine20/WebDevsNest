@@ -44,13 +44,26 @@ export default async function handler(req, res) {
     to: email,
     subject: 'Password Reset Request',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #682bd7; border-radius: 4px;">
-        <h2 style="color: #333;">Password Reset Request</h2>
+      <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #682bd7; border-radius: 4px;">
+      <!-- Logo centered at the top -->
+      <div style="text-align: center;">
+        <img src="${process.env.NEXT_PUBLIC_BASE_URL}/logo.png" alt="WebDevsNest Logo" style="max-width: 100px; height: auto; margin-bottom: 20px;">
+      </div>
+      <h2 style="color: #333;">Password Reset Request</h2>
         <p style="color: #555;">Hello,</p>
-        <p style="color: #555;">You requested a password reset. Click the link below to reset your password:</p>
+        <p style="color: #555;">Please click the link below to reset your password:</p>
         <a href="${resetLink}" style="display: inline-block; padding: 10px 20px; margin: 20px 0; color: #fff; background-color: #682bd7; text-decoration: none; border-radius: 5px;">Reset Password</a>
         <p style="color: #555;">If you did not request this, please ignore this email.</p>
-        <p style="color: #555;">Thanks,<br />The WebDevsNest Team</p>
+        <p style="color: #555;">Thank you,<br />The WebDevsNest Team</p>
+        <!-- Social media icons -->
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="https://www.tiktok.com/@webdevsnest?lang=en" style="margin: 0 10px;">
+            <img src="${process.env.NEXT_PUBLIC_BASE_URL}/tiktokIcon.png" alt="TikTok" style="width: 24px; height: 24px;">
+          </a>
+          <a href="https://www.youtube.com/channel/UCMHAqAbKaP0CWQHbcvIMx2w" style="margin: 0 10px;">
+            <img src="${process.env.NEXT_PUBLIC_BASE_URL}/youtubeIcon.png" alt="YouTube" style="width: 24px; height: 24px;">
+          </a>
+        </div>
       </div>
     `,
   };

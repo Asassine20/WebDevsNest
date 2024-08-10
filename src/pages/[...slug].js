@@ -7,6 +7,8 @@ import styles from '../styles/Post.module.css';
 import Script from 'next/script';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export async function getStaticPaths() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
@@ -122,14 +124,41 @@ const Post = ({ data, content, category, slug }) => {
         });
 
         if (res.ok) {
-          alert('Post added to favorites');
+          toast.success('Post added to favorites!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         } else {
           const errorData = await res.json();
-          alert(`Error: ${errorData.error}`);
+          toast.error('Post already in favorites', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
       } catch (error) {
         console.error('Error adding favorite:', error);
-        alert('An error occurred while adding to favorites');
+        toast.error('An error occurred while adding to favorites', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       }
     } else {
       if (confirm('Log in to access this feature')) {
@@ -161,6 +190,7 @@ const Post = ({ data, content, category, slug }) => {
         </script>
       </Head>
       <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
+      <ToastContainer />
       <div className={styles.pageContainer}>
         {!isSmallScreen && (
           <div className={styles.sidePanel}>
@@ -205,11 +235,13 @@ const Post = ({ data, content, category, slug }) => {
                   <h1 className={styles.postTitle}>{data.title}</h1>
                   <div className={styles.postMeta}>Published on {new Date(data.date).toLocaleDateString()}</div>
                 </div>
-                <FaRegStar
-                  className={styles.favoriteIcon}
-                  onClick={handleFavoriteClick}
-                  title="Add to Favorites"
-                />
+                <div className={styles.favoriteIconWrapper}>
+                  <FaRegStar
+                    className={styles.favoriteIcon}
+                    onClick={handleFavoriteClick}
+                  />
+                  <span className={styles.tooltipText}>Add to Favorites</span>
+                </div>
               </header>
               <div className={styles.postContent}>
                 <MarkdownRenderer content={content} />

@@ -42,21 +42,34 @@ export default async function handler(req, res) {
   const verificationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/verify?token=${verificationToken}`;
 
   const mailOptions = {
-    from: String(process.env.SES_FROM_EMAIL),
+    from: process.env.SES_FROM_EMAIL,
     to: email,
     subject: 'Verify your email',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #682bd7; border-radius: 4px;">
-        <h2 style="color: #333;">Welcome to WebDevsNest!</h2>
+      <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #682bd7; border-radius: 4px;">
+        <!-- Logo centered at the top -->
+        <div style="text-align: center;">
+          <img src="${process.env.NEXT_PUBLIC_BASE_URL}/logo.png" alt="WebDevsNest Logo" style="max-width: 100px; height: auto; margin-bottom: 20px;">
+        </div>
+        <h2 style="color: #333; text-align: center;">Welcome to WebDevsNest!</h2>
         <p style="color: #555;">Hi ${name},</p>
-        <p style="color: #555;">Thank you for signing up. Please verify your email address by clicking the link below:</p>
+        <p style="color: #555;">Thank you for signing up for an account with WebDevsNest. Please confirm your email address by clicking the link below:</p>
         <a href="${verificationLink}" style="display: inline-block; padding: 10px 20px; margin: 20px 0; color: #fff; background-color: #682bd7; text-decoration: none; border-radius: 5px;">Verify Email</a>
         <p style="color: #555;">If you did not sign up for this account, please ignore this email.</p>
-        <p style="color: #555;">Thanks,<br />The WebDevsNest Team</p>
+        <p style="color: #555;">Thank you,<br />The WebDevsNest Team</p>
+        <!-- Social media icons -->
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="https://www.tiktok.com/@webdevsnest?lang=en" style="margin: 0 10px;">
+            <img src="${process.env.NEXT_PUBLIC_BASE_URL}/tiktokIcon.png" alt="TikTok" style="width: 24px; height: 24px;">
+          </a>
+          <a href="https://www.youtube.com/channel/UCMHAqAbKaP0CWQHbcvIMx2w" style="margin: 0 10px;">
+            <img src="${process.env.NEXT_PUBLIC_BASE_URL}/youtubeIcon.png" alt="YouTube" style="width: 24px; height: 24px;">
+          </a>
+        </div>
       </div>
     `,
   };
-  
+
   console.log('SES_FROM_EMAIL:', process.env.SES_FROM_EMAIL);
 
   try {

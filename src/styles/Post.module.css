@@ -108,11 +108,41 @@
   color: #333;
 }
 
+.favoriteIconWrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .favoriteIcon {
   cursor: pointer;
   font-size: 2rem;
   color: #682bd7;
 }
+
+.tooltipText {
+  visibility: hidden;
+  width: auto; /* Adjust the width to fit the content */
+  background-color: #682bd7;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Position the tooltip above the icon */
+  right: 0; /* Align the right side of the tooltip with the right side of the icon */
+  transform: translateY(-5px); /* Add some spacing above the icon */
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9rem;
+  white-space: nowrap; /* Prevent the tooltip from breaking into multiple lines */
+}
+
+.favoriteIconWrapper:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 .postMeta {
   color: #666;
