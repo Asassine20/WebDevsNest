@@ -42,7 +42,7 @@ export default async function handler(req, res) {
   const verificationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/verify?token=${verificationToken}`;
 
   const mailOptions = {
-    from: process.env.SES_FROM_EMAIL,
+    from: String(process.env.SES_FROM_EMAIL),
     to: email,
     subject: 'Verify your email',
     html: `
@@ -56,6 +56,8 @@ export default async function handler(req, res) {
       </div>
     `,
   };
+  
+  console.log('SES_FROM_EMAIL:', process.env.SES_FROM_EMAIL);
 
   try {
     await transporter.sendMail(mailOptions);
