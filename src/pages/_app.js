@@ -1,6 +1,5 @@
 import '../styles/globals.css';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import NavComponent from '../../components/NavComponent/NavComponent';
+import CombinedComponent from '../../components/CombinedComponent/CombinedComponent';
 import Footer from '../../components/Footer/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
@@ -8,8 +7,8 @@ import { useRouter } from 'next/router';
 import * as gtag from '../../lib/gtag';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -43,7 +42,6 @@ function MyApp({ Component, pageProps }) {
       }
     };
 
-    // Set initial value
     handleRouteChange(router.asPath);
 
     router.events.on('routeChangeComplete', handleRouteChange);
@@ -53,7 +51,7 @@ function MyApp({ Component, pageProps }) {
   }, [router.events, user]);
 
   const handleSidePanelToggle = (isOpen) => {
-    // Pass this function to the NavComponent to handle side panel state
+    // Handle side panel state
   };
 
   const adminRoutes = ['/admin', '/admin/new', '/admin/edit/[id]'];
@@ -61,13 +59,11 @@ function MyApp({ Component, pageProps }) {
 
   const shouldShowNav = !['/login', '/signup'].includes(router.pathname) && !isAdminRoute;
   const shouldShowFooter = shouldShowNav;
-  const shouldShowSearchBar = !isAdminRoute;
 
   return (
     <>
-      {shouldShowSearchBar && <SearchBar />}
       {shouldShowNav && (
-        <NavComponent
+        <CombinedComponent
           category={category}
           slug={slug}
           isSlugPage={isSlugPage}

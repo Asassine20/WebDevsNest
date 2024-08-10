@@ -1,0 +1,273 @@
+/* components/CombinedComponent.module.css */
+.navbarContainer {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
+    position: fixed; /* Fix the navbarContainer to the top */
+    top: 0; /* Align it to the top */
+    left: 0; /* Align it to the left */
+    width: 100%; /* Ensure it spans the full width of the viewport */
+    z-index: 1001; /* Ensure it stays above other elements */
+    background-color: #ffffff; /* Optional: Set background color */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for visibility */
+  }
+  
+  .navContainer {
+    display: flex;
+    align-items: center;
+    background-color: #282c34;
+    padding: 0px 10px;
+    position: fixed; /* Fix the navContainer to the top */
+    top: 60px; /* Adjust this based on the height of navbarContainer */
+    left: 0; /* Align it to the left */
+    width: 100%; /* Ensure it spans the full width of the viewport */
+    z-index: 1000; /* Ensure it stays below the navbarContainer */
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent links from wrapping to the next line */
+    
+    /* Hide scrollbar */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .navContainer::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  
+  /* Add margin to the content to prevent overlap */
+  .contentWrapper {
+    margin-top: 94px; /* Adjust this value as needed */
+  }
+  
+  
+  .logo {
+    margin-right: 10px;
+  }
+  
+  .searchContainer {
+    position: relative;
+    width: 100%;
+  }
+  
+  .searchBar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #282c34;
+    border-radius: 10px;
+    padding: 3px 8px;
+    box-sizing: border-box;
+    background-color: white;
+  }
+  
+  .searchInput {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 5px 8px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: white;
+  }
+  
+  .searchInput::placeholder {
+    color: #282c34;
+    opacity: 1;
+  }
+  
+  .searchIcon {
+    color: #282c34;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .suggestionsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .suggestionItem {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    color: grey;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .suggestionItem:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .authButton {
+    padding: 20px 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background-color: #682bd7;
+    color: white;
+    border-radius: 10px;
+    z-index: 2000; /* Ensure this is higher than overlapping elements */
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .authButton:hover {
+    background-color: #5d27c2;
+  }
+  
+  .noUnderline {
+    text-decoration: none !important;
+    color: white !important;
+  }
+  
+  .noUnderline:hover {
+    text-decoration: none !important;
+    color: white !important;
+  }
+  
+  .profileIcon {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #682bd7;
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 2000;
+    position: relative;
+  }
+  
+  .profileIcon:hover {
+    color: #8444fa;
+  }
+  
+  .linksContainer {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .categoryLink {
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  
+  .categoryLink:hover {
+    background-color: #444444;
+  }
+  
+  .activeLink {
+    background-color: #682bd7;
+    color: white;
+  }
+  
+  .activeLink:hover {
+    background-color: #682bd7;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: white;
+    margin-right: 15px;
+  }
+  
+  .sidePanel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(240, 240, 240, 1);
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    overflow-y: auto;
+  }
+  
+  .sidePanel h2 {
+    display: none;
+  }
+  
+  .sidePanel h3 {
+    margin: 10px 0 5px;
+    font-size: 1.4rem;
+  }
+  
+  .sidePanel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidePanel li {
+    margin: 0;
+    background-color: #f0f0f0;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 0;
+  }
+  
+  .sidePanel li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 5px 30px;
+    font-weight: bold;
+    margin-left: 0;
+  }
+  
+  .sidePanel li a:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .sidePanel .activeLink a {
+    background-color: #682bd7;
+    color: white;
+  }
+  
+  .sidePanel .activeLink a:hover {
+    background-color: #682bd7;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 1068px) {
+    .closeButton {
+      display: none;
+    }
+  }
+  
