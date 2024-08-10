@@ -13,6 +13,8 @@
 .sidePanel {
   background-color: #f0f0f0;
   padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a right shadow to the side panel */
+  overflow-x: auto; /* Ensure sidePanel scrolls if necessary */
 }
 
 .sidePanel h2 {
@@ -67,6 +69,7 @@
 .mainContentWrapper {
   display: flex;
   flex-direction: column;
+  overflow-x: auto; /* Enable horizontal scrolling for the main content wrapper */
 }
 
 .mainContent {
@@ -143,7 +146,6 @@
   opacity: 1;
 }
 
-
 .postMeta {
   color: #666;
   font-size: 0.9rem;
@@ -201,7 +203,7 @@
   z-index: 1; /* Lower z-index to ensure authButton is on top */
 }
 
-@media (max-width: 1067px) {
+@media (max-width: 1068px) {
   .sidePanel {
     display: none; /* Hide side panel on small screens */
   }
