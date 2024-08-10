@@ -182,13 +182,11 @@
 
   .pageContainer {
     grid-template-columns: 1fr; /* Single column layout for small screens */
-    overflow-x: auto; /* Allow horizontal scrolling on small screens */
   }
 
   .mainContent {
-    width: 100%;
-    margin: 0;
-    overflow-x: auto; /* Ensure main content can scroll horizontally */
+    width: 100%; /* Ensure main content takes the full width */
+    margin: 0; /* Remove right and left margin */
   }
 
   .adTop {
@@ -196,11 +194,7 @@
   }
 
   .postContainer {
-    margin: 0 20px;
-    overflow-x: auto; /* Allow horizontal scrolling in the post container */
-  }
-
-  .postContent {
-    overflow-x: auto; /* Allow horizontal scrolling for post content */
+    margin: 0 20px; /* Maintain margin to separate from ad section */
+    overflow-x: auto; /* Ensure horizontal scrolling is allowed */
   }
 }

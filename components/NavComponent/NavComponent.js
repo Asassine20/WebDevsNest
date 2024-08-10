@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import styles from './NavComponent.module.css';
-import categoryLinks from '../../links'; // Maintain the use of links.js
+import categoryLinks from '../../links';
 
 const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -52,10 +52,8 @@ const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
         return acc;
       }, {});
 
-      console.log('Grouped Data:', groupedData); // Debug log to check the grouped data
       setGroupedLinks(groupedData);
     } else {
-      console.log('No posts found for category:', category);
       setGroupedLinks({});
     }
   };
@@ -72,6 +70,10 @@ const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   const closePanel = () => {
     setIsPanelOpen(false);
     onSidePanelToggle(false);
+  };
+
+  const handleLinkClick = () => {
+    closePanel(); // Close the panel when a link is clicked
   };
 
   return (
@@ -103,7 +105,7 @@ const NavComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
                 <ul>
                   {groupedLinks[subCategory].map((link, idx) => (
                     <li key={idx} className={link.Slug === slug ? styles.activeLink : ''}>
-                      <Link href={`/${link.Category}/${link.Slug}`}>{link.Title}</Link>
+                      <Link href={`/${link.Category}/${link.Slug}`} onClick={handleLinkClick}>{link.Title}</Link>
                     </li>
                   ))}
                 </ul>
