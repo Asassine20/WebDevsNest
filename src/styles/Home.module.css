@@ -52,7 +52,7 @@
 }
 
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 10px; /* Reduced margin */
   padding: 10px;
   border-radius: 10px;
   box-sizing: border-box;
@@ -187,6 +187,10 @@
   .subHeader {
     font-size: 1.05rem;
   }
+  
+  .section {
+    margin-bottom: 5px; /* Further reduced margin on smaller screens */
+  }
 }
 
 @media (max-width: 600px) {
@@ -195,11 +199,16 @@
     height: 60px;
     font-size: 0.875rem;
   }
+  
   .mainHeader {
     font-size: 3rem;
   }
   
   .subHeader {
     font-size: 1rem;
+  }
+  
+  .section {
+    margin-bottom: 5px; /* Even smaller margin on the smallest screens */
   }
 }

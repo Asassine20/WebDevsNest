@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { IoIosSearch } from 'react-icons/io';
-import styles from '../SearchBar/SearchBar.module.css';
+import styles from './SearchBar.module.css';
 
 const SearchBarWithoutLogin = () => {
   const [query, setQuery] = useState('');
