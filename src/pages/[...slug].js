@@ -67,7 +67,10 @@ export async function getStaticProps({ params }) {
   };
   const content = post.Content;
 
-  return { props: { data, content, category, slug } };
+  return {
+    props: { data, content, category, slug },
+    revalidate: 60, // Revalidate the page at most every 60 seconds
+  };
 }
 
 const Post = ({ data, content, category, slug }) => {

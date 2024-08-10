@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import SearchBarWithoutLogin from '../../components/SearchBarWithoutLogin/SearchBarWithoutLogin';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
@@ -31,6 +32,10 @@ const Home = () => {
 
   return (
     <div className={styles.pageContainer}>
+      <Head>
+        <title>WebDevsNest - Learn to Program</title>
+        <meta name="description" content="Grow from basic programming fundamentals to complex concepts with WebDevsNest. Learn Python, Java, C++, and more." />
+      </Head>
       <div className={styles.container}>
         <h1 className={styles.mainHeader}>Learn to program</h1>
         <h2 className={styles.subHeader}>Grow from basic fundamentals to complex concepts</h2>

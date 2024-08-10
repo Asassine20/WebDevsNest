@@ -4,6 +4,10 @@ import Image from 'next/image';
 const AboutUs = () => {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>About WebDevsNest</title>
+        <meta name="description" content="Learn more about WebDevsNest, the platform designed to help you grow from basic programming skills to advanced real-world applications." />
+      </Head>
       <div className={styles.creatorSection}>
         <h1 className={styles.title}>About the Creator</h1>
         <div className={styles.creatorContent}>
