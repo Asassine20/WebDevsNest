@@ -144,11 +144,33 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
     checkLoggedInStatus();
   }, []);
 
-  const handleProfileIconClick = () => {
-    if (isLoggedIn) {
-      router.push('/profile/dashboard');
+  useEffect(() => {
+    if (query.length > 1) {
+      fetch(`/api/search?query=${query}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setSuggestions(data);
+          setShowSuggestions(true);
+        });
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
     }
-  };
+  }, [query]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={styles.contentWrapper}>

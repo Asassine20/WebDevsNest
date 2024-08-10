@@ -1,4 +1,3 @@
-/* components/CombinedComponent.module.css */
 .navbarContainer {
     display: flex;
     align-items: center;
@@ -80,7 +79,7 @@
     cursor: pointer;
     margin-left: 5px;
   }
-  
+
   .suggestionsList {
     list-style-type: none;
     padding: 0;
@@ -94,7 +93,7 @@
     border-radius: 10px;
     overflow: hidden;
   }
-  
+
   .suggestionItem {
     padding: 10px;
     border-bottom: 1px solid #eee;
@@ -104,11 +103,29 @@
     cursor: pointer;
     text-align: left;
   }
-  
+
+  .suggestionItem a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .suggestionItem:hover {
     background-color: #f0f0f0;
   }
-  
+
+  .suggestionItem:first-child {
+    background-color: #d7f7f4;
+    color: black;
+  }
+
+  .suggestionItem:first-child .highlight {
+    background-color: #5fe1d5;
+  }
+
+  .highlight {
+    background-color: #5fe1d5;
+  }
+
   .authButton {
     padding: 20px 20px;
     margin-left: 10px;
@@ -270,4 +287,3 @@
       display: none;
     }
   }
-  
