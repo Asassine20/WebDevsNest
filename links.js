@@ -5,26 +5,32 @@ const categoryLinks = {
   javascript: {
     defaultUrl: '/javascript/javascript-introduction',
   },
+  html: {
+    defaultUrl: '/html/html-introduction',
+  },
+  css : {
+    defaultUrl: '/css/css-introduction',
+  },
+  sql: {
+    defaultUrl: '/sql/sql-introduction',
+  },
   java: {
     defaultUrl: '/java/java-introduction',
   },
   'c++': {
     defaultUrl: '/cpp/cpp-introduction',
   },
-  sql: {
-    defaultUrl: '/sql/sql-introduction',
+  'data structures': {
+    defaultUrl: '/data-structures/data-structures-introduction',
+  },
+  algorithms: {
+    defaultUrl: '/algorithms/algorithms-introduction',
   },
   c: {
     defaultUrl: '/c/c-introduction',
   },
   'c#': {
     defaultUrl: '/csharp/csharp-introduction',
-  },
-  'data structures': {
-    defaultUrl: '/data-structures/data-structures-introduction',
-  },
-  algorithms: {
-    defaultUrl: '/algorithms/algorithms-introduction',
   },
   git: {
     defaultUrl: '/git/git-introduction',

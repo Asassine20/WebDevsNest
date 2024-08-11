@@ -175,6 +175,10 @@
   margin: 20px 0;
 }
 
+.postContent ul {
+  font-size: 20px !important;
+}
+
 .postContent a {
   color: #1e90ff;
   text-decoration: none;
