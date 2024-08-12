@@ -5,6 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from 'react-icons/fa6';
 import remarkGfm from 'remark-gfm'; // Import the GFM plugin
 import { okaidia } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import Image from 'next/image';
 
 const MarkdownRenderer = ({ content }) => {
   return (
@@ -62,6 +63,19 @@ const MarkdownRenderer = ({ content }) => {
             >
               {children}
             </code>
+          );
+        },
+        img({ node, src, alt, ...props }) {
+          return (
+            <Image
+              src={src}
+              alt={alt}
+              width={800} // Adjust these values as needed
+              height={450} // Adjust these values as needed
+              layout="responsive"
+              objectFit="contain"
+              {...props}
+            />
           );
         },
         table({ node, ...props }) {
