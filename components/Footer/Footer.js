@@ -126,13 +126,13 @@ const Footer = () => {
                 <Link href="/javascript/javascript-introduction" passHref>JavaScript</Link>
               </li>
               <li>
-                <Link href="/reactjs/reactjs-introduction" passHref>ReactJS</Link>
+                <Link href="/react/react-introduction" passHref>React</Link>
               </li>
               <li>
-                <Link href="/nextjs/nextjs-introduction" passHref>NextJS</Link>
+                <Link href="/next/next-introduction" passHref>Next</Link>
               </li>
               <li>
-                <Link href="/nodejs/nodejs-introduction" passHref>NodeJS</Link>
+                <Link href="/nodejs/nodejs-introduction" passHref>Node.js</Link>
               </li>
               <li>
                 <Link href="/bootstrap/bootstrap-introduction" passHref>Bootstrap</Link>

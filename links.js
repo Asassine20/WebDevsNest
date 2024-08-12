@@ -54,7 +54,7 @@ const categoryLinks = {
     defaultUrl: '/amazon-web-services/amazon-web-services-introduction',
   },
   nextjs: {
-    defaultUrl: '/nextjs/nextjs-introduction',
+    defaultUrl: '/next/next-introduction',
   },
   nodejs: {
     defaultUrl: '/nodejs/nodejs-introduction',
@@ -78,7 +78,7 @@ const categoryLinks = {
     defaultUrl: '/flutter/flutter-introduction',
   },
   angularjs: {
-    defaultUrl: '/angularjs/angularjs-introduction',
+    defaultUrl: '/angular/angular-introduction',
   },
   vuejs: {
     defaultUrl: '/vuejs/vuejs-introduction',

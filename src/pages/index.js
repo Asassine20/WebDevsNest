@@ -8,7 +8,7 @@ const Home = () => {
     { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'PHP', 'R', 'Flutter', 'GoLang'] },
     { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Strings', 'Stacks', 'Queues', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables', 'Heaps', 'Matrix'] },
     { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Pattern Searching', 'Mathemtical Algorithms'] },
-    { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'ReactJS', 'NextJS', 'Frontend Development', 'Backend Development', 'NodeJS', 'Django', 'Bootstrap'] },
+    { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Next', 'Frontend Development', 'Backend Development', 'Node.js', 'Django', 'Bootstrap'] },
     { title: 'DevOps', link: '/devops', items: ['GitHub', 'Git', 'Amazon Web Services', 'Azure', 'CI/CD', 'Docker', 'Kubernetes', 'Jenkins', 'Google Cloud Services'] },
     { title: 'Databases', link: '/databases', items: ['SQL', 'MySQL', 'Microsoft SQL Server', 'MongoDB', 'PostgreSQL', 'PL/SQL', 'SQLite', 'MariaDB', 'IBM Db2']}
   ];
