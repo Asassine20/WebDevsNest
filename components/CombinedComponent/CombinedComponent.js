@@ -1,25 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'; // Import useRouter here
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { FaUserCircle } from "react-icons/fa";
-import { IoIosSearch } from 'react-icons/io';
+import Image from 'next/image';
+import SearchBar from '../SearchBar/SearchBar';
 import styles from './CombinedComponent.module.css';
 import categoryLinks from '../../links';
-import Image from 'next/image';
 
 const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [groupedLinks, setGroupedLinks] = useState({});
-  const [query, setQuery] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navRef = useRef(null);
-  const searchBarRef = useRef(null);
   const sidePanelRef = useRef(null);
-  const router = useRouter();
+
+  const router = useRouter(); // Define the router here
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,46 +81,6 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
     closePanel(); // Close the panel when a link is clicked
   };
 
-  const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && suggestions.length > 0) {
-      const topSuggestion = suggestions[0];
-      router.push(`/${topSuggestion.Category}/${topSuggestion.Slug}`);
-      setShowSuggestions(false);
-    }
-  };
-
-  const handleItemClick = (category, slug) => {
-    router.push(`/${category}/${slug}`);
-    setShowSuggestions(false);
-  };
-
-  const handleIconClick = () => {
-    if (suggestions.length > 0) {
-      const topSuggestion = suggestions[0];
-      router.push(`/${topSuggestion.Category}/${topSuggestion.Slug}`);
-      setShowSuggestions(false);
-    }
-  };
-
-  const highlightText = (text, highlight) => {
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return (
-      <span>
-        {parts.map((part, index) =>
-          part.toLowerCase() === highlight.toLowerCase() ? (
-            <span key={index} className={styles.highlight}>{part}</span>
-          ) : (
-            part
-          )
-        )}
-      </span>
-    );
-  };
-
   useEffect(() => {
     const checkLoggedInStatus = async () => {
       try {
@@ -144,34 +101,6 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
     checkLoggedInStatus();
   }, []);
 
-  useEffect(() => {
-    if (query.length > 1) {
-      fetch(`/api/search?query=${query}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setSuggestions(data);
-          setShowSuggestions(true);
-        });
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
-  }, [query]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
   const handleProfileIconClick = () => {
     if (isLoggedIn) {
       router.push('/profile/dashboard');
@@ -186,33 +115,7 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
             <Image src={require('../../public/logo.png')} alt="Logo" height="50" />
           </Link>
         </div>
-        <div className={styles.searchContainer} ref={searchBarRef}>
-          <div className={styles.searchBar}>
-            <input
-              type="text"
-              placeholder="Search posts..."
-              value={query}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              onFocus={() => setShowSuggestions(true)}
-              className={styles.searchInput}
-            />
-            <IoIosSearch className={styles.searchIcon} onClick={handleIconClick} />
-          </div>
-          {showSuggestions && suggestions.length > 0 && (
-            <ul className={styles.suggestionsList}>
-              {suggestions.map((post) => (
-                <li
-                  key={post.Id}
-                  className={styles.suggestionItem}
-                  onClick={() => handleItemClick(post.Category, post.Slug)}
-                >
-                  {highlightText(post.Title, query)}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <SearchBar placeholder="Search posts..." />
         <div className={styles.authButtons}>
           {isLoggedIn ? (
             <FaUserCircle

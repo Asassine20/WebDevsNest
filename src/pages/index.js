@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import SearchBarWithoutLogin from '../../components/SearchBarWithoutLogin/SearchBarWithoutLogin';
+import SearchBar from '../../components/SearchBar/SearchBar'; // Use the SearchBar component here
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 
@@ -7,7 +7,7 @@ const Home = () => {
   const sections = [
     { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'PHP', 'R', 'Flutter', 'GoLang'] },
     { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Strings', 'Stacks', 'Queues', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables', 'Heaps', 'Matrix'] },
-    { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Pattern Searching', 'Mathemtical Algorithms'] },
+    { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Pattern Searching', 'Mathematical Algorithms'] },
     { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Next', 'Frontend Development', 'Backend Development', 'Node.js', 'Django', 'Bootstrap'] },
     { title: 'DevOps', link: '/devops', items: ['GitHub', 'Git', 'Amazon Web Services', 'Azure', 'CI/CD', 'Docker', 'Kubernetes', 'Jenkins', 'Google Cloud Services'] },
     { title: 'Databases', link: '/databases', items: ['SQL', 'MySQL', 'Microsoft SQL Server', 'MongoDB', 'PostgreSQL', 'PL/SQL', 'SQLite', 'MariaDB', 'IBM Db2']}
@@ -40,7 +40,7 @@ const Home = () => {
         <h1 className={styles.mainHeader}>Learn to program</h1>
         <h2 className={styles.subHeader}>Grow from basic fundamentals to complex concepts</h2>
         <div className={styles.searchContainer}>
-          <SearchBarWithoutLogin />
+          <SearchBar />
         </div>
       </div>
       <div className={styles.sectionsContainer}>

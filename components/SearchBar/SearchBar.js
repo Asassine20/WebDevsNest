@@ -1,9 +1,10 @@
+// SearchBar.js
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { IoIosSearch } from 'react-icons/io';
 import styles from './SearchBar.module.css';
 
-const SearchBarWithoutLogin = () => {
+const SearchBar = ({ placeholder }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -89,7 +90,7 @@ const SearchBarWithoutLogin = () => {
       <div className={styles.searchBar}>
         <input
           type="text"
-          placeholder="Learn a new programming language"
+          placeholder={"Learn a new programming language..."}
           value={query}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -115,4 +116,4 @@ const SearchBarWithoutLogin = () => {
   );
 };
 
-export default SearchBarWithoutLogin;
+export default SearchBar;
