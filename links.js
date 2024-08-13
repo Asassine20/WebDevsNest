@@ -2,16 +2,16 @@ const categoryLinks = {
   python: {
     defaultUrl: '/python/python-introduction',
   },
-  javascript: {
+  'JavaScript': {
     defaultUrl: '/javascript/javascript-introduction',
   },
-  html: {
+  'html': {
     defaultUrl: '/html/html-introduction',
   },
-  css : {
+  'CSS' : {
     defaultUrl: '/css/css-introduction',
   },
-  sql: {
+  'SQL': {
     defaultUrl: '/sql/sql-introduction',
   },
   java: {
@@ -20,7 +20,7 @@ const categoryLinks = {
   'c++': {
     defaultUrl: '/cpp/cpp-introduction',
   },
-  'data structures': {
+  'Data Structures': {
     defaultUrl: '/data-structures/data-structures-introduction',
   },
   algorithms: {
@@ -35,31 +35,31 @@ const categoryLinks = {
   git: {
     defaultUrl: '/git/git-introduction',
   },
-  github: {
+  'GitHub': {
     defaultUrl: '/github/github-introduction',
   },
-  postgresql: {
+  'PostgreSQL': {
     defaultUrl: '/postgresql/postgresql-introduction',
   },
-  php: {
+  'PHP': {
     defaultUrl: '/php/php-introduction',
   },
   react: {
     defaultUrl: '/react/react-introduction',
   },
-  mysql: {
+  'MySQL': {
     defaultUrl: '/mysql/mysql-introduction',
   },
-  aws: {
+  'AWS': {
     defaultUrl: '/amazon-web-services/amazon-web-services-introduction',
   },
-  nextjs: {
+  next: {
     defaultUrl: '/next/next-introduction',
   },
-  nodejs: {
+  'Node.js': {
     defaultUrl: '/nodejs/nodejs-introduction',
   },
-  typescript: {
+  'TypeScript': {
     defaultUrl: '/typescript/typescript-introduction',
   },
   redis: {
@@ -71,28 +71,28 @@ const categoryLinks = {
   go: {
     defaultUrl: '/go/go-introduction',
   },
-  mongodb: {
+  'MongoDB': {
     defaultUrl: '/mongodb/mongodb-introduction',
   },
   flutter: {
     defaultUrl: '/flutter/flutter-introduction',
   },
-  angularjs: {
+  'AngularJS': {
     defaultUrl: '/angular/angular-introduction',
   },
-  vuejs: {
+  'Vue.js': {
     defaultUrl: '/vuejs/vuejs-introduction',
   },
-  powershell: {
+  'PowerShell': {
     defaultUrl: '/powershell/powershell-introduction',
   },
-  'ruby on rails': {
+  'Ruby on Rails': {
     defaultUrl: '/ruby-on-rails/ruby-on-rails-introduction',
   },
-  jquery: {
+  'jQuery': {
     defaultUrl: '/jquery/jquery-introduction',
   },
-  'asp.net': {
+  'ASP.NET': {
     defaultUrl: '/aspnet/aspnet-introduction',
   },
   flask: {

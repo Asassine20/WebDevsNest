@@ -217,7 +217,7 @@
     height: 100vh;
     background-color: rgba(240, 240, 240, 1);
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     z-index: 2000;
     overflow-y: auto;
   }
@@ -247,11 +247,10 @@
   }
   
   .sidePanel li a {
-    color: #333;
+    color: #000;
     text-decoration: none;
     display: block;
     padding: 5px 30px;
-    font-weight: bold;
     margin-left: 0;
   }
   

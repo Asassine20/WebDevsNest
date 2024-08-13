@@ -18,6 +18,9 @@ export default async function auth(req, res, next) {
     return res.status(401).json({ error: 'Not authenticated' }); // Respond with 401 status
   }
 
+  // Reset the cookie expiration on every request
+  res.setHeader('Set-Cookie', `user=${userId}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}`); // 7 days
+
   req.user = results[0];
   next();
 }

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      
+            <url>
+              <loc>https://webdevsnest.com</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.comabout-us</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.comcontact-us</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.comprivacy-policy</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.comlogin</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.comsignup</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-installation</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-data-types</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-comments</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-numbers</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-strings</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-syntax-cheat-sheet</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-if-else</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-for-loop</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-while-loop</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-variables</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-booleans</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-lists</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-tuples</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-dictionaries</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-sets</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-range</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-functions</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-modules</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-errors</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/python-open-close-files</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/javascript/javascript-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/javascript/javascript-installation</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/html/html-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/css/css-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/sql/sql-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/java/java-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+    </urlset>

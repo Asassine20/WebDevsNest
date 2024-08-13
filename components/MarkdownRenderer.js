@@ -57,8 +57,7 @@ const MarkdownRenderer = ({ content }) => {
                 backgroundColor: 'rgba(222, 222, 222, 0.3)',
                 padding: '0.2em 0.4em',
                 borderRadius: '3px',
-                fontWeight: 'bold',
-                fontSize: '15px !important',
+                fontSize: '10px !important',
               }}
             >
               {children}

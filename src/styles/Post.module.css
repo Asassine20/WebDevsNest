@@ -13,7 +13,7 @@
 .sidePanel {
   background-color: #f0f0f0;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a right shadow to the side panel */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Add a right shadow to the side panel */
   overflow-x: auto; /* Ensure sidePanel scrolls if necessary */
 }
 
@@ -45,11 +45,10 @@
 }
 
 .sidePanel li a {
-  color: #333;
+  color: #000;
   text-decoration: none;
   display: block; /* Make the link cover the entire li */
   padding: 5px 30px; /* Adjust padding for the links */
-  font-weight: bold; /* Make the links bold */
   margin-left: 0; /* Remove margin-left to align with the headers */
 }
 
