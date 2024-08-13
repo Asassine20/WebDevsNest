@@ -38,6 +38,12 @@
             </url>
           
             <url>
+              <loc>https://webdevsnest.com/advertise-with-us</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
               <loc>https://webdevsnest.com/python/python-introduction</loc>
               <changefreq>weekly</changefreq>
               <priority>0.8</priority>

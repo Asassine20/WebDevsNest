@@ -18,6 +18,11 @@ const NewPost = () => {
   const [subCategory, setSubCategory] = useState(''); // New SubCategory field
   const router = useRouter();
 
+  // Define the handleContentChange function
+  const handleContentChange = useCallback((value) => {
+    setContent(value);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
