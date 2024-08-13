@@ -5,7 +5,14 @@ import path from 'path';
 // Function to generate a slug from a title
 const generateSlug = (title) => {
   if (!title) return '';
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return title
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/\+\+/g, 'pp') // Replace "++" with "pp"
+    .replace(/#/g, 'sharp') // Replace "#" with "sharp"
+    .replace(/[^a-z0-9\-]+/g, '') // Remove all non-word chars except hyphens
+    .replace(/--+/g, '-') // Replace multiple hyphens with a single hyphen
+    .replace(/(^-|-$)/g, ''); // Trim hyphens from start and end
 };
 
 // Function to generate a URL from the category and slug
@@ -23,11 +30,12 @@ const generateSitemap = async () => {
 
   const staticPaths = [
     '',
-    'about-us',
-    'contact-us',
-    'privacy-policy',
-    'login',
-    'signup',
+    '/about-us',
+    '/contact-us',
+    '/privacy-policy',
+    '/login',
+    '/signup',
+    '/advertise-with-us',
   ];
 
   const dynamicPaths = posts.map((post) => `/${post.Category}/${post.Slug}`);

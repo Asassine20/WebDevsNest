@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import withAdminAuth from '../../../../components/WithAdminAuth';
+import { slugify } from '../../../../utils/slugify';
 import styles from '../../../styles/Admin.module.css';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -43,13 +44,18 @@ const EditPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    const formattedCategory = slugify(post.category); // Generate slug for the category
+    const formattedSlug = slugify(post.title); // Generate slug for the title
+  
     await fetch('/api/posts', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...post, id }),
+      body: JSON.stringify({ ...post, id, category: formattedCategory, slug: formattedSlug }), // Include formatted slug
     });
+  
     router.push('/admin');
   };
 

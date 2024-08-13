@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import withAdminAuth from '../../../components/WithAdminAuth';
+import { slugify } from '../../../utils/slugify';
 import styles from '../../styles/Admin.module.css';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -19,17 +20,18 @@ const NewPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    const formattedCategory = slugify(category); // Generate slug for the category
+    const formattedSlug = slugify(title); // Generate slug for the title
+  
     await fetch('/api/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, content, category, subCategory }), // Include subCategory
+      body: JSON.stringify({ title, content, category: formattedCategory, subCategory, slug: formattedSlug }), // Include formatted slug
     });
+  
     router.push('/admin');
   };
-
-  const handleContentChange = useCallback((value) => {
-    setContent(value);
-  }, []);
 
   const converter = useMemo(() => new Showdown.Converter({
     tables: true,

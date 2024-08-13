@@ -10,6 +10,8 @@ export default async function handler(req, res) {
     { url: `${baseUrl}/privacy-policy`, lastModified: new Date().toISOString() },
     { url: `${baseUrl}/login`, lastModified: new Date().toISOString() },
     { url: `${baseUrl}/signup`, lastModified: new Date().toISOString() },
+    { url: `${baseUrl}/contact-us`, lastModified: new Date().toISOString() },
+    { url: `${baseUrl}/advertise-with-us`, lastModified: new Date().toISOString() },
   ];
 
   let dynamicPaths = [];
