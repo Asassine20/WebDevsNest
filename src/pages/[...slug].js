@@ -4,7 +4,6 @@ import { FaRegStar } from 'react-icons/fa';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import Head from 'next/head';
 import styles from '../styles/Post.module.css';
-import Script from 'next/script';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
 import { toast, ToastContainer } from 'react-toastify';
@@ -188,8 +187,6 @@ const Post = ({ data, content, category, slug }) => {
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5256730967472287"
-     crossorigin="anonymous"></script>
       </Head>
 
       <ToastContainer />
@@ -222,15 +219,6 @@ const Post = ({ data, content, category, slug }) => {
         )}
         <div className={styles.mainContentWrapper}>
           <div className={styles.mainContent}>
-            <div className={styles.adTop}>
-              <ins className="adsbygoogle"
-                   style={{ display: 'block', width: '100%', height: '60px' }}
-                   data-ad-client="ca-pub-6059555296443681"
-                   data-ad-slot="xxxxxxxxxx"></ins>
-              <Script>
-                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-              </Script>
-            </div>
             <div className={styles.postContainer}>
               <header className={styles.postHeader}>
                 <div className={styles.postHeaderContent}>
@@ -249,17 +237,6 @@ const Post = ({ data, content, category, slug }) => {
                 <MarkdownRenderer content={content} />
               </div>
             </div>
-          </div>
-        </div>
-        <div className={styles.adSection}>
-          <div className={styles.adSide}>
-            <ins className="adsbygoogle"
-                 style={{ display: 'block', width: '160px', height: '600px' }}
-                 data-ad-client="ca-pub-6059555296443681"
-                 data-ad-slot="xxxxxxxxxx"></ins>
-            <Script>
-              {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-            </Script>
           </div>
         </div>
       </div>

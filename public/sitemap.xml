@@ -211,4 +211,58 @@
               <priority>0.8</priority>
             </url>
           
+            <url>
+              <loc>https://webdevsnest.com/data-structures/data-structures-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/algorithms/algorithms-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/c/c-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/git/git-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/github/github-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/postgresql/postgresql-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/mysql/mysql-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/react/react-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/nodejs/nodejs-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
     </urlset>

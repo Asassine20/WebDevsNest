@@ -1,42 +1,42 @@
 .navbarContainer {
-    display: flex;
-    align-items: center;
-    padding: 5px 5px;
-    position: fixed; /* Fix the navbarContainer to the top */
-    top: 0; /* Align it to the top */
-    left: 0; /* Align it to the left */
-    width: 100%; /* Ensure it spans the full width of the viewport */
-    z-index: 1001; /* Ensure it stays above other elements */
-    background-color: #ffffff; /* Optional: Set background color */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for visibility */
-  }
-  
-  .navContainer {
-    display: flex;
-    align-items: center;
-    background-color: #282c34;
-    padding: 0px 10px;
-    position: fixed; /* Fix the navContainer to the top */
-    top: 60px; /* Adjust this based on the height of navbarContainer */
-    left: 0; /* Align it to the left */
-    width: 100%; /* Ensure it spans the full width of the viewport */
-    z-index: 1000; /* Ensure it stays below the navbarContainer */
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevent links from wrapping to the next line */
-    
-    /* Hide scrollbar */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-  }
-  
-  .navContainer::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
-  
-  /* Add margin to the content to prevent overlap */
-  .contentWrapper {
-    margin-top: 94px; /* Adjust this value as needed */
-  }
+  display: flex;
+  align-items: center;
+  padding: 5px 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  height: 60px; /* Define a fixed height for consistency */
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  background-color: #282c34;
+  padding: 0px 10px;
+  position: fixed;
+  top: 60px; /* Adjust this value to match the height of navbarContainer */
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin-top: 0;
+  /* Hide scrollbar */
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.navContainer::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.contentWrapper {
+  margin-top: 110px; /* Adjust this value to match the combined height of navbarContainer and navContainer */
+}
   
   
   .logo {
@@ -286,3 +286,63 @@
       display: none;
     }
   }
+  @media (max-width: 768px) {
+    .navbarContainer {
+      height: 80px; /* Increase the height for larger screens */
+    }
+  
+    .navContainer {
+      top: 80px; /* Adjust top value to match the new height of navbarContainer */
+    }
+  
+    .contentWrapper {
+      margin-top: 130px; /* Adjust this value to match the combined height of navbarContainer and navContainer on larger screens */
+    }
+    /* Adjust the logo size */
+    .navbarContainer .logo img {
+      height: 40px; /* Make the logo smaller */
+      width: auto; /* Keep the aspect ratio */
+    }
+  
+    /* Adjust the search bar size */
+    .navbarContainer .searchContainer {
+      flex: 1;
+      max-width: 60%; /* Limit the width of the search bar */
+    }
+  
+    .searchBar {
+      width: 100%;
+    }
+  
+    .searchInput {
+      font-size: 14px; /* Smaller font size for mobile */
+      padding: 8px; /* Adjust padding to match smaller font */
+    }
+  
+    .searchIcon {
+      font-size: 20px; /* Adjust the size of the search icon */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    /* Further adjust the logo size for smaller screens */
+    .navbarContainer .logo img {
+      height: 30px; /* Further reduce the logo size */
+      width: auto; /* Keep the aspect ratio */
+    }
+  
+    /* Further adjust the search bar size for smaller screens */
+    .navbarContainer .searchContainer {
+      max-width: 80%; /* Increase the search bar width slightly */
+    }
+  
+    .searchInput {
+      font-size: 12px; /* Smaller font size for very small screens */
+      padding: 6px; /* Adjust padding to match smaller font */
+    }
+  
+    .searchIcon {
+      font-size: 18px; /* Adjust the size of the search icon */
+    }
+  }
+  

@@ -1,6 +1,6 @@
 .pageContainer {
   display: grid;
-  grid-template-columns: 250px 1fr 300px; /* Define the columns: sidePanel, mainContent, adSide */
+  grid-template-columns: 250px 1fr; /* Define the columns: sidePanel, mainContent */
   grid-template-rows: auto; /* Auto height for rows */
   gap: 0; /* No gap between columns */
   min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
@@ -77,16 +77,9 @@
   overflow-x: auto; /* Ensure main content can scroll horizontally */
 }
 
-.adTop {
-  width: 100%; /* Extend to cover the full width */
-  height: 150px; /* Adjust height for the top ad */
-  background-color: pink; /* For visualization */
-  text-align: center;
-}
-
 .postContainer {
   flex: 1; /* Allow the post container to grow and fill available space */
-  margin: 10px 0; /* Add margin to separate from ad section and side panel */
+  margin: 10px 0; /* Add margin to separate from the side panel */
   padding: 20px;
   line-height: 1.6;
   box-sizing: border-box; /* Include padding and border in element's total width and height */
@@ -187,32 +180,9 @@
   text-decoration: underline;
 }
 
-.adSection {
-  background-color: lightblue; /* For visualization, remove or adjust as needed */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Align items to the top */
-  position: relative;
-  z-index: 1; /* Lower z-index to ensure authButton is on top */
-}
-
-.adSide {
-  width: 300px; /* Adjust width for the side ad */
-  height: 100vh; /* Adjust height for the side ad */
-  position: fixed; /* Fix position so it doesn't cause overflow */
-  right: 0; /* Align to the right */
-  top: 0; /* Align to the top */
-  z-index: 1; /* Lower z-index to ensure authButton is on top */
-}
-
 @media (max-width: 1068px) {
   .sidePanel {
     display: none; /* Hide side panel on small screens */
-  }
-
-  .adSection {
-    display: none; /* Hide ad section on small screens */
   }
 
   .pageContainer {
@@ -222,10 +192,6 @@
   .mainContent {
     width: 100%; /* Ensure main content takes the full width */
     margin: 0; /* Remove right and left margin */
-  }
-
-  .adTop {
-    width: 100%; /* Take full width on small screens */
   }
 
   .postContainer {

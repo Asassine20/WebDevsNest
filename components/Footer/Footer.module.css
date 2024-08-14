@@ -126,7 +126,7 @@
     .siteName {
       margin-left: 0;
       font-size: 1.5rem;
-      color: #5fe1d5;
+      color: white;
       text-align: center;
       order: 1; /* Ensure site name appears between logo and social icons */
       flex: 1;
