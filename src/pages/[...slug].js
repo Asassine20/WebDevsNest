@@ -188,8 +188,10 @@ const Post = ({ data, content, category, slug }) => {
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5256730967472287"
+     crossorigin="anonymous"></script>
       </Head>
-      <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
+
       <ToastContainer />
       <div className={styles.pageContainer}>
         {!isSmallScreen && (
