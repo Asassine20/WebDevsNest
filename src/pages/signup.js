@@ -43,7 +43,7 @@ export default function Signup() {
         <div className={styles.authForm}>
           <div className="d-flex justify-content-center mb-4">
             <Link href="/">
-              <Image src="/logo.png" alt="Logo" width={100} height={100} />
+              <Image src="/logo.png" alt="Logo" width={100} height={50} />
             </Link>
           </div>
           <h1 className="text-center text-bs-dark">Sign Up</h1>

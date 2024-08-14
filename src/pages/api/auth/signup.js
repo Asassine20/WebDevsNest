@@ -49,7 +49,7 @@ export default async function handler(req, res) {
       <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #682bd7; border-radius: 4px;">
         <!-- Logo centered at the top -->
         <div style="text-align: center;">
-          <img src="${process.env.NEXT_PUBLIC_BASE_URL}/logo.png" alt="WebDevsNest Logo" style="max-width: 100px; height: auto; margin-bottom: 20px;">
+          <img src="${process.env.NEXT_PUBLIC_BASE_URL}/logo.png" alt="WebDevsNest Logo" style="width: 100px; height: 50px; margin-bottom: 20px;">
         </div>
         <h2 style="color: #333; text-align: center;">Welcome to WebDevsNest!</h2>
         <p style="color: #555;">Hi ${name},</p>

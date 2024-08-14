@@ -40,7 +40,7 @@
   
   
   .logo {
-    margin-right: 10px;
+    margin-right: 20px;
   }
   
   .searchContainer {
@@ -163,7 +163,7 @@
     margin-left: 10px;
     margin-right: 10px;
     color: #682bd7;
-    font-size: 2em;
+    font-size: 2.5em;
     cursor: pointer;
     z-index: 2000;
     position: relative;

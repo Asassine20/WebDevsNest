@@ -9,7 +9,7 @@ const Footer = () => {
       <div className={styles.leftContainer}>
         <div className={styles.logoContainer}>
           <Link href='/'>
-            <Image src="/logo.png" alt="Logo" width={50} height={50} className={styles.logo} />
+            <Image src="/logo.png" alt="Logo" width={100} height={50} className={styles.logo} />
           </Link>
           <span className={styles.siteName}>WebDevsNest</span>
         </div>

@@ -15,7 +15,7 @@ export default function ThankYou() {
     <div className={styles.container}>
       <div className={styles.thankYouWrapper}>
         <Link href="/">
-          <Image src="/logo.png" alt="Logo" width={100} height={100} />
+          <Image src="/logo.png" alt="Logo" width={100} height={50} />
         </Link>
         <h1>Thank You!</h1>
         <p>{message}</p>

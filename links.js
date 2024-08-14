@@ -5,7 +5,7 @@ const categoryLinks = {
   'JavaScript': {
     defaultUrl: '/javascript/javascript-introduction',
   },
-  'html': {
+  'HTML': {
     defaultUrl: '/html/html-introduction',
   },
   'CSS' : {
@@ -38,17 +38,17 @@ const categoryLinks = {
   'GitHub': {
     defaultUrl: '/github/github-introduction',
   },
+  'MySQL': {
+    defaultUrl: '/mysql/mysql-introduction',
+  },
+  react: {
+    defaultUrl: '/react/react-introduction',
+  },
   'PostgreSQL': {
     defaultUrl: '/postgresql/postgresql-introduction',
   },
   'PHP': {
     defaultUrl: '/php/php-introduction',
-  },
-  react: {
-    defaultUrl: '/react/react-introduction',
-  },
-  'MySQL': {
-    defaultUrl: '/mysql/mysql-introduction',
   },
   'AWS': {
     defaultUrl: '/amazon-web-services/amazon-web-services-introduction',
