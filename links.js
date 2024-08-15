@@ -53,8 +53,8 @@ const categoryLinks = {
   'AWS': {
     defaultUrl: '/amazon-web-services/amazon-web-services-introduction',
   },
-  next: {
-    defaultUrl: '/next/next-introduction',
+  'Next.js': {
+    defaultUrl: '/nextjs/nextjs-introduction',
   },
   'Node.js': {
     defaultUrl: '/nodejs/nodejs-introduction',
@@ -68,8 +68,8 @@ const categoryLinks = {
   django: {
     defaultUrl: '/django/django-introduction',
   },
-  go: {
-    defaultUrl: '/go/go-introduction',
+  golang: {
+    defaultUrl: '/golang/golang-introduction',
   },
   'MongoDB': {
     defaultUrl: '/mongodb/mongodb-introduction',

@@ -12,6 +12,11 @@
   height: 60px; /* Define a fixed height for consistency */
 }
 
+.navbarContainer .logo img {
+  height: 40px; /* Smaller logo for all screen sizes */
+  width: auto; /* Keep the aspect ratio */
+}
+
 .navContainer {
   display: flex;
   align-items: center;
@@ -300,7 +305,7 @@
     }
     /* Adjust the logo size */
     .navbarContainer .logo img {
-      height: 40px; /* Make the logo smaller */
+      height: 35px; /* Make the logo smaller */
       width: auto; /* Keep the aspect ratio */
     }
   
@@ -313,7 +318,9 @@
     .searchBar {
       width: 100%;
     }
-  
+    .profileIcon {
+      font-size: 2rem;
+    }
     .searchInput {
       font-size: 14px; /* Smaller font size for mobile */
       padding: 8px; /* Adjust padding to match smaller font */
@@ -327,13 +334,17 @@
   @media (max-width: 480px) {
     /* Further adjust the logo size for smaller screens */
     .navbarContainer .logo img {
-      height: 30px; /* Further reduce the logo size */
+      height: 25px; /* Further reduce the logo size */
       width: auto; /* Keep the aspect ratio */
     }
   
     /* Further adjust the search bar size for smaller screens */
     .navbarContainer .searchContainer {
       max-width: 80%; /* Increase the search bar width slightly */
+    }
+
+    .authButton {
+      padding: 5px 5px;
     }
   
     .searchInput {

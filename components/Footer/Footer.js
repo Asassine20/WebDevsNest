@@ -9,17 +9,17 @@ const Footer = () => {
       <div className={styles.leftContainer}>
         <div className={styles.logoContainer}>
           <Link href='/'>
-            <Image src="/logo.png" alt="Logo" width={100} height={50} className={styles.logo} />
+            <Image src="/logo.png" alt="Logo" width={80} height={40} className={styles.logo} />
           </Link>
           <span className={styles.siteName}>WebDevsNest</span>
         </div>
         <div className={styles.socials}>
           <div className={styles.socialLinks}>
             <a href="https://www.youtube.com/@WebDevsNest" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FaYoutube size={30} />
+              <FaYoutube size={28} />
             </a>
             <a href="https://www.tiktok.com/@webdevsnest?lang=en" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FaTiktok size={30} />
+              <FaTiktok size={28} />
             </a>
           </div>
         </div>
