@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router'; // Import useRouter here
+import { useRouter } from 'next/router';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from 'react-icons/fa';
 import Image from 'next/image';
 import SearchBar from '../SearchBar/SearchBar';
 import styles from './CombinedComponent.module.css';
@@ -15,8 +15,7 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navRef = useRef(null);
   const sidePanelRef = useRef(null);
-
-  const router = useRouter(); // Define the router here
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -78,7 +77,7 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
   };
 
   const handleLinkClick = () => {
-    closePanel(); // Close the panel when a link is clicked
+    closePanel();
   };
 
   useEffect(() => {
@@ -106,6 +105,51 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
       router.push('/profile/dashboard');
     }
   };
+
+  // Drag scrolling logic
+  useEffect(() => {
+    const navContainer = navRef.current;
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    const handleMouseDown = (e) => {
+      isDown = true;
+      navContainer.classList.add(styles.active);
+      startX = e.pageX - navContainer.offsetLeft;
+      scrollLeft = navContainer.scrollLeft;
+    };
+
+    const handleMouseLeave = () => {
+      isDown = false;
+      navContainer.classList.remove(styles.active);
+    };
+
+    const handleMouseUp = () => {
+      isDown = false;
+      navContainer.classList.remove(styles.active);
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - navContainer.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed multiplier
+      navContainer.scrollLeft = scrollLeft - walk;
+    };
+
+    navContainer.addEventListener('mousedown', handleMouseDown);
+    navContainer.addEventListener('mouseleave', handleMouseLeave);
+    navContainer.addEventListener('mouseup', handleMouseUp);
+    navContainer.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      navContainer.removeEventListener('mousedown', handleMouseDown);
+      navContainer.removeEventListener('mouseleave', handleMouseLeave);
+      navContainer.removeEventListener('mouseup', handleMouseUp);
+      navContainer.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   return (
     <div className={styles.contentWrapper}>
@@ -139,7 +183,7 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
           {Object.keys(categoryLinks).map((category, idx) => {
             const isActive = router.asPath === categoryLinks[category].defaultUrl;
             return (
-              <Link href={categoryLinks[category].defaultUrl} key={idx} className={`${styles.categoryLink} ${isActive ? styles.activeLink : ''}`}>
+              <Link href={categoryLinks[category].defaultUrl} key={idx} className={`${styles.categoryLink} ${isActive ? styles.activeLink : ''}`} draggable="false">
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Link>
             );
@@ -156,7 +200,7 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
                 <ul>
                   {groupedLinks[subCategory].map((link, idx) => (
                     <li key={idx} className={link.Slug === slug ? styles.activeLink : ''}>
-                      <Link href={`/${link.Category}/${link.Slug}`} onClick={handleLinkClick}>{link.Title}</Link>
+                      <Link href={`/${link.Category}/${link.Slug}`} onClick={handleLinkClick} draggable="false">{link.Title}</Link>
                     </li>
                   ))}
                 </ul>

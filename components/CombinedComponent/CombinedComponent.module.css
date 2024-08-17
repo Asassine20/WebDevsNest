@@ -30,7 +30,7 @@
   overflow-x: scroll;
   white-space: nowrap;
   margin-top: 0;
-  /* Hide scrollbar */
+  cursor: grab; /* Change cursor to grab for better UX */
   -ms-overflow-style: none;  /* IE 10+ */
   scrollbar-width: none;  /* Firefox */
 }
@@ -39,321 +39,323 @@
   display: none; /* Safari and Chrome */
 }
 
+.navContainer.active {
+  cursor: grabbing; /* Change cursor to grabbing when dragging */
+}
+
 .contentWrapper {
   margin-top: 110px; /* Adjust this value to match the combined height of navbarContainer and navContainer */
 }
-  
-  
-  .logo {
-    margin-right: 20px;
+
+.logo {
+  margin-right: 20px;
+}
+
+.searchContainer {
+  position: relative;
+  width: 100%;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #282c34;
+  border-radius: 10px;
+  padding: 3px 8px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.searchInput {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 5px 8px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.searchInput::placeholder {
+  color: #282c34;
+  opacity: 1;
+}
+
+.searchIcon {
+  color: #282c34;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.suggestionsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.suggestionItem {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.suggestionItem a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.suggestionItem:hover {
+  background-color: #f0f0f0;
+}
+
+.suggestionItem:first-child {
+  background-color: #d7f7f4;
+  color: black;
+}
+
+.suggestionItem:first-child .highlight {
+  background-color: #5fe1d5;
+}
+
+.highlight {
+  background-color: #5fe1d5;
+}
+
+.authButton {
+  padding: 20px 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background-color: #682bd7;
+  color: white;
+  border-radius: 10px;
+  z-index: 2000;
+  text-decoration: none;
+  position: relative;
+}
+
+.authButton:hover {
+  background-color: #5d27c2;
+}
+
+.noUnderline {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.noUnderline:hover {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.profileIcon {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #682bd7;
+  font-size: 2.5em;
+  cursor: pointer;
+  z-index: 2000;
+  position: relative;
+}
+
+.profileIcon:hover {
+  color: #8444fa;
+}
+
+.linksContainer {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.categoryLink {
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.categoryLink:hover {
+  background-color: #444444;
+}
+
+.activeLink {
+  background-color: #682bd7;
+  color: white;
+}
+
+.activeLink:hover {
+  background-color: #682bd7;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: white;
+  margin-right: 15px;
+}
+
+.sidePanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: rgba(240, 240, 240, 1);
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  overflow-y: auto;
+}
+
+.sidePanel h2 {
+  display: none;
+}
+
+.sidePanel h3 {
+  margin: 10px 0 5px;
+  font-size: 1.4rem;
+}
+
+.sidePanel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidePanel li {
+  margin: 0;
+  background-color: #f0f0f0;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 0;
+}
+
+.sidePanel li a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 5px 30px;
+  margin-left: 0;
+}
+
+.sidePanel li a:hover {
+  background-color: #e0e0e0;
+}
+
+.sidePanel .activeLink a {
+  background-color: #682bd7;
+  color: white;
+}
+
+.sidePanel .activeLink a:hover {
+  background-color: #682bd7;
+}
+
+.hidden {
+  display: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (min-width: 1068px) {
+  .closeButton {
+    display: none;
   }
-  
-  .searchContainer {
-    position: relative;
-    width: 100%;
+}
+
+@media (max-width: 768px) {
+  .navbarContainer {
+    height: 80px;
   }
-  
+
+  .navContainer {
+    top: 80px;
+  }
+
+  .contentWrapper {
+    margin-top: 130px;
+  }
+
+  .navbarContainer .logo img {
+    height: 35px;
+    width: auto;
+  }
+
+  .navbarContainer .searchContainer {
+    flex: 1;
+    max-width: 60%;
+  }
+
   .searchBar {
-    display: flex;
-    align-items: center;
-    border: 1px solid #282c34;
-    border-radius: 10px;
-    padding: 3px 8px;
-    box-sizing: border-box;
-    background-color: white;
-  }
-  
-  .searchInput {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    padding: 5px 8px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    background-color: white;
-  }
-  
-  .searchInput::placeholder {
-    color: #282c34;
-    opacity: 1;
-  }
-  
-  .searchIcon {
-    color: #282c34;
-    font-size: 1.5em;
-    cursor: pointer;
-    margin-left: 5px;
-  }
-
-  .suggestionsList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
     width: 100%;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    text-align: left;
-    border-radius: 10px;
-    overflow: hidden;
   }
 
-  .suggestionItem {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    font-weight: bold;
-    color: grey;
-    text-decoration: none;
-    cursor: pointer;
-    text-align: left;
+  .profileIcon {
+    font-size: 2rem;
   }
 
-  .suggestionItem a {
-    color: inherit;
-    text-decoration: none;
+  .searchInput {
+    font-size: 14px;
+    padding: 8px;
   }
 
-  .suggestionItem:hover {
-    background-color: #f0f0f0;
+  .searchIcon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbarContainer .logo img {
+    height: 25px;
+    width: auto;
   }
 
-  .suggestionItem:first-child {
-    background-color: #d7f7f4;
-    color: black;
-  }
-
-  .suggestionItem:first-child .highlight {
-    background-color: #5fe1d5;
-  }
-
-  .highlight {
-    background-color: #5fe1d5;
+  .navbarContainer .searchContainer {
+    max-width: 80%;
   }
 
   .authButton {
-    padding: 20px 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    background-color: #682bd7;
-    color: white;
-    border-radius: 10px;
-    z-index: 2000; /* Ensure this is higher than overlapping elements */
-    text-decoration: none;
-    position: relative;
+    padding: 5px 5px;
   }
-  
-  .authButton:hover {
-    background-color: #5d27c2;
-  }
-  
-  .noUnderline {
-    text-decoration: none !important;
-    color: white !important;
-  }
-  
-  .noUnderline:hover {
-    text-decoration: none !important;
-    color: white !important;
-  }
-  
-  .profileIcon {
-    margin-left: 10px;
-    margin-right: 10px;
-    color: #682bd7;
-    font-size: 2.5em;
-    cursor: pointer;
-    z-index: 2000;
-    position: relative;
-  }
-  
-  .profileIcon:hover {
-    color: #8444fa;
-  }
-  
-  .linksContainer {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-  }
-  
-  .categoryLink {
-    color: white;
-    text-decoration: none;
-    padding: 5px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-  
-  .categoryLink:hover {
-    background-color: #444444;
-  }
-  
-  .activeLink {
-    background-color: #682bd7;
-    color: white;
-  }
-  
-  .activeLink:hover {
-    background-color: #682bd7;
-  }
-  
-  .toggleButton {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    color: white;
-    margin-right: 15px;
-  }
-  
-  .sidePanel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: rgba(240, 240, 240, 1);
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    z-index: 2000;
-    overflow-y: auto;
-  }
-  
-  .sidePanel h2 {
-    display: none;
-  }
-  
-  .sidePanel h3 {
-    margin: 10px 0 5px;
-    font-size: 1.4rem;
-  }
-  
-  .sidePanel ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidePanel li {
-    margin: 0;
-    background-color: #f0f0f0;
-    width: calc(100% + 40px);
-    margin-left: -20px;
-    margin-right: -20px;
-    padding: 0;
-  }
-  
-  .sidePanel li a {
-    color: #000;
-    text-decoration: none;
-    display: block;
-    padding: 5px 30px;
-    margin-left: 0;
-  }
-  
-  .sidePanel li a:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .sidePanel .activeLink a {
-    background-color: #682bd7;
-    color: white;
-  }
-  
-  .sidePanel .activeLink a:hover {
-    background-color: #682bd7;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  @media (min-width: 1068px) {
-    .closeButton {
-      display: none;
-    }
-  }
-  @media (max-width: 768px) {
-    .navbarContainer {
-      height: 80px; /* Increase the height for larger screens */
-    }
-  
-    .navContainer {
-      top: 80px; /* Adjust top value to match the new height of navbarContainer */
-    }
-  
-    .contentWrapper {
-      margin-top: 130px; /* Adjust this value to match the combined height of navbarContainer and navContainer on larger screens */
-    }
-    /* Adjust the logo size */
-    .navbarContainer .logo img {
-      height: 35px; /* Make the logo smaller */
-      width: auto; /* Keep the aspect ratio */
-    }
-  
-    /* Adjust the search bar size */
-    .navbarContainer .searchContainer {
-      flex: 1;
-      max-width: 60%; /* Limit the width of the search bar */
-    }
-  
-    .searchBar {
-      width: 100%;
-    }
-    .profileIcon {
-      font-size: 2rem;
-    }
-    .searchInput {
-      font-size: 14px; /* Smaller font size for mobile */
-      padding: 8px; /* Adjust padding to match smaller font */
-    }
-  
-    .searchIcon {
-      font-size: 20px; /* Adjust the size of the search icon */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    /* Further adjust the logo size for smaller screens */
-    .navbarContainer .logo img {
-      height: 25px; /* Further reduce the logo size */
-      width: auto; /* Keep the aspect ratio */
-    }
-  
-    /* Further adjust the search bar size for smaller screens */
-    .navbarContainer .searchContainer {
-      max-width: 80%; /* Increase the search bar width slightly */
-    }
 
-    .authButton {
-      padding: 5px 5px;
-    }
-  
-    .searchInput {
-      font-size: 12px; /* Smaller font size for very small screens */
-      padding: 6px; /* Adjust padding to match smaller font */
-    }
-  
-    .searchIcon {
-      font-size: 18px; /* Adjust the size of the search icon */
-    }
+  .searchInput {
+    font-size: 12px;
+    padding: 6px;
   }
-  
+
+  .searchIcon {
+    font-size: 18px;
+  }
+}

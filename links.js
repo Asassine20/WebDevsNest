@@ -77,7 +77,7 @@ const categoryLinks = {
   flutter: {
     defaultUrl: '/flutter/flutter-introduction',
   },
-  'AngularJS': {
+  Angular: {
     defaultUrl: '/angular/angular-introduction',
   },
   'Vue.js': {
@@ -92,8 +92,8 @@ const categoryLinks = {
   'jQuery': {
     defaultUrl: '/jquery/jquery-introduction',
   },
-  'ASP.NET': {
-    defaultUrl: '/aspnet/aspnet-introduction',
+  '.NET': {
+    defaultUrl: '/net/net-introduction',
   },
   flask: {
     defaultUrl: '/flask/flask-introduction',
