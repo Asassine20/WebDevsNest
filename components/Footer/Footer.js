@@ -68,25 +68,31 @@ const Footer = () => {
             <h4>Data Structures</h4>
             <ul>
               <li>
-                <Link href="/arrays/arrays-introduction" passHref>Arrays</Link>
+                <Link href="/data-structures/arrays" passHref>Arrays</Link>
               </li>
               <li>
-                <Link href="/stacks/stacks-introduction" passHref>Stacks</Link>
+                <Link href="/data-structures/stacks" passHref>Stacks</Link>
               </li>
               <li>
-                <Link href="/queues/queues-introduction" passHref>Queues</Link>
+                <Link href="/data-structures/queues" passHref>Queues</Link>
               </li>
               <li>
-                <Link href="/linked-lists/linked-lists-introduction" passHref>Linked Lists</Link>
+                <Link href="/data-structures/linked-lists" passHref>Linked Lists</Link>
               </li>
               <li>
-                <Link href="/trees/trees-introduction" passHref>Trees</Link>
+                <Link href="/data-structures/trees" passHref>Trees</Link>
               </li>
               <li>
-                <Link href="/graphs/graphs-introduction" passHref>Graphs</Link>
+                <Link href="/data-structures/graphs" passHref>Graphs</Link>
               </li>
               <li>
-                <Link href="/hash-tables/hash-tables-introduction" passHref>Hash Tables</Link>
+                <Link href="/data-structures/hash-tables" passHref>Hash Tables</Link>
+              </li>
+              <li>
+                <Link href="/data-structures/heaps" passHref>Heaps</Link>
+              </li>
+              <li>
+                <Link href="/data-structures/matrices" passHref>Matrices</Link>
               </li>
             </ul>
           </div>
@@ -94,22 +100,22 @@ const Footer = () => {
             <h4>Algorithms</h4>
             <ul>
               <li>
-                <Link href="/searching-algorithms/searching-algorithms-introduction" passHref>Searching Algorithm</Link>
+                <Link href="/algorithms/searching-algorithms" passHref>Searching Algorithm</Link>
               </li>
               <li>
-                <Link href="/sorting-algorithms/sorting-algorithms-introduction" passHref>Sorting Algorithm</Link>
+                <Link href="/algorithms/sorting-algorithms" passHref>Sorting Algorithm</Link>
               </li>
               <li>
-                <Link href="/recursion-algorithms/recursion-algorithms-introduction" passHref>Recursion Algorithm</Link>
+                <Link href="/algorithms/recursion-algorithms" passHref>Recursion Algorithm</Link>
               </li>
               <li>
-                <Link href="/greedy-algorithms/greedy-algorithms-introduction" passHref>Greedy Algorithm</Link>
+                <Link href="/algorithms/greedy-algorithms" passHref>Greedy Algorithm</Link>
               </li>
               <li>
-                <Link href="/dynamic-programming/dynamic-programming-introduction" passHref>Dynamic Programming</Link>
+                <Link href="/algorithms/dynamic-programming" passHref>Dynamic Programming</Link>
               </li>
               <li>
-                <Link href="/divide-and-conquer/divide-and-conquer-introduction" passHref>Divide and Conquer</Link>
+                <Link href="/algorithms/divide-and-conquer" passHref>Divide and Conquer</Link>
               </li>
             </ul>
           </div>
