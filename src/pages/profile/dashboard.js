@@ -7,17 +7,21 @@ import styles from '../../styles/Dashboard.module.css';
 
 export default function Dashboard() {
   const { data: user, error: userError } = useSWR('/api/auth/user', fetcher);
-  const { data: streakData, error: streakError } = useSWR(user ? `/api/visit?userId=${user.Id}` : null, fetcher);
-  const { data: favoritesData, error: favoritesError } = useSWR(user ? `/api/userFavorites?userId=${user.Id}` : null, fetcher);
+  const { data: streakData, error: streakError } = useSWR(user ? `/api/visit?userId=${user?.Id}` : null, fetcher);
+  const { data: favoritesData, error: favoritesError } = useSWR(user ? `/api/userFavorites?userId=${user?.Id}` : null, fetcher);
+  const { data: portfolioData, error: portfolioError } = useSWR(user ? `/api/portfolio?userId=${user?.Id}` : null, fetcher);
 
   useEffect(() => {
     if (userError) {
       Router.push('/login');
     }
-  }, [user, userError]);
+  }, [userError]);
 
-  if (!user) return <div>Loading...</div>;
-  if (userError || streakError || favoritesError) return <div>Error loading dashboard</div>;
+  if (!user && !userError) return <div>Loading...</div>;
+  if (userError) return <div>Error loading user data</div>;
+  if (streakError) return <div>Error loading streak data</div>;
+  if (favoritesError) return <div>Error loading favorites data</div>;
+  if (portfolioError) return <div>Error loading portfolio data</div>;
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', {
@@ -29,7 +33,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.dashboardContainer}>
-      <h1>Welcome, {user.Name}</h1>
+      <h1>Welcome, {user?.Name}</h1>
       <div className={styles.infoContainer}>
         <div className={styles.visitBox}>
           <p>You visited WebDevsNest</p>
@@ -53,8 +57,31 @@ export default function Dashboard() {
             )}
           </div>
         </div>
+        <div className={styles.portfolioBox}>
+          <h2>Your Portfolio</h2>
+          <div className={styles.portfolioList}>
+            {portfolioData?.projects && portfolioData.projects.length > 0 ? (
+              portfolioData.projects.map((project) => (
+                <div key={project.id} className={styles.portfolioItem}>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <Link href={`/${project.PortfolioSlug}`}>
+                    View Portfolio
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <p>You have no portfolio items at the moment</p>
+            )}
+          </div>
+          <Link href="/profile/new">
+            <button className={styles.addPortfolioButton}>
+              Add New Portfolio Item
+            </button>
+          </Link>
+        </div>
       </div>
-      {user.Role === 'admin' && (
+      {user?.Role === 'admin' && (
         <Link href="/admin">
           <button className={styles.adminButton}>
             Admin Dashboard

@@ -1,0 +1,24 @@
+.portfolioContainer {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .portfolioContainer h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .portfolioContainer p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .portfolioContainer a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #0070f3;
+    text-decoration: underline;
+  }
+  
