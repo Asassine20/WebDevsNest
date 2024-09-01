@@ -4,7 +4,6 @@ import Footer from '../../components/Footer/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import * as gtag from '../../lib/gtag';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
 import { Analytics } from "@vercel/analytics/react";
@@ -19,7 +18,6 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     const handleRouteChange = (url) => {
-      gtag.pageview(url);  // This will send page views to Google Analytics
 
       const pathSegments = url.split('/');
       if (pathSegments.length >= 3) {
