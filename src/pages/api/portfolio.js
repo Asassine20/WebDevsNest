@@ -10,14 +10,11 @@ export default async function handler(req, res) {
       case 'GET': {
         const { userId, portfolioSlug } = req.query;
         
-        // Handle getting portfolio by userId or portfolioSlug
         if (userId) {
           const projects = await query('SELECT * FROM Portfolio WHERE UserId = ?', [userId]);
-          console.log("Projects fetched: ", projects);
           res.status(200).json({ projects });
         } else if (portfolioSlug) {
           const portfolio = await query('SELECT * FROM Portfolio WHERE PortfolioSlug = ?', [portfolioSlug]);
-          console.log("Portfolio fetched: ", portfolio);
           if (portfolio.length === 0) {
             return res.status(404).json({ error: 'Portfolio not found' });
           }
@@ -31,21 +28,20 @@ export default async function handler(req, res) {
       case 'POST': {
         const { name, content, userId: bodyUserId, resume } = req.body;
 
-        // Ensure all required fields are provided
+        console.log('Received POST request with data:', { name, content, bodyUserId, resume });
+
         if (!name || !content || !bodyUserId) {
+          console.error('Missing required fields:', { name, content, bodyUserId });
           return res.status(400).json({ error: 'Name, content, and userId are required' });
         }
 
         let resumeFilePath = null;
+        let images = [];
 
-        // Handle file upload
         if (resume) {
           try {
-            console.log("Processing resume file");
-
             const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
             if (!fs.existsSync(uploadsDir)) {
-              console.log("Creating uploads directory");
               fs.mkdirSync(uploadsDir, { recursive: true });
             }
 
@@ -53,7 +49,6 @@ export default async function handler(req, res) {
             const fileName = `${name}_resume.pdf`.replace(/\s+/g, '_');
             const filePath = path.join(uploadsDir, fileName);
 
-            // Save the file
             fs.writeFileSync(filePath, buffer);
             resumeFilePath = `/uploads/${fileName}`;
           } catch (error) {
@@ -62,14 +57,41 @@ export default async function handler(req, res) {
           }
         }
 
-        // Create a portfolio slug
+        // Process sections and handle image uploads
+        for (let section of content) {
+          if (section.type === 'image' && section.content) {
+            try {
+              const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+              if (!fs.existsSync(uploadsDir)) {
+                fs.mkdirSync(uploadsDir, { recursive: true });
+              }
+
+              const buffer = Buffer.from(section.content, 'base64');
+              const fileName = `${name}_${Date.now()}_image.png`;
+              const filePath = path.join(uploadsDir, fileName);
+
+              fs.writeFileSync(filePath, buffer);
+              section.content = `/uploads/${fileName}`;
+              images.push(`/uploads/${fileName}`);
+            } catch (error) {
+              console.error('Error saving image file:', error);
+              return res.status(500).json({ error: 'Error saving image file' });
+            }
+          }
+        }
+
         const portfolioSlug = `${name}-portfolio`.replace(/\s+/g, '-').toLowerCase();
 
-        // Insert into database
-        await query(
-          'INSERT INTO Portfolio (Name, ResumeFile, Content, UserId, PortfolioSlug) VALUES (?, ?, ?, ?, ?)',
-          [name, resumeFilePath || null, content, bodyUserId, portfolioSlug]
-        );
+        try {
+          await query(
+            'INSERT INTO Portfolio (Name, ResumeFile, Content, UserId, PortfolioSlug, Images) VALUES (?, ?, ?, ?, ?, ?)',
+            [name, resumeFilePath || null, JSON.stringify(content), bodyUserId, portfolioSlug, JSON.stringify(images)]
+          );
+          console.log('Portfolio created successfully');
+        } catch (error) {
+          console.error('Error inserting portfolio into database:', error);
+          return res.status(500).json({ error: 'Error creating portfolio' });
+        }
 
         res.status(201).json({ message: 'Portfolio item created', portfolioSlug });
         break;
@@ -81,7 +103,7 @@ export default async function handler(req, res) {
         break;
     }
   } catch (error) {
-    console.error(error);
+    console.error('Unhandled error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }

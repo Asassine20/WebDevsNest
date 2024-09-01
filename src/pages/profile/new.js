@@ -1,33 +1,32 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import styles from '../../styles/Dashboard.module.css';
-import dynamic from 'next/dynamic';
-import * as Showdown from 'showdown';
-import 'easymde/dist/easymde.min.css';
+import styles from '../../styles/NewPortfolioItem.module.css';
 import fetcher from '../../../lib/fetcher';
 
-// Dynamically import SimpleMDE
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
-
-const NewPortfolioItem = () => {
+export default function NewPortfolioItem() {
   const [name, setName] = useState('');
-  const [content, setContent] = useState('');
   const [resume, setResume] = useState(null);
+  const [sections, setSections] = useState([]);
   const router = useRouter();
 
   // Fetch the user data to get the userId
-  const { data: user, error: userError } = useSWR('/api/auth/user', fetcher);
+  const { data: user } = useSWR('/api/auth/user', fetcher);
 
-  useEffect(() => {
-    if (userError) {
-      console.error('Error fetching user data:', userError);
-    }
-  }, [userError]);
+  const addSection = (type) => {
+    setSections((prevSections) => [
+      ...prevSections,
+      { type, content: '' },
+    ]);
+  };
 
-  const handleContentChange = useCallback((value) => {
-    setContent(value);
-  }, []);
+  const updateSectionContent = (index, content) => {
+    setSections((prevSections) =>
+      prevSections.map((section, i) =>
+        i === index ? { ...section, content } : section
+      )
+    );
+  };
 
   const handleResumeChange = (e) => {
     const file = e.target.files[0];
@@ -53,7 +52,7 @@ const NewPortfolioItem = () => {
     const response = await fetch('/api/portfolio', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, content, userId, resume }),
+      body: JSON.stringify({ name, content: sections, userId, resume }),
     });
 
     if (response.ok) {
@@ -63,25 +62,6 @@ const NewPortfolioItem = () => {
       console.error('Failed to create portfolio');
     }
   };
-
-  const converter = useMemo(
-    () =>
-      new Showdown.Converter({
-        tables: true,
-        simplifiedAutoLink: true,
-        strikethrough: true,
-        tasklists: true,
-      }),
-    []
-  );
-
-  const options = useMemo(
-    () => ({
-      spellChecker: false,
-      showIcons: ['code', 'table'],
-    }),
-    []
-  );
 
   return (
     <div className={styles.container}>
@@ -94,14 +74,85 @@ const NewPortfolioItem = () => {
           onChange={(e) => setName(e.target.value)}
           className={styles.input}
         />
-        <SimpleMDE value={content} onChange={handleContentChange} options={options} />
-        <input type="file" accept=".pdf" onChange={handleResumeChange} className={styles.input} />
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleResumeChange}
+          className={styles.input}
+        />
+        <div className={styles.sections}>
+          {sections.map((section, index) => (
+            <div key={index} className={styles.section}>
+              {section.type === 'title' && (
+                <input
+                  type="text"
+                  placeholder="Title"
+                  value={section.content}
+                  onChange={(e) =>
+                    updateSectionContent(index, e.target.value)
+                  }
+                  className={styles.input}
+                />
+              )}
+              {section.type === 'text' && (
+                <textarea
+                  placeholder="Text Caption"
+                  value={section.content}
+                  onChange={(e) =>
+                    updateSectionContent(index, e.target.value)
+                  }
+                  className={styles.input}
+                />
+              )}
+              {section.type === 'image' && (
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        updateSectionContent(index, reader.result.split(',')[1]);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  className={styles.input}
+                />
+              )}
+              {section.type === 'link' && (
+                <input
+                  type="url"
+                  placeholder="Link"
+                  value={section.content}
+                  onChange={(e) =>
+                    updateSectionContent(index, e.target.value)
+                  }
+                  className={styles.input}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        <div className={styles.buttons}>
+          <button type="button" onClick={() => addSection('title')}>
+            Add Title
+          </button>
+          <button type="button" onClick={() => addSection('text')}>
+            Add Text Caption
+          </button>
+          <button type="button" onClick={() => addSection('image')}>
+            Add Image
+          </button>
+          <button type="button" onClick={() => addSection('link')}>
+            Add Link
+          </button>
+        </div>
         <button type="submit" className={styles.button}>
           Create
         </button>
       </form>
     </div>
   );
-};
-
-export default NewPortfolioItem;
+}

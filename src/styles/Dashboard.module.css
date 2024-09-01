@@ -1,110 +1,125 @@
 .dashboardContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    position: relative;
-    min-height: 100vh;
-  }
-  
-  .infoContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 900px;
-    margin-top: 20px;
-  }
-  
-  .visitBox, .favoritesBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #f0f4f8;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 45%;
-  }
-  
-  .visitBox h2  {
-    font-size: 4rem;
-    color: #682bd7;
-    margin: 0;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  min-height: 100vh;
+}
 
-  .favoritesBox h2{
-    font-size: 2rem;
-    color: #682bd7;
-    margin: 0;
-  }
-  
-  .visitBox p, .favoritesBox p {
-    font-size: 1.2rem;
-    color: #333;
-    margin-top: 10px;
-  }
-  
-  .favoritesBox {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  .favoritesList {
-    width: 100%;
-  }
-  
-  .favoriteItem {
-    background-color: white;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-  }
-  
-  .favoriteItem h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #682bd7;
-  }
-  
-  .favoriteItem p {
-    margin: 5px 0 0;
-    font-size: 1rem;
-    color: #666;
-  }
-  
-  .logoutButton {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #682bd7;
-    color: white;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .logoutButton:hover {
-    background-color: #45a049;
-  }
-  
-  .adminButton {
-    margin-top: 1em;
-    padding: 0.5em 1em;
-    background-color: #682bd7;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .adminButton:hover {
-    background-color: #5a23b3;
-  }
-  
+.infoContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+.visitBox,
+.favoritesBox,
+.portfolioBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #f0f4f8;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 45%;
+}
+
+.visitBox h2,
+.portfolioBox h2 {
+  font-size: 4rem;
+  color: #682bd7;
+  margin: 0;
+}
+
+.favoritesBox h2,
+.portfolioBox h2 {
+  font-size: 2rem;
+  color: #682bd7;
+  margin: 0;
+}
+
+.visitBox p,
+.favoritesBox p,
+.portfolioBox p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+.favoritesBox,
+.portfolioBox {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.favoritesList,
+.portfolioList {
+  width: 100%;
+}
+
+.favoriteItem,
+.portfolioItem {
+  background-color: white;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.favoriteItem h3,
+.portfolioItem h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #682bd7;
+}
+
+.favoriteItem p,
+.portfolioItem p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.logoutButton,
+.adminButton,
+.addPortfolioButton,
+.viewButton,
+.editButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #682bd7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.logoutButton:hover,
+.adminButton:hover,
+.addPortfolioButton:hover,
+.viewButton:hover,
+.editButton:hover {
+  background-color: #45a049;
+}
+
+.portfolioActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.editButton {
+  background-color: #ff6b6b;
+}
+
+.editButton:hover {
+  background-color: #e55a5a;
+}

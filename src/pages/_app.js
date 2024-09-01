@@ -19,7 +19,8 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     const handleRouteChange = (url) => {
-      gtag.pageview(url);
+      gtag.pageview(url);  // This will send page views to Google Analytics
+
       const pathSegments = url.split('/');
       if (pathSegments.length >= 3) {
         setCategory(pathSegments[1]);
@@ -42,9 +43,9 @@ function MyApp({ Component, pageProps }) {
       }
     };
 
-    handleRouteChange(router.asPath);
+    handleRouteChange(router.asPath);  // Handle the initial page load
 
-    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteChange);  // Handle subsequent route changes
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };

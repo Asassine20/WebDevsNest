@@ -63,10 +63,13 @@ export default function Dashboard() {
             {portfolioData?.projects && portfolioData.projects.length > 0 ? (
               portfolioData.projects.map((project) => (
                 <div key={project.id} className={styles.portfolioItem}>
-                  <h3>{project.title}</h3>
+                  <h3>{project.Name}</h3>
                   <p>{project.description}</p>
+                  <Link href={`/profile/edit/${project.Id}`}>
+Edit Portfolio
+                  </Link>
                   <Link href={`/${project.PortfolioSlug}`}>
-                    View Portfolio
+View Portfolio
                   </Link>
                 </div>
               ))
