@@ -69,7 +69,7 @@ const MarkdownRenderer = ({ content }) => {
             <Image
               src={src}
               alt={alt}
-              width={800} // Adjust these values as needed
+              width={500} // Adjust these values as needed
               height={450} // Adjust these values as needed
               layout="responsive"
               objectFit="contain"

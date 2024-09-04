@@ -7,31 +7,42 @@ export default async function handler(req, res) {
 
   try {
     switch (method) {
-      case 'GET': {
-        const { userId, portfolioSlug } = req.query;
-        
-        if (userId) {
-          const projects = await query('SELECT * FROM Portfolio WHERE UserId = ?', [userId]);
-          res.status(200).json({ projects });
-        } else if (portfolioSlug) {
-          const portfolio = await query('SELECT * FROM Portfolio WHERE PortfolioSlug = ?', [portfolioSlug]);
-          if (portfolio.length === 0) {
-            return res.status(404).json({ error: 'Portfolio not found' });
+        case 'GET': {
+            const { userId, portfolioSlug, id } = req.query;
+            
+            console.log('Received GET request with:', { userId, portfolioSlug, id });
+    
+            if (id) {
+              const portfolio = await query('SELECT * FROM Portfolio WHERE Id = ?', [id]);
+              if (portfolio.length === 0) {
+                console.log('Portfolio not found');
+                return res.status(404).json({ error: 'Portfolio not found' });
+              }
+              console.log('Portfolio data:', portfolio[0]);
+              res.status(200).json({ portfolio: portfolio[0] });
+            } else if (userId) {
+              const projects = await query('SELECT * FROM Portfolio WHERE UserId = ?', [userId]);
+              console.log('Projects fetched:', projects);
+              res.status(200).json({ projects });
+            } else if (portfolioSlug) {
+              const portfolio = await query('SELECT * FROM Portfolio WHERE PortfolioSlug = ?', [portfolioSlug]);
+              if (portfolio.length === 0) {
+                console.log('Portfolio not found by slug');
+                return res.status(404).json({ error: 'Portfolio not found' });
+              }
+              console.log('Portfolio data by slug:', portfolio[0]);
+              res.status(200).json({ portfolio: portfolio[0] });
+            } else {
+              console.log('Invalid request: No userId, portfolioSlug, or id');
+              return res.status(400).json({ error: 'User ID, Portfolio Slug, or ID is required' });
+            }
+            break;
           }
-          res.status(200).json({ portfolio: portfolio[0] });
-        } else {
-          return res.status(400).json({ error: 'User ID or Portfolio Slug is required' });
-        }
-        break;
-      }
 
       case 'POST': {
         const { name, content, userId: bodyUserId, resume } = req.body;
 
-        console.log('Received POST request with data:', { name, content, bodyUserId, resume });
-
         if (!name || !content || !bodyUserId) {
-          console.error('Missing required fields:', { name, content, bodyUserId });
           return res.status(400).json({ error: 'Name, content, and userId are required' });
         }
 
@@ -52,7 +63,6 @@ export default async function handler(req, res) {
             fs.writeFileSync(filePath, buffer);
             resumeFilePath = `/uploads/${fileName}`;
           } catch (error) {
-            console.error("Error saving resume file:", error);
             return res.status(500).json({ error: 'Error saving resume file' });
           }
         }
@@ -74,7 +84,6 @@ export default async function handler(req, res) {
               section.content = `/uploads/${fileName}`;
               images.push(`/uploads/${fileName}`);
             } catch (error) {
-              console.error('Error saving image file:', error);
               return res.status(500).json({ error: 'Error saving image file' });
             }
           }
@@ -87,9 +96,7 @@ export default async function handler(req, res) {
             'INSERT INTO Portfolio (Name, ResumeFile, Content, UserId, PortfolioSlug, Images) VALUES (?, ?, ?, ?, ?, ?)',
             [name, resumeFilePath || null, JSON.stringify(content), bodyUserId, portfolioSlug, JSON.stringify(images)]
           );
-          console.log('Portfolio created successfully');
         } catch (error) {
-          console.error('Error inserting portfolio into database:', error);
           return res.status(500).json({ error: 'Error creating portfolio' });
         }
 
@@ -103,7 +110,6 @@ export default async function handler(req, res) {
         break;
     }
   } catch (error) {
-    console.error('Unhandled error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }

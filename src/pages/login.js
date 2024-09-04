@@ -34,6 +34,7 @@ export default function Login() {
           <ul>
             <li>It's free to join, and free to use</li>
             <li>Get access to a personalized dashboard</li>
+            <li>Create a public and shareable portfolio to display your work experience, projects, awards, and more</li>
             <li>Keep track of how often you learn on WebDevsNest</li>
             <li>Opt in to receive notifications about new posts</li>
             <li>Set goals for your learning path</li>

@@ -7,6 +7,7 @@ import fetcher from '../../../lib/fetcher';
 export default function NewPortfolioItem() {
   const [name, setName] = useState('');
   const [resume, setResume] = useState(null);
+  const [profileImage, setProfileImage] = useState(null); // Add state for profile image
   const [sections, setSections] = useState([]);
   const router = useRouter();
 
@@ -39,6 +40,17 @@ export default function NewPortfolioItem() {
     }
   };
 
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result.split(',')[1]); // Get the base64 content
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -52,7 +64,7 @@ export default function NewPortfolioItem() {
     const response = await fetch('/api/portfolio', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, content: sections, userId, resume }),
+      body: JSON.stringify({ name, content: sections, userId, resume, profileImage }), // Send profile image with the request
     });
 
     if (response.ok) {
@@ -74,12 +86,25 @@ export default function NewPortfolioItem() {
           onChange={(e) => setName(e.target.value)}
           className={styles.input}
         />
+        
+        {/* Profile Image Input */}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleProfileImageChange}
+          className={styles.input}
+          placeholder="Profile Image"
+        />
+        
+        {/* Resume Input */}
         <input
           type="file"
           accept=".pdf"
           onChange={handleResumeChange}
           className={styles.input}
         />
+        
+        {/* Sections */}
         <div className={styles.sections}>
           {sections.map((section, index) => (
             <div key={index} className={styles.section}>
@@ -135,6 +160,8 @@ export default function NewPortfolioItem() {
             </div>
           ))}
         </div>
+
+        {/* Add Section Buttons */}
         <div className={styles.buttons}>
           <button type="button" onClick={() => addSection('title')}>
             Add Title
@@ -149,6 +176,7 @@ export default function NewPortfolioItem() {
             Add Link
           </button>
         </div>
+
         <button type="submit" className={styles.button}>
           Create
         </button>

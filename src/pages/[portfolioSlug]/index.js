@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import fetcher from '../../../lib/fetcher'; // Adjust the import path to match your directory structure
+import fetcher from '../../../lib/fetcher'; 
 import styles from '../../styles/Portfolio.module.css';
 
 export default function Portfolio() {
@@ -16,26 +16,53 @@ export default function Portfolio() {
   const portfolio = data.portfolio;
   const contentSections = JSON.parse(portfolio.Content); // Parse the JSON string into an array
 
-  return (
-    <div className={styles.portfolioContainer}>
-      <h1>{portfolio.Name}</h1>
-      {contentSections.map((section, index) => (
-        <div key={index} className={styles.portfolioSection}>
-          {section.type === 'title' && <h2>{section.content}</h2>}
-          {section.type === 'text' && <p>{section.content}</p>}
-          {section.type === 'image' && <img src={section.content} alt="Portfolio Image" className={styles.portfolioImage} />}
-          {section.type === 'link' && (
-            <a href={section.content} target="_blank" rel="noopener noreferrer" className={styles.portfolioLink}>
+  // Combine all content into a single section
+  const renderContent = () => {
+    return contentSections.map((section, index) => {
+      switch (section.type) {
+        case 'title':
+          return <h2 key={index}>{section.content}</h2>;
+        case 'text':
+          return <p key={index}>{section.content}</p>;
+        case 'image':
+          return (
+            <div key={index} className={styles.imagePreview}>
+              <img src={section.content} alt="Portfolio Image" />
+            </div>
+          );
+        case 'link':
+          return (
+            <a
+              key={index}
+              href={section.content}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.portfolioLink}
+            >
               View Demo
             </a>
-          )}
-        </div>
-      ))}
+          );
+        default:
+          return null;
+      }
+    });
+  };
+
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>{portfolio.Name}</h1>
+
+      {/* Display Resume right after the portfolio name */}
       {portfolio.ResumeFile && (
-        <a href={portfolio.ResumeFile} download>
+        <a href={portfolio.ResumeFile} download className={styles.resumeLink}>
           Download Resume
         </a>
       )}
+
+      {/* Render all content in one section */}
+      <div className={styles.contentSection}>
+        {renderContent()}
+      </div>
     </div>
   );
 }
