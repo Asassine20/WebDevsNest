@@ -1,42 +1,35 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../../styles/NewPortfolioItem.module.css'; // Adjust path as needed
+import styles from '../../../styles/NewPortfolioItem.module.css';
 import dynamic from 'next/dynamic';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import fetcher from '../../../../lib/fetcher';
 import useSWR from 'swr';
 
-// Dynamically import SimpleMDE
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
 
 export default function EditPortfolioItem() {
   const router = useRouter();
   const { id } = router.query;
-
-  const { data: portfolioItem, error } = useSWR(id ? `/api/portfolio?id=${id}` : null, fetcher);
+  const { data: portfolioItem, error, mutate } = useSWR(id ? `/api/portfolio?id=${id}` : null, fetcher);
 
   const [name, setName] = useState('');
   const [content, setContent] = useState([]);
   const [resume, setResume] = useState(null);
-  const [profileImage, setProfileImage] = useState(null); // State for profile image
+  const [profileImage, setProfileImage] = useState(null);
 
-  // Populate form with pre-existing portfolio data
+  // Fetch the portfolio item data
   useEffect(() => {
     if (portfolioItem && portfolioItem.portfolio) {
-      console.log('Portfolio item data:', portfolioItem);
-
       try {
         if (portfolioItem.portfolio.Content && portfolioItem.portfolio.Content !== 'undefined') {
           const parsedContent = JSON.parse(portfolioItem.portfolio.Content);
-          console.log('Parsed content:', parsedContent);
           setContent(parsedContent);
-        } else {
-          console.error('Content is either undefined or empty');
         }
 
         setName(portfolioItem.portfolio.Name);
         setResume(portfolioItem.portfolio.ResumeFile);
-        setProfileImage(portfolioItem.portfolio.ProfileImage); // Set profile image
+        setProfileImage(portfolioItem.portfolio.ProfileImage);
       } catch (error) {
         console.error('Error parsing portfolio content:', error);
       }
@@ -48,21 +41,33 @@ export default function EditPortfolioItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('Submitting form with:', { name, content, resume, profileImage });
-
     const response = await fetch(`/api/portfolio?id=${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, content, resume, profileImage }), // Send updated profile image
+      body: JSON.stringify({ name, content, resume, profileImage }),
     });
 
     if (response.ok) {
-      console.log('Portfolio updated successfully');
       router.push('/profile/dashboard');
     } else {
       console.error('Failed to update portfolio');
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm('Are you sure you want to delete this portfolio?');
+    if (confirmed) {
+      const response = await fetch(`/api/portfolio?id=${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        alert('Portfolio deleted successfully');
+        router.push('/profile/dashboard');
+      } else {
+        alert('Failed to delete portfolio');
+      }
     }
   };
 
@@ -71,7 +76,7 @@ export default function EditPortfolioItem() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setResume(reader.result.split(',')[1]); // Get the base64 content
+        setResume(reader.result.split(',')[1]);
       };
       reader.readAsDataURL(file);
     }
@@ -82,33 +87,30 @@ export default function EditPortfolioItem() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfileImage(reader.result.split(',')[1]); // Get the base64 content for profile image
+        setProfileImage(reader.result.split(',')[1]);
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleContentChange = useCallback((result) => {
-    if (!result.destination) return; // Ensure valid drop
+    if (!result.destination) return;
 
     const newItems = Array.from(content);
     const [removed] = newItems.splice(result.source.index, 1);
     newItems.splice(result.destination.index, 0, removed);
     setContent(newItems);
-    console.log('Rearranged content:', newItems);
   }, [content]);
 
   const handleAddSection = (type) => {
     const updatedContent = [...content, { type, content: '' }];
     setContent(updatedContent);
-    console.log('Added section:', updatedContent);
   };
 
   const handleSectionChange = (index, newContent) => {
     const updatedContent = [...content];
     updatedContent[index].content = newContent;
     setContent(updatedContent);
-    console.log('Updated section content:', updatedContent);
   };
 
   const renderPreview = () => {
@@ -145,7 +147,6 @@ export default function EditPortfolioItem() {
           className={styles.input}
         />
 
-        {/* Profile Image Input */}
         <input
           type="file"
           accept="image/*"
@@ -156,7 +157,6 @@ export default function EditPortfolioItem() {
           <p>Current Profile Image: <a href={profileImage} target="_blank" rel="noopener noreferrer">View Profile Image</a></p>
         )}
 
-        {/* Resume Input */}
         <input
           type="file"
           accept=".pdf"
@@ -226,9 +226,14 @@ export default function EditPortfolioItem() {
       <div className={styles.previewContainer}>
         <h2>Portfolio Preview</h2>
         <div className={styles.previewContent}>
-          {renderPreview()} {/* This renders a single combined preview for all content */}
+          {renderPreview()}
         </div>
       </div>
+
+      {/* Delete Button */}
+      <button onClick={handleDelete} className={styles.deleteButton}>
+        Delete Portfolio
+      </button>
     </div>
   );
 }

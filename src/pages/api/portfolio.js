@@ -7,37 +7,29 @@ export default async function handler(req, res) {
 
   try {
     switch (method) {
-        case 'GET': {
-            const { userId, portfolioSlug, id } = req.query;
-            
-            console.log('Received GET request with:', { userId, portfolioSlug, id });
-    
-            if (id) {
-              const portfolio = await query('SELECT * FROM Portfolio WHERE Id = ?', [id]);
-              if (portfolio.length === 0) {
-                console.log('Portfolio not found');
-                return res.status(404).json({ error: 'Portfolio not found' });
-              }
-              console.log('Portfolio data:', portfolio[0]);
-              res.status(200).json({ portfolio: portfolio[0] });
-            } else if (userId) {
-              const projects = await query('SELECT * FROM Portfolio WHERE UserId = ?', [userId]);
-              console.log('Projects fetched:', projects);
-              res.status(200).json({ projects });
-            } else if (portfolioSlug) {
-              const portfolio = await query('SELECT * FROM Portfolio WHERE PortfolioSlug = ?', [portfolioSlug]);
-              if (portfolio.length === 0) {
-                console.log('Portfolio not found by slug');
-                return res.status(404).json({ error: 'Portfolio not found' });
-              }
-              console.log('Portfolio data by slug:', portfolio[0]);
-              res.status(200).json({ portfolio: portfolio[0] });
-            } else {
-              console.log('Invalid request: No userId, portfolioSlug, or id');
-              return res.status(400).json({ error: 'User ID, Portfolio Slug, or ID is required' });
-            }
-            break;
+      case 'GET': {
+        const { userId, portfolioSlug, id } = req.query;
+        
+        if (id) {
+          const portfolio = await query('SELECT * FROM Portfolio WHERE Id = ?', [id]);
+          if (portfolio.length === 0) {
+            return res.status(404).json({ error: 'Portfolio not found' });
           }
+          res.status(200).json({ portfolio: portfolio[0] });
+        } else if (userId) {
+          const projects = await query('SELECT * FROM Portfolio WHERE UserId = ?', [userId]);
+          res.status(200).json({ projects });
+        } else if (portfolioSlug) {
+          const portfolio = await query('SELECT * FROM Portfolio WHERE PortfolioSlug = ?', [portfolioSlug]);
+          if (portfolio.length === 0) {
+            return res.status(404).json({ error: 'Portfolio not found' });
+          }
+          res.status(200).json({ portfolio: portfolio[0] });
+        } else {
+          return res.status(400).json({ error: 'User ID, Portfolio Slug, or ID is required' });
+        }
+        break;
+      }
 
       case 'POST': {
         const { name, content, userId: bodyUserId, resume } = req.body;
@@ -104,8 +96,44 @@ export default async function handler(req, res) {
         break;
       }
 
+      case 'DELETE': {
+        const { id } = req.query;
+
+        if (!id) {
+          return res.status(400).json({ error: 'Portfolio ID is required' });
+        }
+
+        const portfolio = await query('SELECT * FROM Portfolio WHERE Id = ?', [id]);
+        if (portfolio.length === 0) {
+          return res.status(404).json({ error: 'Portfolio not found' });
+        }
+
+        const { ResumeFile, Images } = portfolio[0];
+
+        if (ResumeFile) {
+          const filePath = path.join(process.cwd(), 'public', ResumeFile);
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+          }
+        }
+
+        if (Images) {
+          const imagePaths = JSON.parse(Images);
+          imagePaths.forEach((imagePath) => {
+            const filePath = path.join(process.cwd(), 'public', imagePath);
+            if (fs.existsSync(filePath)) {
+              fs.unlinkSync(filePath);
+            }
+          });
+        }
+
+        await query('DELETE FROM Portfolio WHERE Id = ?', [id]);
+        res.status(200).json({ message: 'Portfolio deleted successfully' });
+        break;
+      }
+
       default:
-        res.setHeader('Allow', ['GET', 'POST']);
+        res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
         res.status(405).end(`Method ${method} Not Allowed`);
         break;
     }

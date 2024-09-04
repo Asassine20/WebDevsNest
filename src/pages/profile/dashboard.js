@@ -9,7 +9,7 @@ export default function Dashboard() {
   const { data: user, error: userError } = useSWR('/api/auth/user', fetcher);
   const { data: streakData, error: streakError } = useSWR(user ? `/api/visit?userId=${user?.Id}` : null, fetcher);
   const { data: favoritesData, error: favoritesError } = useSWR(user ? `/api/userFavorites?userId=${user?.Id}` : null, fetcher);
-  const { data: portfolioData, error: portfolioError } = useSWR(user ? `/api/portfolio?userId=${user?.Id}` : null, fetcher);
+  const { data: portfolioData, error: portfolioError, mutate } = useSWR(user ? `/api/portfolio?userId=${user?.Id}` : null, fetcher);
 
   useEffect(() => {
     if (userError) {
@@ -29,6 +29,21 @@ export default function Dashboard() {
     });
     Router.push('/login');
     window.location.reload(); // Refresh the page
+  };
+
+  const handleDelete = async (portfolioId) => {
+    const confirmed = window.confirm('Are you sure you want to delete this portfolio?');
+    if (confirmed) {
+      const response = await fetch(`/api/portfolio?id=${portfolioId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        alert('Portfolio deleted successfully');
+        mutate(); // Re-fetch portfolio data after deletion
+      } else {
+        alert('Failed to delete portfolio');
+      }
+    }
   };
 
   return (
@@ -71,6 +86,11 @@ export default function Dashboard() {
                   <Link href={`/${project.PortfolioSlug}`}>
                     View Portfolio
                   </Link>
+                  <button 
+                    onClick={() => handleDelete(project.Id)} 
+                    className={styles.deleteButton}>
+                    Delete Portfolio
+                  </button>
                 </div>
               ))
             ) : (
