@@ -1,67 +1,107 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import fetcher from '../../../lib/fetcher'; 
 import styles from '../../styles/Portfolio.module.css';
+import fetcher from '../../../lib/fetcher';
+import { useState } from 'react';
 
 export default function Portfolio() {
   const router = useRouter();
   const { portfolioSlug } = router.query;
-
-  // Fetch the portfolio data based on the slug
   const { data, error } = useSWR(portfolioSlug ? `/api/portfolio?portfolioSlug=${portfolioSlug}` : null, fetcher);
 
+  const [currentIndex, setCurrentIndex] = useState(0); // For carousel navigation
+
   if (error) return <div>Error loading portfolio</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!data || !data.portfolio) return <div>No portfolio found</div>;
 
   const portfolio = data.portfolio;
-  const contentSections = JSON.parse(portfolio.Content); // Parse the JSON string into an array
+  // Ensure that workExperience and projects are valid arrays
+  const workExperience = portfolio.WorkExperience ? JSON.parse(portfolio.WorkExperience) : [];
+  const projects = portfolio.Projects ? JSON.parse(portfolio.Projects) : [];
 
-  // Combine all content into a single section
-  const renderContent = () => {
-    return contentSections.map((section, index) => {
-      switch (section.type) {
-        case 'title':
-          return <h2 key={index}>{section.content}</h2>;
-        case 'text':
-          return <p key={index}>{section.content}</p>;
-        case 'image':
-          return (
-            <div key={index} className={styles.imagePreview}>
-              <img src={section.content} alt="Portfolio Image" />
-            </div>
-          );
-        case 'link':
-          return (
-            <a
-              key={index}
-              href={section.content}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.portfolioLink}
-            >
-              View Demo
+  // Handle base64 profile image properly
+  const profileImageSrc = portfolio.ProfileImage
+    ? `data:image/jpeg;base64,${portfolio.ProfileImage}` // or image/png if necessary
+    : null;
+
+  // Define carousel sections
+  const sections = [
+    {
+      title: `${portfolio.Name}`,
+      content: (
+        <>
+          <p>University: {portfolio.University}</p>
+          {portfolio.ResumeFile && (
+            <a href={portfolio.ResumeFile} download className={styles.resumeLink}>
+              Download Resume
             </a>
-          );
-        default:
-          return null;
-      }
-    });
+          )}
+          {profileImageSrc && <img src={profileImageSrc} alt="Profile" className={styles.imagePreview} />}
+        </>
+      ),
+    },
+    {
+      title: 'Work Experience',
+      content: workExperience.length > 0 ? (
+        workExperience.map((experience, index) => (
+          <div key={index} className={styles.workExperience}>
+            <p>Company: {experience.company}</p>
+            <p>Role: {experience.role}</p>
+            <p>Duration: {experience.duration}</p>
+            <p>Description: {experience.description}</p>
+          </div>
+        ))
+      ) : (
+        <p>No work experience added.</p>
+      ),
+    },
+    {
+      title: 'Projects',
+      content: projects.length > 0 ? (
+        projects.map((project, index) => (
+          <div key={index} className={styles.project}>
+            <p>Project Name: {project.name}</p>
+            <p>Tech Stack: {project.techStack}</p>
+            <a href={project.demoLink} className={styles.portfolioLink}>
+              Demo Link
+            </a>
+            <p>Description: {project.description}</p>
+          </div>
+        ))
+      ) : (
+        <p>No projects added.</p>
+      ),
+    },
+  ];
+
+  // Helper functions for carousel navigation
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % sections.length);
   };
 
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + sections.length) % sections.length);
+  };
+
+  // Get the titles for the next and previous sections
+  const nextTitle = sections[(currentIndex + 1) % sections.length].title;
+  const prevTitle = sections[(currentIndex - 1 + sections.length) % sections.length].title;
+
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{portfolio.Name}</h1>
+    <div className={styles.carouselContainer}>
+      <div className={styles.navContainer}>
+        <p className={styles.navTitle}>{prevTitle}</p>
+        <button onClick={handlePrev} className={styles.navButton}>&#8592;</button>
+      </div>
 
-      {/* Display Resume right after the portfolio name */}
-      {portfolio.ResumeFile && (
-        <a href={portfolio.ResumeFile} download className={styles.resumeLink}>
-          Download Resume
-        </a>
-      )}
+      <div className={styles.carouselItem}>
+        <h1>{sections[currentIndex].title}</h1>
+        <div>{sections[currentIndex].content}</div>
+      </div>
 
-      {/* Render all content in one section */}
-      <div className={styles.contentSection}>
-        {renderContent()}
+      <div className={styles.navContainer}>
+        <p className={styles.navTitle}>{nextTitle}</p>
+        <button onClick={handleNext} className={styles.navButton}>&#8594;</button>
       </div>
     </div>
   );

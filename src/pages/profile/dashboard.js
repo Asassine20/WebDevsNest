@@ -21,7 +21,13 @@ export default function Dashboard() {
   if (userError) return <div>Error loading user data</div>;
   if (streakError) return <div>Error loading streak data</div>;
   if (favoritesError) return <div>Error loading favorites data</div>;
-  if (portfolioError) return <div>Error loading portfolio data</div>;
+  if (portfolioError) {
+    if (portfolioError.status === 404) {
+      // Handle case where no portfolios exist for this user
+      return <div>No portfolios found for this user.</div>;
+    }
+    return <div>Error loading portfolio data</div>;
+  }
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', {
