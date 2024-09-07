@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import styles from '../../../styles/NewPortfolioItem.module.css';
 import fetcher from '../../../../lib/fetcher';
+import { FaTrash, FaPlus } from 'react-icons/fa'; // Import icons
 
 export default function EditPortfolioItem() {
   const router = useRouter();
@@ -132,6 +133,7 @@ export default function EditPortfolioItem() {
           className={styles.input}
         />
 
+        <h4>Profile Image</h4>
         <input type="file" accept="image/*" onChange={handleProfileImageChange} className={styles.input} />
         {profileImage && <img src={`data:image/png;base64,${profileImage}`} alt="Profile Preview" className={styles.imagePreview} />}
 
@@ -141,91 +143,118 @@ export default function EditPortfolioItem() {
             Download Current Resume
           </a>
         )}
+        <h4>Resume</h4>
         <input type="file" accept=".pdf" onChange={handleResumeChange} className={styles.input} />
 
         <h2>Work Experience</h2>
-        {workExperience.length === 0 && (
-          <p>No work experience added yet. Click the button below to add.</p>
-        )}
-        {workExperience.map((experience, index) => (
-          <div key={index} className={styles.workExperience}>
-            <input
-              type="text"
-              placeholder="Company"
-              value={experience.company}
-              onChange={(e) => handleWorkExperienceChange(index, 'company', e.target.value)}
-              className={styles.input}
-            />
-            <input
-              type="text"
-              placeholder="Role"
-              value={experience.role}
-              onChange={(e) => handleWorkExperienceChange(index, 'role', e.target.value)}
-              className={styles.input}
-            />
-            <input
-              type="text"
-              placeholder="Duration"
-              value={experience.duration}
-              onChange={(e) => handleWorkExperienceChange(index, 'duration', e.target.value)}
-              className={styles.input}
-            />
-            <textarea
-              placeholder="Description"
-              value={experience.description}
-              onChange={(e) => handleWorkExperienceChange(index, 'description', e.target.value)}
-              className={styles.input}
-            />
-            <button type="button" onClick={() => handleDeleteWorkExperience(index)} className={styles.deleteButton}>
-              Delete Work Experience
+        {workExperience.length === 0 ? (
+          <div>
+            <p>No work experience added yet. Click the button below to add.</p>
+            <button type="button" onClick={handleAddWorkExperience} className={styles.addButton}>
+              <FaPlus />
             </button>
           </div>
-        ))}
-        <button type="button" onClick={handleAddWorkExperience} className={styles.addButton}>
-          Add Work Experience
-        </button>
+        ) : (
+          workExperience.map((experience, index) => (
+            <div key={index} className={styles.workExperience}>
+              <input
+                type="text"
+                placeholder="Company"
+                value={experience.company}
+                onChange={(e) => handleWorkExperienceChange(index, 'company', e.target.value)}
+                className={styles.input}
+              />
+              <input
+                type="text"
+                placeholder="Role"
+                value={experience.role}
+                onChange={(e) => handleWorkExperienceChange(index, 'role', e.target.value)}
+                className={styles.input}
+              />
+              <input
+                type="text"
+                placeholder="Duration"
+                value={experience.duration}
+                onChange={(e) => handleWorkExperienceChange(index, 'duration', e.target.value)}
+                className={styles.input}
+              />
+              <textarea
+                placeholder="Description"
+                value={experience.description}
+                maxLength="1000"
+                onChange={(e) => handleWorkExperienceChange(index, 'description', e.target.value)}
+                className={styles.input}
+              />
+              <div>{1000 - experience.description.length} characters remaining</div>
+              <div className={styles.buttons}>
+                <button type="button" onClick={() => handleDeleteWorkExperience(index)} className={styles.deleteButton}>
+                  <FaTrash />
+                </button>
+                {/* Add button next to delete for new work experience entry */}
+                {index === workExperience.length - 1 && (
+                  <button type="button" onClick={handleAddWorkExperience} className={styles.addButton}>
+                    <FaPlus />
+                  </button>
+                )}
+              </div>
+            </div>
+          ))
+        )}
 
         <h2>Projects</h2>
-        {projects.length === 0 && (
-          <p>No projects added yet. Click the button below to add.</p>
-        )}
-        {projects.map((project, index) => (
-          <div key={index} className={styles.project}>
-            <input
-              type="text"
-              placeholder="Project Name"
-              value={project.name}
-              onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
-              className={styles.input}
-            />
-            <input
-              type="text"
-              placeholder="Tech Stack"
-              value={project.techStack}
-              onChange={(e) => handleProjectChange(index, 'techStack', e.target.value)}
-              className={styles.input}
-            />
-            <input
-              type="url"
-              placeholder="Demo Link"
-              value={project.demoLink}
-              onChange={(e) => handleProjectChange(index, 'demoLink', e.target.value)}
-              className={styles.input}
-            />
-            <textarea
-              placeholder="Description"
-              value={project.description}
-              onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
-              className={styles.input}
-            />
-            <button type="button" onClick={() => handleDeleteProject(index)} className={styles.deleteButton}>
-              Delete Project
+        {projects.length === 0 ? (
+          <div>
+            <p>No projects added yet. Click the button below to add.</p>
+            <button type="button" onClick={handleAddProject} className={styles.addButton}>
+              <FaPlus />
             </button>
           </div>
-        ))}
-        <button type="button" onClick={handleAddProject} className={styles.addButton}>
-          Add Project
-        </button>
+        ) : (
+          projects.map((project, index) => (
+            <div key={index} className={styles.project}>
+              <input
+                type="text"
+                placeholder="Project Name"
+                value={project.name}
+                onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
+                className={styles.input}
+              />
+              <input
+                type="text"
+                placeholder="Tech Stack"
+                value={project.techStack}
+                onChange={(e) => handleProjectChange(index, 'techStack', e.target.value)}
+                className={styles.input}
+              />
+              <input
+                type="url"
+                placeholder="Demo Link"
+                value={project.demoLink}
+                onChange={(e) => handleProjectChange(index, 'demoLink', e.target.value)}
+                className={styles.input}
+              />
+              <textarea
+                placeholder="Description"
+                value={project.description}
+                maxLength="1000"
+                onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
+                className={styles.input}
+              />
+              <div>{1000 - project.description.length} characters remaining</div>
+              <div className={styles.buttons}>
+                <button type="button" onClick={() => handleDeleteProject(index)} className={styles.deleteButton}>
+                  <FaTrashAlt />
+                </button>
+                {/* Add button next to delete for new project entry */}
+                {index === projects.length - 1 && (
+                  <button type="button" onClick={handleAddProject} className={styles.addButton}>
+                    <FaPlus />
+                  </button>
+                )}
+              </div>
+            </div>
+          ))
+        )}
 
         <button type="submit" className={styles.button}>
           Update Portfolio

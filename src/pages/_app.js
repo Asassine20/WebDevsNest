@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -17,7 +18,6 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     const handleRouteChange = (url) => {
-
       const pathSegments = url.split('/');
       if (pathSegments.length >= 3) {
         setCategory(pathSegments[1]);
@@ -40,9 +40,9 @@ function MyApp({ Component, pageProps }) {
       }
     };
 
-    handleRouteChange(router.asPath);  // Handle the initial page load
+    handleRouteChange(router.asPath); // Handle the initial page load
 
-    router.events.on('routeChangeComplete', handleRouteChange);  // Handle subsequent route changes
+    router.events.on('routeChangeComplete', handleRouteChange); // Handle subsequent route changes
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
@@ -69,6 +69,7 @@ function MyApp({ Component, pageProps }) {
         />
       )}
       <Component {...pageProps} />
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
       {shouldShowFooter && <Footer />}
       <SpeedInsights />
     </>
