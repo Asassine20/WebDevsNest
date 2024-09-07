@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { FaUserCircle } from 'react-icons/fa';
+import { MdArrowForwardIos } from 'react-icons/md'; // Import right arrow icon
 import Image from 'next/image';
 import SearchBar from '../SearchBar/SearchBar';
 import styles from './CombinedComponent.module.css';
@@ -13,6 +14,7 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [groupedLinks, setGroupedLinks] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showArrow, setShowArrow] = useState(true); // State to control arrow visibility
   const navRef = useRef(null);
   const sidePanelRef = useRef(null);
   const router = useRouter();
@@ -138,16 +140,23 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
       navContainer.scrollLeft = scrollLeft - walk;
     };
 
+    // Hide arrow when user scrolls
+    const handleScroll = () => {
+      setShowArrow(navContainer.scrollLeft === 0);
+    };
+
     navContainer.addEventListener('mousedown', handleMouseDown);
     navContainer.addEventListener('mouseleave', handleMouseLeave);
     navContainer.addEventListener('mouseup', handleMouseUp);
     navContainer.addEventListener('mousemove', handleMouseMove);
+    navContainer.addEventListener('scroll', handleScroll);
 
     return () => {
       navContainer.removeEventListener('mousedown', handleMouseDown);
       navContainer.removeEventListener('mouseleave', handleMouseLeave);
       navContainer.removeEventListener('mouseup', handleMouseUp);
       navContainer.removeEventListener('mousemove', handleMouseMove);
+      navContainer.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -189,6 +198,11 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
             );
           })}
         </div>
+        {isSmallScreen && showArrow && (
+          <div className={styles.arrowIcon}>
+            <MdArrowForwardIos size={24} />
+          </div>
+        )}
       </div>
       {isPanelOpen && (
         <div ref={sidePanelRef} className={styles.sidePanel}>

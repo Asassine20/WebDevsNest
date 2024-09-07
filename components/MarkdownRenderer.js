@@ -156,6 +156,38 @@ const MarkdownRenderer = ({ content }) => {
             />
           );
         },
+        h3({ node, ...props }) {
+          return (
+            <h3
+              style={{
+                fontSize: '24px',
+                marginBottom: '0.5em',
+                color: '#000', // Change h3 color to #000
+              }}
+              {...props}
+            />
+          );
+        },
+        ul({ node, ...props }) {
+          return (
+            <ul
+              style={{
+                color: '#000', // Change bullet points color to #000
+              }}
+              {...props}
+            />
+          );
+        },
+        ol({ node, ...props }) {
+          return (
+            <ol
+              style={{
+                color: '#000', // Change numbered list color to #000
+              }}
+              {...props}
+            />
+          );
+        },
       }}
     >
       {content}

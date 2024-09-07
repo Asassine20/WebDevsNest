@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   background-color: #282c34;
-  padding: 0px 10px;
+  padding: 0px 5px;
   position: fixed;
   top: 60px; /* Adjust this value to match the height of navbarContainer */
   left: 0;
@@ -44,7 +44,7 @@
 }
 
 .contentWrapper {
-  margin-top: 110px; /* Adjust this value to match the combined height of navbarContainer and navContainer */
+  margin-top: 95px; /* Adjust this value to match the combined height of navbarContainer and navContainer */
 }
 
 .logo {
@@ -209,12 +209,18 @@
 }
 
 .toggleButton {
+  position: sticky;
+  left: -6px;
+  top: 0;
+  height: auto;
   background: none;
   border: none;
-  padding: 0;
+  padding: auto;
   cursor: pointer;
+  background-color: #282c34;
   color: white;
-  margin-right: 15px;
+  margin-left: 0;
+  z-index: 1002; /* Ensure it stays above other content */
 }
 
 .sidePanel {
@@ -222,7 +228,7 @@
   top: 0;
   left: 0;
   width: 250px;
-  height: 90vh;
+  height: 100vh;
   background-color: rgba(240, 240, 240, 1);
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
