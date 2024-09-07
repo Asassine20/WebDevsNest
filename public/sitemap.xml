@@ -264,5 +264,233 @@
               <changefreq>weekly</changefreq>
               <priority>0.8</priority>
             </url>
+
+            <url>
+              <loc>https://webdevsnest.com/csharp/csharp-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/php/php-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/nextjs/nextjs-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/django/django-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/amazon-web-services/amazon-web-services-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/redis/redis-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/typescript/typescript-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/golang/golang-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/vuejs/vuejs-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/flutter/flutter-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/mongodb/mongodb-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/azure/azure-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/angular/angular-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/powershell/powershell-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/ruby-on-rails/ruby-on-rails-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/jquery/jquery-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/net/net-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/flask/flask-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/arrays</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/linked-lists</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/stacks</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/queues</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/trees</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/graphs</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/heaps</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/data-structures/hash-tables</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/searching-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/greedy-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/recursion-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/sorting-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/dynamic-programming</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/backtracking-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/divide-and-conquer</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/graph-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/pattern-searching-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/algorithms/mathematical-algorithms</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/leetcode/88-merge-sorted-array-easy</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+
+            <url>
+              <loc>https://webdevsnest.com/leetcode/27-remove-element-easy</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
           
     </urlset>
