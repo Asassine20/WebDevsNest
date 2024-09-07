@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { GA_TRACKING_ID } from '../../lib/gtag';
 
 export default class MyDocument extends Document {
   render() {
@@ -7,19 +6,25 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet="UTF-8" />
-          <meta name="description" content="WebDevsNest - Your platform to learn and grow as a programmer. Master Python, Java, C++, and more." />
+          <meta
+            name="description"
+            content="WebDevsNest - Your platform to learn and grow as a programmer. Master Python, Java, C++, and more."
+          />
 
           {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           <script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}
+          />
+          <script
+            id="google-analytics"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GA_TRACKING_ID}', {
-                  page_path: window.location.pathname,
-                });
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}');
               `,
             }}
           />
@@ -27,10 +32,9 @@ export default class MyDocument extends Document {
           {/* Google AdSense Script */}
           <script
             async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5256730967472287"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
             crossOrigin="anonymous"
           ></script>
-          
         </Head>
         <body>
           <Main />

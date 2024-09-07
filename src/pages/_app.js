@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -69,7 +69,8 @@ function MyApp({ Component, pageProps }) {
         />
       )}
       <Component {...pageProps} />
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTAG_ID} />
+      <GoogleAnalytics gaId={process.env.GA_TRACKING_ID} />
       {shouldShowFooter && <Footer />}
       <SpeedInsights />
     </>
