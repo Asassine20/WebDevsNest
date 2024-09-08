@@ -15,14 +15,18 @@ export default function Portfolio() {
   if (!data || !data.portfolio) return <div>No portfolio found</div>;
 
   const portfolio = data.portfolio;
+
   // Ensure that workExperience and projects are valid arrays
   const workExperience = portfolio.WorkExperience ? JSON.parse(portfolio.WorkExperience) : [];
   const projects = portfolio.Projects ? JSON.parse(portfolio.Projects) : [];
 
-  // Handle base64 profile image properly
-  const profileImageSrc = portfolio.ProfileImage
-    ? `data:image/jpeg;base64,${portfolio.ProfileImage}` // or image/png if necessary
-    : null;
+  // Use the file path from the database for profile image
+  const profileImageSrc = portfolio.ProfileImage ? portfolio.ProfileImage : null;
+
+  // Helper function to format date
+  const formatDate = (date) => {
+    return date ? date : 'Present'; // Return "Present" if the date is null or undefined
+  };
 
   // Define carousel sections
   const sections = [
@@ -43,14 +47,19 @@ export default function Portfolio() {
     {
       title: 'Work Experience',
       content: workExperience.length > 0 ? (
-        workExperience.map((experience, index) => (
-          <div key={index} className={styles.workExperience}>
-            <p>Company: {experience.company}</p>
-            <p>Role: {experience.role}</p>
-            <p>Duration: {experience.duration}</p>
-            <p>Description: {experience.description}</p>
-          </div>
-        ))
+        workExperience.map((experience, index) => {
+          const startDate = experience.startDate ? experience.startDate : 'Unknown Start Date';
+          const endDate = experience.endDate ? experience.endDate : 'Present';
+
+          return (
+            <div key={index} className={styles.workExperience}>
+              <p>Company: {experience.company}</p>
+              <p>Role: {experience.role}</p>
+              <p>Duration: {startDate} - {endDate}</p>
+              <p>Description: {experience.description}</p>
+            </div>
+          );
+        })
       ) : (
         <p>No work experience added.</p>
       ),

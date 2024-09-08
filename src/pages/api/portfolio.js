@@ -1,4 +1,13 @@
+import formidable from 'formidable';
 import { query } from '../../../lib/db';
+import fs from 'fs';
+import path from 'path';
+
+export const config = {
+  api: {
+    bodyParser: false, // Disable default body parser
+  },
+};
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -30,56 +39,149 @@ export default async function handler(req, res) {
         }
         break;
       }
-
       case 'POST': {
-        const { name, university, profileImage, resume, workExperience, projects, userId } = req.body;
+        const form = formidable({
+          multiples: false, // Handle single file uploads
+          keepExtensions: true, // Keep the original file extension
+          maxFileSize: 2 * 1024 * 1024, // 2MB file size limit
+        });
 
-        if (!userId) {
-          return res.status(400).json({ error: 'UserId is required' });
+        // Define the directory where files will be saved
+        const uploadDir = path.join(process.cwd(), 'public/uploads');
+
+        // Ensure the upload directory exists
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-        const portfolioSlug = name ? name.replace(/\s+/g, '-').toLowerCase() + '-portfolio' : null;
+        form.uploadDir = uploadDir;
 
-        // Ensure undefined values are replaced with valid defaults
-        await query(
-          'INSERT INTO Portfolio (Name, University, ProfileImage, ResumeFile, WorkExperience, Projects, UserId, PortfolioSlug) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-          [
-            name || null,
-            university || null,
-            profileImage || null,
-            resume || null,
-            JSON.stringify(workExperience || []), // Save empty array as default
-            JSON.stringify(projects || []), // Save empty array as default
-            userId,
-            portfolioSlug
-          ]
-        );
-        res.status(201).json({ message: 'Portfolio created', portfolioSlug });
+        // Parse form data (including files)
+        form.parse(req, async (err, fields, files) => {
+          if (err) {
+            console.error('Error parsing form:', err);
+            return res.status(500).json({ error: 'Form parse error' });
+          }
+
+          // Check fields
+          const name = fields.name ? String(fields.name) : '';
+          const university = fields.university ? String(fields.university) : '';
+          const userId = fields.userId ? String(fields.userId) : '';
+          const workExperience = fields.workExperience || '[]';
+          const projects = fields.projects || '[]';
+
+          let profileImagePath = null;
+          let resumeFilePath = null;
+
+          // Handle profile image (if uploaded)
+          if (files.profileImage && files.profileImage[0] && files.profileImage[0].filepath) {
+            profileImagePath = `/uploads/${path.basename(files.profileImage[0].filepath)}`;
+          }
+
+          // Handle resume (if uploaded) and rename it to the original filename
+          if (files.resume && files.resume[0] && files.resume[0].filepath) {
+            const originalFilename = files.resume[0].originalFilename; // Get the original file name
+            const newFilePath = path.join(uploadDir, originalFilename); // Path with original name
+            fs.renameSync(files.resume[0].filepath, newFilePath); // Rename the file
+            resumeFilePath = `/uploads/${originalFilename}`; // Update file path
+          }
+
+          // Generate a slug for the portfolio based on the name
+          const portfolioSlug = name ? name.replace(/\s+/g, '-').toLowerCase() + '-portfolio' : `portfolio-${Date.now()}`;
+
+          // Insert the portfolio data, including file paths, into the MySQL database
+          const result = await query(
+            'INSERT INTO Portfolio (Name, University, ProfileImage, ResumeFile, WorkExperience, Projects, UserId, PortfolioSlug) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+              name || null,
+              university || null,
+              profileImagePath || null,
+              resumeFilePath || null,
+              workExperience,
+              projects,
+              userId,
+              portfolioSlug
+            ]
+          );
+
+          if (result.affectedRows > 0) {
+            res.status(201).json({ message: 'Portfolio created', portfolioSlug });
+          } else {
+            console.log('Failed to insert portfolio into the database.');
+            res.status(500).json({ message: 'Failed to create portfolio' });
+          }
+        });
+
         break;
       }
-
       case 'PUT': {
         const { id } = req.query;
-        const { name, university, profileImage, resume, workExperience, projects } = req.body;
 
         if (!id) {
           return res.status(400).json({ error: 'Portfolio ID is required' });
         }
 
-        // Ensure undefined values are replaced with valid defaults
-        await query(
-          'UPDATE Portfolio SET Name = ?, University = ?, ProfileImage = ?, ResumeFile = ?, WorkExperience = ?, Projects = ? WHERE Id = ?',
-          [
-            name || null,
-            university || null,
-            profileImage || null,
-            resume || null,
-            JSON.stringify(workExperience || []), // Save empty array as default
-            JSON.stringify(projects || []), // Save empty array as default
-            id
-          ]
-        );
-        res.status(200).json({ message: 'Portfolio updated' });
+        const form = formidable({
+          multiples: false, // Handle single file uploads
+          keepExtensions: true, // Keep the original file extension
+          maxFileSize: 2 * 1024 * 1024, // 2MB file size limit
+        });
+
+        // Define the directory where files will be saved
+        const uploadDir = path.join(process.cwd(), 'public/uploads');
+
+        // Ensure the upload directory exists
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        form.uploadDir = uploadDir;
+
+        // Parse form data (including files)
+        form.parse(req, async (err, fields, files) => {
+          if (err) {
+            console.error('Error parsing form:', err);
+            return res.status(500).json({ error: 'Form parse error' });
+          }
+
+          const name = fields.name ? String(fields.name) : '';
+          const university = fields.university ? String(fields.university) : '';
+          const workExperience = fields.workExperience || '[]';
+          const projects = fields.projects || '[]';
+
+          let profileImagePath = fields.profileImage || null; // Existing path or null
+          let resumeFilePath = fields.resume || null; // Existing path or null
+
+          // Handle new profile image (if uploaded)
+          if (files.profileImage && files.profileImage[0] && files.profileImage[0].filepath) {
+            profileImagePath = `/uploads/${path.basename(files.profileImage[0].filepath)}`;
+          }
+
+          // Handle new resume (if uploaded) and rename it to the original filename
+          if (files.resume && files.resume[0] && files.resume[0].filepath) {
+            const originalFilename = files.resume[0].originalFilename; // Get the original file name
+            const newFilePath = path.join(uploadDir, originalFilename); // Path with original name
+            fs.renameSync(files.resume[0].filepath, newFilePath); // Rename the file
+            resumeFilePath = `/uploads/${originalFilename}`; // Update file path
+          }
+
+          // Update the portfolio data, including file paths, in the MySQL database
+          await query(
+            'UPDATE Portfolio SET Name = ?, University = ?, ProfileImage = ?, ResumeFile = ?, WorkExperience = ?, Projects = ? WHERE Id = ?',
+            [
+              name || null,
+              university || null,
+              profileImagePath || null,
+              resumeFilePath || null,
+              JSON.stringify(workExperience || []), // Save empty array as default
+              JSON.stringify(projects || []), // Save empty array as default
+              id
+            ]
+          );
+
+          res.status(200).json({ message: 'Portfolio updated' });
+        });
+
         break;
       }
 

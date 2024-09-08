@@ -20,18 +20,18 @@ export default function EditPortfolioItem() {
 
   useEffect(() => {
     if (portfolioItem) {
-      setName(portfolioItem.portfolio.Name || '');
-      setUniversity(portfolioItem.portfolio.University || '');
-      setProfileImage(portfolioItem.portfolio.ProfileImage || '');
-      setResume(portfolioItem.portfolio.ResumeFile || '');
+      setName(portfolioItem?.portfolio?.Name || '');
+      setUniversity(portfolioItem?.portfolio?.University || '');
+      setProfileImage(portfolioItem?.portfolio?.ProfileImage || null);
+      setResume(portfolioItem?.portfolio?.ResumeFile || null);
 
-      const parsedWorkExperience = portfolioItem.portfolio.WorkExperience
-        ? JSON.parse(portfolioItem.portfolio.WorkExperience)
+      const parsedWorkExperience = portfolioItem?.portfolio?.WorkExperience
+        ? JSON.parse(portfolioItem?.portfolio?.WorkExperience)
         : [];
       setWorkExperience(parsedWorkExperience);
 
-      const parsedProjects = portfolioItem.portfolio.Projects
-        ? JSON.parse(portfolioItem.portfolio.Projects)
+      const parsedProjects = portfolioItem?.portfolio?.Projects
+        ? JSON.parse(portfolioItem?.portfolio?.Projects)
         : [];
       setProjects(parsedProjects);
     }
@@ -39,13 +39,13 @@ export default function EditPortfolioItem() {
 
   const handleWorkExperienceChange = (index, field, value) => {
     const updatedWorkExperience = [...workExperience];
-    updatedWorkExperience[index][field] = value;
+    updatedWorkExperience[index][field] = value || ''; // Handle empty or null values
     setWorkExperience(updatedWorkExperience);
   };
 
   const handleProjectChange = (index, field, value) => {
     const updatedProjects = [...projects];
-    updatedProjects[index][field] = value;
+    updatedProjects[index][field] = value || ''; // Handle empty or null values
     setProjects(updatedProjects);
   };
 
@@ -87,10 +87,10 @@ export default function EditPortfolioItem() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('university', university);
-    formData.append('profileImage', profileImage);
-    formData.append('resume', resume); // Append resume file if changed
+    formData.append('name', name || ''); // Ensure name is never null
+    formData.append('university', university || ''); // Ensure university is never null
+    formData.append('profileImage', profileImage || ''); // Append profile image
+    formData.append('resume', resume || ''); // Append resume file if changed
     formData.append('workExperience', JSON.stringify(workExperience));
     formData.append('projects', JSON.stringify(projects));
 
@@ -121,21 +121,27 @@ export default function EditPortfolioItem() {
         <input
           type="text"
           placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={name || ''}
+          onChange={(e) => setName(e.target.value || '')}
           className={styles.input}
         />
         <input
           type="text"
           placeholder="University"
-          value={university}
-          onChange={(e) => setUniversity(e.target.value)}
+          value={university || ''}
+          onChange={(e) => setUniversity(e.target.value || '')}
           className={styles.input}
         />
 
         <h4>Profile Image</h4>
         <input type="file" accept="image/*" onChange={handleProfileImageChange} className={styles.input} />
-        {profileImage && <img src={`data:image/png;base64,${profileImage}`} alt="Profile Preview" className={styles.imagePreview} />}
+        {profileImage && (
+          <img
+            src={profileImage.startsWith('data:image') ? profileImage : `data:image/png;base64,${profileImage}`}
+            alt="Profile Preview"
+            className={styles.imagePreview}
+          />
+        )}
 
         {/* Show current resume file */}
         {resume && (
@@ -160,37 +166,36 @@ export default function EditPortfolioItem() {
               <input
                 type="text"
                 placeholder="Company"
-                value={experience.company}
+                value={experience.company || ''}
                 onChange={(e) => handleWorkExperienceChange(index, 'company', e.target.value)}
                 className={styles.input}
               />
               <input
                 type="text"
                 placeholder="Role"
-                value={experience.role}
+                value={experience.role || ''}
                 onChange={(e) => handleWorkExperienceChange(index, 'role', e.target.value)}
                 className={styles.input}
               />
               <input
                 type="text"
                 placeholder="Duration"
-                value={experience.duration}
+                value={experience.duration || ''}
                 onChange={(e) => handleWorkExperienceChange(index, 'duration', e.target.value)}
                 className={styles.input}
               />
               <textarea
                 placeholder="Description"
-                value={experience.description}
+                value={experience.description || ''}
                 maxLength="1000"
                 onChange={(e) => handleWorkExperienceChange(index, 'description', e.target.value)}
                 className={styles.input}
               />
-              <div>{1000 - experience.description.length} characters remaining</div>
+              <div>{1000 - (experience.description ? experience.description.length : 0)} characters remaining</div>
               <div className={styles.buttons}>
                 <button type="button" onClick={() => handleDeleteWorkExperience(index)} className={styles.deleteButton}>
                   <FaTrash />
                 </button>
-                {/* Add button next to delete for new work experience entry */}
                 {index === workExperience.length - 1 && (
                   <button type="button" onClick={handleAddWorkExperience} className={styles.addButton}>
                     <FaPlus />
@@ -215,37 +220,36 @@ export default function EditPortfolioItem() {
               <input
                 type="text"
                 placeholder="Project Name"
-                value={project.name}
+                value={project.name || ''}
                 onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
                 className={styles.input}
               />
               <input
                 type="text"
                 placeholder="Tech Stack"
-                value={project.techStack}
+                value={project.techStack || ''}
                 onChange={(e) => handleProjectChange(index, 'techStack', e.target.value)}
                 className={styles.input}
               />
               <input
                 type="url"
                 placeholder="Demo Link"
-                value={project.demoLink}
+                value={project.demoLink || ''}
                 onChange={(e) => handleProjectChange(index, 'demoLink', e.target.value)}
                 className={styles.input}
               />
               <textarea
                 placeholder="Description"
-                value={project.description}
+                value={project.description || ''}
                 maxLength="1000"
                 onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
                 className={styles.input}
               />
-              <div>{1000 - project.description.length} characters remaining</div>
+              <div>{1000 - (project.description ? project.description.length : 0)} characters remaining</div>
               <div className={styles.buttons}>
                 <button type="button" onClick={() => handleDeleteProject(index)} className={styles.deleteButton}>
-                  <FaTrashAlt />
+                  <FaTrash />
                 </button>
-                {/* Add button next to delete for new project entry */}
                 {index === projects.length - 1 && (
                   <button type="button" onClick={handleAddProject} className={styles.addButton}>
                     <FaPlus />

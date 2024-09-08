@@ -3,7 +3,10 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import styles from '../../styles/NewPortfolioItem.module.css';
 import fetcher from '../../../lib/fetcher';
-import { FaTrash, FaPlus } from 'react-icons/fa'; // Import icons
+import { FaTrash, FaPlus } from 'react-icons/fa';
+import DatePicker from 'react-datepicker'; // Import DatePicker component
+import 'react-datepicker/dist/react-datepicker.css'; // Import the CSS for DatePicker
+import moment from 'moment'; // Import moment.js for date formatting
 
 export default function NewPortfolioItem() {
   const [name, setName] = useState('');
@@ -11,7 +14,10 @@ export default function NewPortfolioItem() {
   const [profileImage, setProfileImage] = useState(null);
   const [resume, setResume] = useState(null);
 
-  const [workExperience, setWorkExperience] = useState([{ company: '', role: '', duration: '', description: '' }]);
+  const [workExperience, setWorkExperience] = useState([
+    { company: '', role: '', startDate: null, endDate: null, description: '' }
+  ]);
+
   const [projects, setProjects] = useState([{ name: '', techStack: '', demoLink: '', description: '' }]);
 
   const router = useRouter();
@@ -40,23 +46,15 @@ export default function NewPortfolioItem() {
   };
 
   const handleProfileImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result.split(',')[1]);
-      };
-      reader.readAsDataURL(file);
-    }
+    setProfileImage(e.target.files[0]);
   };
 
   const handleResumeChange = (e) => {
-    const file = e.target.files[0];
-    setResume(file);
+    setResume(e.target.files[0]);
   };
 
   const handleAddWorkExperience = () => {
-    setWorkExperience([...workExperience, { company: '', role: '', duration: '', description: '' }]);
+    setWorkExperience([...workExperience, { company: '', role: '', startDate: null, endDate: null, description: '' }]);
   };
 
   const handleAddProject = () => {
@@ -68,18 +66,25 @@ export default function NewPortfolioItem() {
 
     if (!user) return;
 
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('university', university);
+    formData.append('userId', user.Id);
+
+    if (profileImage) {
+      formData.append('profileImage', profileImage);
+    }
+
+    if (resume) {
+      formData.append('resume', resume);
+    }
+
+    formData.append('workExperience', JSON.stringify(workExperience));
+    formData.append('projects', JSON.stringify(projects));
+
     const response = await fetch('/api/portfolio', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        university,
-        profileImage,
-        resume,
-        workExperience,
-        projects,
-        userId: user.Id,
-      }),
+      body: formData,
     });
 
     if (response.ok) {
@@ -110,7 +115,7 @@ export default function NewPortfolioItem() {
 
         <h4>Profile Image</h4>
         <input type="file" accept="image/*" onChange={handleProfileImageChange} className={styles.input} />
-        {profileImage && <img src={`data:image/png;base64,${profileImage}`} alt="Profile Preview" className={styles.imagePreview} />}
+        {profileImage && <img src={URL.createObjectURL(profileImage)} alt="Profile Preview" className={styles.imagePreview} />}
 
         <h4>Resume</h4>
         <input type="file" accept=".pdf" onChange={handleResumeChange} className={styles.input} />
@@ -140,13 +145,28 @@ export default function NewPortfolioItem() {
                 onChange={(e) => handleWorkExperienceChange(index, 'role', e.target.value)}
                 className={styles.input}
               />
-              <input
-                type="text"
-                placeholder="Duration"
-                value={experience.duration}
-                onChange={(e) => handleWorkExperienceChange(index, 'duration', e.target.value)}
-                className={styles.input}
-              />
+              <div className={styles.datePickerContainer}>
+                <label>Start Date</label>
+                <DatePicker
+                  selected={experience.startDate ? new Date(experience.startDate) : null}
+                  onChange={(date) => handleWorkExperienceChange(index, 'startDate', moment(date).format('YYYY-MM'))}
+                  dateFormat="MM/yyyy"
+                  showMonthYearPicker
+                  className={styles.input}
+                  placeholderText="Select Start Date"
+                />
+              </div>
+              <div className={styles.datePickerContainer}>
+                <label>End Date</label>
+                <DatePicker
+                  selected={experience.endDate ? new Date(experience.endDate) : null}
+                  onChange={(date) => handleWorkExperienceChange(index, 'endDate', moment(date).format('YYYY-MM'))}
+                  dateFormat="MM/yyyy"
+                  showMonthYearPicker
+                  className={styles.input}
+                  placeholderText="Select End Date"
+                />
+              </div>
               <textarea
                 placeholder="Description"
                 value={experience.description}
