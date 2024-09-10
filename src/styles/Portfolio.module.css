@@ -112,3 +112,9 @@
 .portfolioLink:hover {
   text-decoration: underline;
 }
+
+.boldLabel {
+  font-weight: bold;
+  margin-right: 5px; /* Optional: adds spacing between the label and the content */
+}
+

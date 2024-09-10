@@ -4,6 +4,9 @@ import useSWR from 'swr';
 import styles from '../../../styles/NewPortfolioItem.module.css';
 import fetcher from '../../../../lib/fetcher';
 import { FaTrash, FaPlus } from 'react-icons/fa'; // Import icons
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 export default function EditPortfolioItem() {
   const router = useRouter();
@@ -14,38 +17,51 @@ export default function EditPortfolioItem() {
   const [university, setUniversity] = useState('');
   const [profileImage, setProfileImage] = useState(null);
   const [resume, setResume] = useState(null);
-
+  const [githubLink, setGithubLink] = useState('');
+  const [linkedinLink, setLinkedinLink] = useState('');
   const [workExperience, setWorkExperience] = useState([]);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    if (portfolioItem) {
-      setName(portfolioItem?.portfolio?.Name || '');
-      setUniversity(portfolioItem?.portfolio?.University || '');
-      setProfileImage(portfolioItem?.portfolio?.ProfileImage || null);
-      setResume(portfolioItem?.portfolio?.ResumeFile || null);
-
-      const parsedWorkExperience = portfolioItem?.portfolio?.WorkExperience
-        ? JSON.parse(portfolioItem?.portfolio?.WorkExperience)
-        : [];
-      setWorkExperience(parsedWorkExperience);
-
-      const parsedProjects = portfolioItem?.portfolio?.Projects
-        ? JSON.parse(portfolioItem?.portfolio?.Projects)
-        : [];
-      setProjects(parsedProjects);
+    if (portfolioItem && portfolioItem.portfolio) {
+      console.log('Portfolio Item:', portfolioItem); // Log portfolioItem for debugging
+  
+      setName(portfolioItem.portfolio.Name || '');
+      setUniversity(portfolioItem.portfolio.University || '');
+      setProfileImage(portfolioItem.portfolio.ProfileImage || null);
+      setResume(portfolioItem.portfolio.ResumeFile || null);
+      setGithubLink(portfolioItem.portfolio.GithubLink || '');
+      setLinkedinLink(portfolioItem.portfolio.LinkedinLink || '');
+  
+      // Parse work experience and projects
+      try {
+        const parsedWorkExperience = portfolioItem.portfolio.WorkExperience
+          ? JSON.parse(JSON.parse(portfolioItem.portfolio.WorkExperience)) // Double parse to handle the nested string
+          : [];
+        console.log('Parsed Work Experience:', parsedWorkExperience); // Log parsed work experience
+        setWorkExperience(parsedWorkExperience);
+  
+        const parsedProjects = portfolioItem.portfolio.Projects
+          ? JSON.parse(JSON.parse(portfolioItem.portfolio.Projects)) // Double parse to handle the nested string
+          : [];
+        console.log('Parsed Projects:', parsedProjects); // Log parsed projects
+        setProjects(parsedProjects);
+      } catch (error) {
+        console.error('Error parsing work experience or projects:', error);
+      }
     }
   }, [portfolioItem]);
+  
 
   const handleWorkExperienceChange = (index, field, value) => {
     const updatedWorkExperience = [...workExperience];
-    updatedWorkExperience[index][field] = value || ''; // Handle empty or null values
+    updatedWorkExperience[index][field] = value;
     setWorkExperience(updatedWorkExperience);
   };
 
   const handleProjectChange = (index, field, value) => {
     const updatedProjects = [...projects];
-    updatedProjects[index][field] = value || ''; // Handle empty or null values
+    updatedProjects[index][field] = value;
     setProjects(updatedProjects);
   };
 
@@ -60,23 +76,15 @@ export default function EditPortfolioItem() {
   };
 
   const handleProfileImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result.split(',')[1]);
-      };
-      reader.readAsDataURL(file);
-    }
+    setProfileImage(e.target.files[0]);
   };
 
   const handleResumeChange = (e) => {
-    const file = e.target.files[0];
-    setResume(file); // Save the resume file
+    setResume(e.target.files[0]);
   };
 
   const handleAddWorkExperience = () => {
-    setWorkExperience([...workExperience, { company: '', role: '', duration: '', description: '' }]);
+    setWorkExperience([...workExperience, { company: '', role: '', startDate: null, endDate: null, description: '' }]);
   };
 
   const handleAddProject = () => {
@@ -85,26 +93,42 @@ export default function EditPortfolioItem() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
-    formData.append('name', name || ''); // Ensure name is never null
-    formData.append('university', university || ''); // Ensure university is never null
-    formData.append('profileImage', profileImage || ''); // Append profile image
-    formData.append('resume', resume || ''); // Append resume file if changed
+    formData.append('name', name || '');
+    formData.append('university', university || '');
+    formData.append('githubLink', githubLink || ''); // Add GitHub link
+    formData.append('linkedinLink', linkedinLink || ''); // Add LinkedIn link
+  
+    // Check if the profileImage is a new file or an existing one
+    if (profileImage && typeof profileImage === 'object') {
+      formData.append('profileImage', profileImage);
+    } else {
+      formData.append('profileImage', portfolioItem.portfolio.ProfileImage || ''); // Use existing image if not changed
+    }
+  
+    // Check if the resume is a new file or an existing one
+    if (resume && typeof resume === 'object') {
+      formData.append('resume', resume);
+    } else {
+      formData.append('resume', portfolioItem.portfolio.ResumeFile || ''); // Use existing resume if not changed
+    }
+  
+    // Append work experience and projects
     formData.append('workExperience', JSON.stringify(workExperience));
     formData.append('projects', JSON.stringify(projects));
-
+  
     const response = await fetch(`/api/portfolio?id=${id}`, {
       method: 'PUT',
       body: formData, // Use FormData for handling files
     });
-
+  
     if (response.ok) {
       router.push('/profile/dashboard');
     } else {
       console.error('Failed to update portfolio');
     }
-  };
+  };  
 
   if (error) {
     return <div>Error loading portfolio data</div>;
@@ -113,6 +137,8 @@ export default function EditPortfolioItem() {
   if (!portfolioItem) {
     return <div>Loading...</div>;
   }
+
+  const isFile = profileImage instanceof File;
 
   return (
     <div className={styles.container}>
@@ -132,18 +158,31 @@ export default function EditPortfolioItem() {
           onChange={(e) => setUniversity(e.target.value || '')}
           className={styles.input}
         />
+        <input
+          type="url"
+          placeholder="GitHub Link"
+          value={githubLink || ''}
+          onChange={(e) => setGithubLink(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="url"
+          placeholder="LinkedIn Link"
+          value={linkedinLink || ''}
+          onChange={(e) => setLinkedinLink(e.target.value)}
+          className={styles.input}
+        />
 
         <h4>Profile Image</h4>
         <input type="file" accept="image/*" onChange={handleProfileImageChange} className={styles.input} />
         {profileImage && (
           <img
-            src={profileImage.startsWith('data:image') ? profileImage : `data:image/png;base64,${profileImage}`}
+            src={isFile ? URL.createObjectURL(profileImage) : profileImage}
             alt="Profile Preview"
             className={styles.imagePreview}
           />
         )}
 
-        {/* Show current resume file */}
         {resume && (
           <a href={resume} download className={styles.resumeLink}>
             Download Current Resume
@@ -177,13 +216,28 @@ export default function EditPortfolioItem() {
                 onChange={(e) => handleWorkExperienceChange(index, 'role', e.target.value)}
                 className={styles.input}
               />
-              <input
-                type="text"
-                placeholder="Duration"
-                value={experience.duration || ''}
-                onChange={(e) => handleWorkExperienceChange(index, 'duration', e.target.value)}
-                className={styles.input}
-              />
+              <div className={styles.datePickerContainer}>
+                <label>Start Date</label>
+                <DatePicker
+                  selected={experience.startDate ? new Date(experience.startDate) : null}
+                  onChange={(date) => handleWorkExperienceChange(index, 'startDate', moment(date).format('YYYY-MM'))}
+                  dateFormat="MM/yyyy"
+                  showMonthYearPicker
+                  className={styles.input}
+                  placeholderText="Select Start Date"
+                />
+              </div>
+              <div className={styles.datePickerContainer}>
+                <label>End Date</label>
+                <DatePicker
+                  selected={experience.endDate ? new Date(experience.endDate) : null}
+                  onChange={(date) => handleWorkExperienceChange(index, 'endDate', moment(date).format('YYYY-MM'))}
+                  dateFormat="MM/yyyy"
+                  showMonthYearPicker
+                  className={styles.input}
+                  placeholderText="Select End Date"
+                />
+              </div>
               <textarea
                 placeholder="Description"
                 value={experience.description || ''}

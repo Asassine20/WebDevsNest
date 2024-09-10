@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Import icons
+import { FaGithub, FaLinkedin } from 'react-icons/fa'; 
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import styles from '../../styles/Portfolio.module.css';
@@ -17,7 +17,9 @@ export default function Portfolio() {
   if (!data || !data.portfolio) return <div>No portfolio found</div>;
 
   const portfolio = data.portfolio;
+  console.log('Portfolio:', portfolio);
 
+  // Parsing WorkExperience correctly
   let workExperience = [];
   if (portfolio.WorkExperience) {
     try {
@@ -27,7 +29,17 @@ export default function Portfolio() {
     }
   }
 
-  const projects = portfolio.Projects ? JSON.parse(portfolio.Projects) : [];
+  // Fix for parsing projects
+  let projects = [];
+  if (portfolio.Projects) {
+    try {
+      // Double parse to handle the stringified JSON stored in the database
+      projects = JSON.parse(JSON.parse(portfolio.Projects));
+      console.log('Parsed Projects:', projects); // Console log the parsed projects
+    } catch (e) {
+      console.error('Error parsing projects:', e);
+    }
+  }
 
   const profileImageSrc = portfolio.ProfileImage ? portfolio.ProfileImage : null;
 
@@ -45,7 +57,7 @@ export default function Portfolio() {
 
   const sections = [
     {
-      title: `${portfolio.Name}`, // Title is already showing the portfolio name
+      title: `${portfolio.Name}`, 
       content: (
         <>
           {profileImageSrc && <img src={profileImageSrc} alt="Profile" className={styles.imagePreview} />}
@@ -54,7 +66,7 @@ export default function Portfolio() {
               Download Resume
             </a>
           )}
-          <p>University: {portfolio.University}</p>
+          <p><span className={styles.boldLabel}>University:</span>{portfolio.University}</p>
           <div className={styles.socialLinks}>
             {portfolio.GithubLink && (
               <a href={portfolio.GithubLink} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
@@ -80,10 +92,10 @@ export default function Portfolio() {
 
           return (
             <div key={index} className={styles.workExperience}>
-              <p>Company: {experience.company}</p>
-              <p>Role: {experience.role}</p>
-              <p>Duration: {startDate} - {endDate} {durationText && <span className={styles.durationText}>({durationText})</span>}</p>
-              <p>Description: {experience.description}</p>
+              <p><span className={styles.boldLabel}>Company:</span> {experience.company}</p>
+              <p><span className={styles.boldLabel}>Role:</span> {experience.role}</p>
+              <p><span className={styles.boldLabel}>Duration:</span> {startDate} - {endDate} {durationText && <span className={styles.durationText}>({durationText})</span>}</p>
+              <p><span className={styles.boldLabel}>Description:</span> {experience.description}</p>
             </div>
           );
         })
@@ -96,12 +108,12 @@ export default function Portfolio() {
       content: projects.length > 0 ? (
         projects.map((project, index) => (
           <div key={index} className={styles.project}>
-            <p>Project Name: {project.name}</p>
-            <p>Tech Stack: {project.techStack}</p>
+            <p><span className={styles.boldLabel}>Project Name:</span> {project.name}</p>
+            <p><span className={styles.boldLabel}>Tech Stack:</span> {project.techStack}</p>
             <a href={project.demoLink} className={styles.portfolioLink}>
-              Demo Link
+            <span className={styles.boldLabel}>Demo Link</span>
             </a>
-            <p>Description: {project.description}</p>
+            <p><span className={styles.boldLabel}>Description:</span> {project.description}</p>
           </div>
         ))
       ) : (
