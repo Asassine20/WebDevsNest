@@ -3,19 +3,19 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 800px; /* Set the carousel container width to 800px */
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
 }
 
-
 .carouselItem {
   width: 90%;
   min-height: 400px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center; /* Center content horizontally */
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: center;
   width: 5%;
-  margin: 0 20px; /* Add more margin between the buttons and the container */
+  margin: 0 20px;
 }
 
 .navTitle {
@@ -65,8 +65,8 @@
 }
 
 .resumeLink {
-  display: inline-block;
-  margin: 20px 0;
+  display: block; /* Ensure it takes up the full width and stacks below the image */
+  margin-top: 20px;
   padding: 10px 15px;
   background-color: #5fe1d5;
   color: black;
@@ -78,6 +78,22 @@
   background-color: #64eddf;
 }
 
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.iconLink {
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.iconLink:hover {
+  color: #0077b5; /* LinkedIn color */
+}
+
 .workExperience, .project {
   background-color: #f9f9f9;
   margin: 10px 0;
@@ -85,7 +101,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
-  width: 100%; /* Ensure full width within the carousel */
+  width: 100%;
 }
 
 .portfolioLink {

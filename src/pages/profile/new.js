@@ -4,15 +4,17 @@ import useSWR from 'swr';
 import styles from '../../styles/NewPortfolioItem.module.css';
 import fetcher from '../../../lib/fetcher';
 import { FaTrash, FaPlus } from 'react-icons/fa';
-import DatePicker from 'react-datepicker'; // Import DatePicker component
-import 'react-datepicker/dist/react-datepicker.css'; // Import the CSS for DatePicker
-import moment from 'moment'; // Import moment.js for date formatting
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 export default function NewPortfolioItem() {
   const [name, setName] = useState('');
   const [university, setUniversity] = useState('');
   const [profileImage, setProfileImage] = useState(null);
   const [resume, setResume] = useState(null);
+  const [githubLink, setGithubLink] = useState('');  // New state for GitHub link
+  const [linkedinLink, setLinkedinLink] = useState('');  // New state for LinkedIn link
 
   const [workExperience, setWorkExperience] = useState([
     { company: '', role: '', startDate: null, endDate: null, description: '' }
@@ -79,6 +81,8 @@ export default function NewPortfolioItem() {
       formData.append('resume', resume);
     }
 
+    formData.append('githubLink', githubLink);  // Append GitHub link
+    formData.append('linkedinLink', linkedinLink);  // Append LinkedIn link
     formData.append('workExperience', JSON.stringify(workExperience));
     formData.append('projects', JSON.stringify(projects));
 
@@ -110,6 +114,20 @@ export default function NewPortfolioItem() {
           placeholder="University"
           value={university}
           onChange={(e) => setUniversity(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="url"
+          placeholder="GitHub Link"
+          value={githubLink}
+          onChange={(e) => setGithubLink(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="url"
+          placeholder="LinkedIn Link"
+          value={linkedinLink}
+          onChange={(e) => setLinkedinLink(e.target.value)}
           className={styles.input}
         />
 

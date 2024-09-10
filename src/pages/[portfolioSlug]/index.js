@@ -1,46 +1,72 @@
+import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Import icons
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import styles from '../../styles/Portfolio.module.css';
 import fetcher from '../../../lib/fetcher';
 import { useState } from 'react';
+import moment from 'moment';
 
 export default function Portfolio() {
   const router = useRouter();
   const { portfolioSlug } = router.query;
   const { data, error } = useSWR(portfolioSlug ? `/api/portfolio?portfolioSlug=${portfolioSlug}` : null, fetcher);
 
-  const [currentIndex, setCurrentIndex] = useState(0); // For carousel navigation
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   if (error) return <div>Error loading portfolio</div>;
   if (!data || !data.portfolio) return <div>No portfolio found</div>;
 
   const portfolio = data.portfolio;
 
-  // Ensure that workExperience and projects are valid arrays
-  const workExperience = portfolio.WorkExperience ? JSON.parse(portfolio.WorkExperience) : [];
+  let workExperience = [];
+  if (portfolio.WorkExperience) {
+    try {
+      workExperience = JSON.parse(JSON.parse(portfolio.WorkExperience));
+    } catch (e) {
+      console.error('Error parsing work experience:', e);
+    }
+  }
+
   const projects = portfolio.Projects ? JSON.parse(portfolio.Projects) : [];
 
-  // Use the file path from the database for profile image
   const profileImageSrc = portfolio.ProfileImage ? portfolio.ProfileImage : null;
 
-  // Helper function to format date
   const formatDate = (date) => {
-    return date ? date : 'Present'; // Return "Present" if the date is null or undefined
+    if (!date) return null;
+    return moment(date, 'YYYY-MM').format('MM/YYYY');
   };
 
-  // Define carousel sections
+  const calculateDuration = (startDate, endDate) => {
+    const start = moment(startDate, 'YYYY-MM');
+    const end = endDate ? moment(endDate, 'YYYY-MM') : moment();
+    const duration = end.diff(start, 'months');
+    return `${duration} months`;
+  };
+
   const sections = [
     {
-      title: `${portfolio.Name}`,
+      title: `${portfolio.Name}`, // Title is already showing the portfolio name
       content: (
         <>
-          <p>University: {portfolio.University}</p>
+          {profileImageSrc && <img src={profileImageSrc} alt="Profile" className={styles.imagePreview} />}
           {portfolio.ResumeFile && (
             <a href={portfolio.ResumeFile} download className={styles.resumeLink}>
               Download Resume
             </a>
           )}
-          {profileImageSrc && <img src={profileImageSrc} alt="Profile" className={styles.imagePreview} />}
+          <p>University: {portfolio.University}</p>
+          <div className={styles.socialLinks}>
+            {portfolio.GithubLink && (
+              <a href={portfolio.GithubLink} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+                <FaGithub size={30} />
+              </a>
+            )}
+            {portfolio.LinkedinLink && (
+              <a href={portfolio.LinkedinLink} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+                <FaLinkedin size={30} />
+              </a>
+            )}
+          </div>
         </>
       ),
     },
@@ -48,14 +74,15 @@ export default function Portfolio() {
       title: 'Work Experience',
       content: workExperience.length > 0 ? (
         workExperience.map((experience, index) => {
-          const startDate = experience.startDate ? experience.startDate : 'Unknown Start Date';
-          const endDate = experience.endDate ? experience.endDate : 'Present';
+          const startDate = formatDate(experience.startDate) || 'Unknown Start Date';
+          const endDate = formatDate(experience.endDate) || 'Present';
+          const durationText = experience.startDate && experience.endDate ? calculateDuration(experience.startDate, experience.endDate) : '';
 
           return (
             <div key={index} className={styles.workExperience}>
               <p>Company: {experience.company}</p>
               <p>Role: {experience.role}</p>
-              <p>Duration: {startDate} - {endDate}</p>
+              <p>Duration: {startDate} - {endDate} {durationText && <span className={styles.durationText}>({durationText})</span>}</p>
               <p>Description: {experience.description}</p>
             </div>
           );
@@ -83,7 +110,6 @@ export default function Portfolio() {
     },
   ];
 
-  // Helper functions for carousel navigation
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % sections.length);
   };
@@ -92,7 +118,6 @@ export default function Portfolio() {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + sections.length) % sections.length);
   };
 
-  // Get the titles for the next and previous sections
   const nextTitle = sections[(currentIndex + 1) % sections.length].title;
   const prevTitle = sections[(currentIndex - 1 + sections.length) % sections.length].title;
 

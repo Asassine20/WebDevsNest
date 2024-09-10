@@ -41,31 +41,28 @@ export default async function handler(req, res) {
       }
       case 'POST': {
         const form = formidable({
-          multiples: false, // Handle single file uploads
-          keepExtensions: true, // Keep the original file extension
+          multiples: false,
+          keepExtensions: true,
           maxFileSize: 2 * 1024 * 1024, // 2MB file size limit
         });
 
-        // Define the directory where files will be saved
         const uploadDir = path.join(process.cwd(), 'public/uploads');
-
-        // Ensure the upload directory exists
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
 
         form.uploadDir = uploadDir;
 
-        // Parse form data (including files)
         form.parse(req, async (err, fields, files) => {
           if (err) {
             console.error('Error parsing form:', err);
             return res.status(500).json({ error: 'Form parse error' });
           }
 
-          // Check fields
           const name = fields.name ? String(fields.name) : '';
           const university = fields.university ? String(fields.university) : '';
+          const githubLink = fields.githubLink ? String(fields.githubLink) : '';  // Handle GitHub link
+          const linkedinLink = fields.linkedinLink ? String(fields.linkedinLink) : '';  // Handle LinkedIn link
           const userId = fields.userId ? String(fields.userId) : '';
           const workExperience = fields.workExperience || '[]';
           const projects = fields.projects || '[]';
@@ -73,41 +70,40 @@ export default async function handler(req, res) {
           let profileImagePath = null;
           let resumeFilePath = null;
 
-          // Handle profile image (if uploaded)
           if (files.profileImage && files.profileImage[0] && files.profileImage[0].filepath) {
             profileImagePath = `/uploads/${path.basename(files.profileImage[0].filepath)}`;
           }
 
-          // Handle resume (if uploaded) and rename it to the original filename
           if (files.resume && files.resume[0] && files.resume[0].filepath) {
-            const originalFilename = files.resume[0].originalFilename; // Get the original file name
-            const newFilePath = path.join(uploadDir, originalFilename); // Path with original name
-            fs.renameSync(files.resume[0].filepath, newFilePath); // Rename the file
-            resumeFilePath = `/uploads/${originalFilename}`; // Update file path
+            const originalFilename = files.resume[0].originalFilename;
+            const newFilePath = path.join(uploadDir, originalFilename);
+            fs.renameSync(files.resume[0].filepath, newFilePath);
+            resumeFilePath = `/uploads/${originalFilename}`;
           }
 
-          // Generate a slug for the portfolio based on the name
-          const portfolioSlug = name ? name.replace(/\s+/g, '-').toLowerCase() + '-portfolio' : `portfolio-${Date.now()}`;
+          const portfolioSlug = name
+            ? name.replace(/\s+/g, '-').toLowerCase() + '-portfolio'
+            : `portfolio-${Date.now()}`;
 
-          // Insert the portfolio data, including file paths, into the MySQL database
           const result = await query(
-            'INSERT INTO Portfolio (Name, University, ProfileImage, ResumeFile, WorkExperience, Projects, UserId, PortfolioSlug) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO Portfolio (Name, University, ProfileImage, ResumeFile, GithubLink, LinkedinLink, WorkExperience, Projects, UserId, PortfolioSlug) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
               name || null,
               university || null,
               profileImagePath || null,
               resumeFilePath || null,
+              githubLink || null,
+              linkedinLink || null,
               workExperience,
               projects,
               userId,
-              portfolioSlug
+              portfolioSlug,
             ]
           );
 
           if (result.affectedRows > 0) {
             res.status(201).json({ message: 'Portfolio created', portfolioSlug });
           } else {
-            console.log('Failed to insert portfolio into the database.');
             res.status(500).json({ message: 'Failed to create portfolio' });
           }
         });
