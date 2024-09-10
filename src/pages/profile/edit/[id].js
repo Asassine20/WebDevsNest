@@ -97,21 +97,21 @@ export default function EditPortfolioItem() {
     const formData = new FormData();
     formData.append('name', name || '');
     formData.append('university', university || '');
-    formData.append('githubLink', githubLink || ''); // Add GitHub link
-    formData.append('linkedinLink', linkedinLink || ''); // Add LinkedIn link
+    formData.append('githubLink', githubLink || '');
+    formData.append('linkedinLink', linkedinLink || '');
   
-    // Check if the profileImage is a new file or an existing one
+    // Include profile image only if changed
     if (profileImage && typeof profileImage === 'object') {
       formData.append('profileImage', profileImage);
     } else {
-      formData.append('profileImage', portfolioItem.portfolio.ProfileImage || ''); // Use existing image if not changed
+      formData.append('existingProfileImage', profileImage || '');
     }
   
-    // Check if the resume is a new file or an existing one
+    // Include resume only if changed
     if (resume && typeof resume === 'object') {
       formData.append('resume', resume);
     } else {
-      formData.append('resume', portfolioItem.portfolio.ResumeFile || ''); // Use existing resume if not changed
+      formData.append('existingResume', resume || '');
     }
   
     // Append work experience and projects
@@ -120,7 +120,7 @@ export default function EditPortfolioItem() {
   
     const response = await fetch(`/api/portfolio?id=${id}`, {
       method: 'PUT',
-      body: formData, // Use FormData for handling files
+      body: formData,
     });
   
     if (response.ok) {

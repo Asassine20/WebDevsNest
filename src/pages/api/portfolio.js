@@ -112,72 +112,72 @@ export default async function handler(req, res) {
       }
       case 'PUT': {
         const { id } = req.query;
-
+      
         if (!id) {
           return res.status(400).json({ error: 'Portfolio ID is required' });
         }
-
+      
         const form = formidable({
-          multiples: false, // Handle single file uploads
-          keepExtensions: true, // Keep the original file extension
+          multiples: false, 
+          keepExtensions: true,
           maxFileSize: 2 * 1024 * 1024, // 2MB file size limit
         });
-
-        // Define the directory where files will be saved
+      
         const uploadDir = path.join(process.cwd(), 'public/uploads');
-
-        // Ensure the upload directory exists
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
-
+      
         form.uploadDir = uploadDir;
-
-        // Parse form data (including files)
+      
         form.parse(req, async (err, fields, files) => {
           if (err) {
             console.error('Error parsing form:', err);
             return res.status(500).json({ error: 'Form parse error' });
           }
-
-          const name = fields.name ? String(fields.name) : '';
-          const university = fields.university ? String(fields.university) : '';
+      
+          const name = fields.name || '';
+          const university = fields.university || '';
+          const githubLink = fields.githubLink || '';
+          const linkedinLink = fields.linkedinLink || '';
           const workExperience = fields.workExperience || '[]';
           const projects = fields.projects || '[]';
-
-          let profileImagePath = fields.profileImage || null; // Existing path or null
-          let resumeFilePath = fields.resume || null; // Existing path or null
-
-          // Handle new profile image (if uploaded)
+      
+          let profileImagePath = fields.profileImage || fields.existingProfileImage || null;
+          let resumeFilePath = fields.resume || fields.existingResume || null;
+      
+          // Handle profile image file
           if (files.profileImage && files.profileImage[0] && files.profileImage[0].filepath) {
             profileImagePath = `/uploads/${path.basename(files.profileImage[0].filepath)}`;
           }
-
-          // Handle new resume (if uploaded) and rename it to the original filename
+      
+          // Handle resume file
           if (files.resume && files.resume[0] && files.resume[0].filepath) {
-            const originalFilename = files.resume[0].originalFilename; // Get the original file name
-            const newFilePath = path.join(uploadDir, originalFilename); // Path with original name
-            fs.renameSync(files.resume[0].filepath, newFilePath); // Rename the file
-            resumeFilePath = `/uploads/${originalFilename}`; // Update file path
+            const originalFilename = files.resume[0].originalFilename;
+            const newFilePath = path.join(uploadDir, originalFilename);
+            fs.renameSync(files.resume[0].filepath, newFilePath);
+            resumeFilePath = `/uploads/${originalFilename}`;
           }
-
-          // Update the portfolio data, including file paths, in the MySQL database
+      
+          // Update portfolio data in the database
           await query(
-            'UPDATE Portfolio SET Name = ?, University = ?, ProfileImage = ?, ResumeFile = ?, WorkExperience = ?, Projects = ? WHERE Id = ?',
+            'UPDATE Portfolio SET Name = ?, University = ?, ProfileImage = ?, ResumeFile = ?, GithubLink = ?, LinkedinLink = ?, WorkExperience = ?, Projects = ? WHERE Id = ?',
             [
-              name || null,
-              university || null,
-              profileImagePath || null,
-              resumeFilePath || null,
-              JSON.stringify(workExperience || []), // Save empty array as default
-              JSON.stringify(projects || []), // Save empty array as default
+              name,
+              university,
+              profileImagePath,
+              resumeFilePath,
+              githubLink,
+              linkedinLink,
+              workExperience,
+              projects,
               id
             ]
           );
-
+      
           res.status(200).json({ message: 'Portfolio updated' });
         });
-
+      
         break;
       }
 
