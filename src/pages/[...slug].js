@@ -74,6 +74,35 @@ export async function getStaticProps({ params }) {
   };
 }
 
+const VerticalAd = () => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Check if adsbygoogle is already defined, and if not, initialize it
+      if (window.adsbygoogle && window.adsbygoogle.length === 0) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    }
+  }, []);
+
+  return (
+    <div className="verticalAd">
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
+        data-ad-slot="7927875990"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
+        crossOrigin="anonymous"
+      ></script>
+    </div>
+  );
+};
+
 const Post = ({ data, content, category, slug }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -238,6 +267,7 @@ const Post = ({ data, content, category, slug }) => {
               </div>
             </div>
           </div>
+          {!isSmallScreen && <VerticalAd />} {/* Display vertical ad on larger screens */}
         </div>
       </div>
     </>

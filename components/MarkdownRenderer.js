@@ -26,14 +26,14 @@ const GoogleAd = () => {
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-5256730967472287" // Replace with your AdSense client ID
+        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
         data-ad-slot="8227785553" // Replace with your AdSense slot ID
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
       <script
         async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5256730967472287"
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
         crossOrigin="anonymous"
       ></script>
     </div>
