@@ -6,6 +6,39 @@ import { FaRegCopy } from 'react-icons/fa6';
 import remarkGfm from 'remark-gfm'; // Import the GFM plugin
 import { okaidia } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Image from 'next/image';
+import { useEffect } from 'react';
+
+const GoogleAd = () => {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.adsbygoogle && document.querySelectorAll('.adsbygoogle').length) {
+      // Ensure this specific ad slot has not already been initialized
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('Ad error:', e);
+      }
+    }
+  }, []);
+
+  return (
+    <div style={{ margin: '1em 0', textAlign: 'center' }}>
+      {/* Google AdSense ad unit */}
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client="ca-pub-5256730967472287" // Replace with your AdSense client ID
+        data-ad-slot="8227785553" // Replace with your AdSense slot ID
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5256730967472287"
+        crossOrigin="anonymous"
+      ></script>
+    </div>
+  );
+};
 
 const MarkdownRenderer = ({ content }) => {
   return (
@@ -146,14 +179,18 @@ const MarkdownRenderer = ({ content }) => {
         },
         h2({ node, ...props }) {
           return (
-            <h2
-              style={{
-                fontSize: '32px',
-                marginBottom: '0.5em',
-                color: '#000',
-              }}
-              {...props}
-            />
+            <>
+              <h2
+                style={{
+                  fontSize: '32px',
+                  marginBottom: '0.5em',
+                  color: '#000',
+                }}
+                {...props}
+              />
+                            <GoogleAd /> {/* Inject Google Ad after every <h2> header */}
+                            </>
+
           );
         },
         h3({ node, ...props }) {
