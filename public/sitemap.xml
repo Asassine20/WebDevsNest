@@ -500,7 +500,55 @@
             </url>
           
             <url>
-              <loc>https://webdevsnest.com/amazon-web-services/how-to-set-up-an-rds-in-aws-for-a-mysql-database</loc>
+              <loc>https://webdevsnest.com/amazon-web-services/setting-up-a-mysql-rds-in-aws</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/amazon-web-services/setting-up-a-vpc-in-aws</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-installation</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/leetcode/169-majority-element-easy</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-file-handling-and-uploading</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-mysql</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/leetcode/121-best-time-to-buy-and-sell-stock-easy</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-model-view-template</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-forms</loc>
               <changefreq>weekly</changefreq>
               <priority>0.8</priority>
             </url>

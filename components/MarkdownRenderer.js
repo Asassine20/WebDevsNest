@@ -180,6 +180,7 @@ const MarkdownRenderer = ({ content }) => {
         h2({ node, ...props }) {
           return (
             <>
+            <GoogleAd />
               <h2
                 style={{
                   fontSize: '32px',
@@ -188,8 +189,7 @@ const MarkdownRenderer = ({ content }) => {
                 }}
                 {...props}
               />
-                            <GoogleAd /> {/* Inject Google Ad after every <h2> header */}
-                            </>
+            </>
 
           );
         },
