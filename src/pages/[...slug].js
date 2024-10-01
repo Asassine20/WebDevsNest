@@ -63,16 +63,18 @@ export async function getStaticProps({ params }) {
   const data = {
     id: post.Id,
     title: post.Title,
-    description: post.Content,
+    description: post.MetaDescription || post.Content.substring(0, 150), // Use metaDescription or a snippet from content
+    keywords: post.MetaKeywords || '', // Use metaKeywords from DB
     date: createdAtDate.toISOString(),
   };
   const content = post.Content;
 
   return {
     props: { data, content, category, slug },
-    revalidate: 60, // Revalidate the page at most every 60 seconds
+    revalidate: 60,
   };
 }
+
 
 const VerticalAd = () => {
   useEffect(() => {
@@ -209,14 +211,26 @@ const Post = ({ data, content, category, slug }) => {
 
   return (
     <>
-      <Head>
-        <title>{data.title}</title>
-        <meta name="description" content={data.description} />
-        <meta name="date" content={data.date} />
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      </Head>
+<Head>
+  <title>{data.title}</title>
+  <meta name="description" content={data.description} />
+  <meta name="keywords" content={data.keywords} />
+  <meta name="date" content={data.date} />
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": data.title,
+      "description": data.description,
+      "datePublished": data.date,
+      "author": {
+        "@type": "Person",
+        "name": "Andrew Sassine" // Replace with dynamic author name if needed
+      }
+    })}
+  </script>
+</Head>
+
 
       <ToastContainer />
       <div className={styles.pageContainer}>

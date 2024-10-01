@@ -553,4 +553,94 @@
               <priority>0.8</priority>
             </url>
           
+            <url>
+              <loc>https://webdevsnest.com/django/django-views</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/css/css-ultimate-cheat-sheet</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-models</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-displaying-files-pdf-images-text</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-urls</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/github/github-set-up-repository</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/python/top-10-companies-that-hire-python-programmers</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-best-practices</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-templates</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-views-selecting-data</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/algorithms/heapsort-algorithm</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/algorithms/merge-sort-algorithm</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-inline-formsets</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/algorithms/bubble-sort-algorithm</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/algorithms/quicksort-algorithm</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
     </urlset>

@@ -15,7 +15,9 @@ const NewPost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
-  const [subCategory, setSubCategory] = useState(''); // New SubCategory field
+  const [subCategory, setSubCategory] = useState('');
+  const [metaDescription, setMetaDescription] = useState('');
+  const [metaKeywords, setMetaKeywords] = useState('');
   const router = useRouter();
 
   // Define the handleContentChange function
@@ -25,16 +27,24 @@ const NewPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const formattedCategory = slugify(category); // Generate slug for the category
-    const formattedSlug = slugify(title); // Generate slug for the title
-  
+
+    const formattedCategory = slugify(category);
+    const formattedSlug = slugify(title);
+
     await fetch('/api/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, content, category: formattedCategory, subCategory, slug: formattedSlug }), // Include formatted slug
+      body: JSON.stringify({
+        title,
+        content,
+        category: formattedCategory,
+        subCategory,
+        slug: formattedSlug,
+        metaDescription,   // Include metaDescription
+        metaKeywords       // Include metaKeywords
+      }),
     });
-  
+
     router.push('/admin');
   };
 
@@ -78,6 +88,20 @@ const NewPost = () => {
           placeholder="SubCategory" // New SubCategory field
           value={subCategory}
           onChange={(e) => setSubCategory(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="Meta Description"
+          value={metaDescription}
+          onChange={(e) => setMetaDescription(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="Meta Keywords (comma-separated)"
+          value={metaKeywords}
+          onChange={(e) => setMetaKeywords(e.target.value)}
           className={styles.input}
         />
         <SimpleMDE

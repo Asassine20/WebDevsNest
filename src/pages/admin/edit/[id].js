@@ -12,7 +12,14 @@ import 'easymde/dist/easymde.min.css';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
 
 const EditPost = () => {
-  const [post, setPost] = useState({ title: '', content: '', category: '', subCategory: '' }); // Add subCategory field
+  const [post, setPost] = useState({
+    title: '',
+    content: '',
+    category: '',
+    subCategory: '',
+    metaDescription: '', // Add metaDescription state
+    metaKeywords: ''     // Add metaKeywords state
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -28,7 +35,9 @@ const EditPost = () => {
               title: data[0].Title || '',
               content: data[0].Content || '',
               category: data[0].Category || '',
-              subCategory: data[0].SubCategory || '', // Include subCategory
+              subCategory: data[0].SubCategory || '',
+              metaDescription: data[0].MetaDescription || '', // Fetch metaDescription
+              metaKeywords: data[0].MetaKeywords || '',       // Fetch metaKeywords
             });
           } else {
             setError('Post not found');
@@ -53,7 +62,7 @@ const EditPost = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...post, id, category: formattedCategory, slug: formattedSlug }), // Include formatted slug
+      body: JSON.stringify({ ...post, id, category: formattedCategory, slug: formattedSlug }), // Include metaDescription and metaKeywords
     });
   
     router.push('/admin');
@@ -131,13 +140,31 @@ const EditPost = () => {
           onChange={(e) => handleChange(e.target.value, 'category')}
           className={styles.input}
         />
-        <h4>SubCategory</h4> {/* Add SubCategory input */}
+        <h4>SubCategory</h4>
         <input
           type="text"
           name="subCategory"
           placeholder="SubCategory"
           value={post.subCategory}
           onChange={(e) => handleChange(e.target.value, 'subCategory')}
+          className={styles.input}
+        />
+        <h4>Meta Description</h4> {/* Add MetaDescription input */}
+        <input
+          type="text"
+          name="metaDescription"
+          placeholder="Meta Description"
+          value={post.metaDescription}
+          onChange={(e) => handleChange(e.target.value, 'metaDescription')}
+          className={styles.input}
+        />
+        <h4>Meta Keywords</h4> {/* Add MetaKeywords input */}
+        <input
+          type="text"
+          name="metaKeywords"
+          placeholder="Meta Keywords"
+          value={post.metaKeywords}
+          onChange={(e) => handleChange(e.target.value, 'metaKeywords')}
           className={styles.input}
         />
         <h4>Content</h4>

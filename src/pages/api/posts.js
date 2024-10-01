@@ -75,23 +75,23 @@ export default async (req, res) => {
         res.status(200).json(rows);
       }
     } else if (req.method === 'POST') {
-      const { title, content, category, subCategory } = req.body;
+      const { title, content, category, subCategory, metaDescription, metaKeywords } = req.body;
       const slug = generateSlug(title);
       const url = generateUrl(category, slug);
       await connection.execute(
-        'INSERT INTO Post (Title, Content, Category, SubCategory, Slug, Url) VALUES (?, ?, ?, ?, ?, ?)', 
-        [title, content, category, subCategory, slug, url]
+        'INSERT INTO Post (Title, Content, Category, SubCategory, Slug, Url, MetaDescription, MetaKeywords) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+        [title, content, category, subCategory, slug, url, metaDescription, metaKeywords]
       );
       await generateSitemap(); // Trigger sitemap generation after adding a post
       res.status(201).json({ message: 'Post created' });
     } else if (req.method === 'PUT') {
-      const { id, title, content, category, subCategory } = req.body;
+      const { id, title, content, category, subCategory, metaDescription, metaKeywords } = req.body;
       const slug = generateSlug(title);
       const url = generateUrl(category, slug);
       const currentTime = new Date();
       await connection.execute(
-        'UPDATE Post SET Title = ?, Content = ?, Category = ?, SubCategory = ?, Slug = ?, Url = ?, UpdatedAt = ? WHERE Id = ?', 
-        [title, content, category, subCategory, slug, url, currentTime, id]
+        'UPDATE Post SET Title = ?, Content = ?, Category = ?, SubCategory = ?, Slug = ?, Url = ?, MetaDescription = ?, MetaKeywords = ?, UpdatedAt = ? WHERE Id = ?', 
+        [title, content, category, subCategory, slug, url, metaDescription, metaKeywords, currentTime, id]
       );
       await generateSitemap(); // Trigger sitemap generation after updating a post
       res.status(200).json({ message: 'Post updated' });
