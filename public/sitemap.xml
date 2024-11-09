@@ -86,7 +86,7 @@
             </url>
           
             <url>
-              <loc>https://webdevsnest.com/python/python-if-else</loc>
+              <loc>https://webdevsnest.com/python/python-ifelse</loc>
               <changefreq>weekly</changefreq>
               <priority>0.8</priority>
             </url>
@@ -164,7 +164,7 @@
             </url>
           
             <url>
-              <loc>https://webdevsnest.com/python/python-open-close-files</loc>
+              <loc>https://webdevsnest.com/python/python-openclose-files</loc>
               <changefreq>weekly</changefreq>
               <priority>0.8</priority>
             </url>
@@ -639,6 +639,60 @@
           
             <url>
               <loc>https://webdevsnest.com/algorithms/quicksort-algorithm</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-dynamic-forms-nested-inline-formsets</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/django/django-views-sql-equivalents</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/tech-news/how-to-utilize-chatgpt-4o-canvas</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/gmail/how-to-send-automated-emails-using-google-apps-script-for-free</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/backend-development/backend-development-introduction</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/data-analyst/how-to-become-a-data-analyst-step-by-step-guide-for-2024</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/data-analyst/using-sql-as-a-data-analyst-essential-skills-for-success-in-2024</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/sql/sql-select-statements-types-examples-and-best-practices</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/sql/sql-aggregate-functions</loc>
               <changefreq>weekly</changefreq>
               <priority>0.8</priority>
             </url>
