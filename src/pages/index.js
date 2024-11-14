@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Home = () => {
   const sections = [
-    { title: 'Artifical Intelligence (AI)', link: '/ai', items: ['AI', 'Machine Learning', 'Deep Learning', 'Generative AI', 'Natural Language Processing', 'Computer Vision'] },
+    { title: 'Artificial Intelligence (AI)', link: '/ai', items: ['AI', 'Machine Learning', 'Deep Learning', 'Generative AI', 'Natural Language Processing', 'Computer Vision'] },
     { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'PHP', 'R', 'Flutter', 'Golang'] },
     { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Strings', 'Stacks', 'Queues', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables', 'Heaps', 'Matrix'] },
     { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Pattern Searching', 'Mathematical Algorithms'] },
@@ -26,8 +26,17 @@ const Home = () => {
     'C#': 'csharp'
   };
 
-  const generateLink = (item) => {
+  const generateLink = (item, sectionTitle) => {
     const alias = aliasMapping[item] || item.toLowerCase().replace(/\s+/g, '-');
+    
+    if (sectionTitle === 'Data Structures') {
+      return `/data-structures/${alias}`;
+    }
+    
+    if (sectionTitle === 'Algorithms') {
+      return `/algorithms/${alias}`;
+    }
+    
     return `/${alias}/${alias}-introduction`;
   };
 
@@ -52,7 +61,7 @@ const Home = () => {
             </div>
             <div className={`${styles.itemsContainer} ${bgColors[index % bgColors.length]}`}>
               {section.items.map((item, idx) => (
-                <Link key={idx} href={generateLink(item)} passHref>
+                <Link key={idx} href={generateLink(item, section.title)} passHref>
                   <div className={styles.item}><span>{item}</span></div>
                 </Link>
               ))}
