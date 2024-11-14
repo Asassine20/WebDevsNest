@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 const Home = () => {
   const sections = [
+    { title: 'Artifical Intelligence (AI)', link: '/ai', items: ['AI', 'Machine Learning', 'Deep Learning', 'Generative AI', 'Natural Language Processing', 'Computer Vision'] },
     { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'PHP', 'R', 'Flutter', 'Golang'] },
     { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Strings', 'Stacks', 'Queues', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables', 'Heaps', 'Matrix'] },
     { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Pattern Searching', 'Mathematical Algorithms'] },

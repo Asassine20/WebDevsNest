@@ -1,4 +1,7 @@
 const categoryLinks = {
+  'AI': {
+    defaultUrl: '/ai/ai-introduction',
+  },
   python: {
     defaultUrl: '/python/python-introduction',
   },
