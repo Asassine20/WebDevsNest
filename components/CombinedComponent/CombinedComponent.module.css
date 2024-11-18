@@ -199,6 +199,18 @@
   background-color: #444444;
 }
 
+.categoryButton {
+  background-color: #682bd7;
+  color: #fff;
+  padding: 5px 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 10px;
+  text-align: center;
+  font-size: 14px;
+  flex-shrink: 0; 
+}
+
 .activeLink {
   background-color: #682bd7;
   color: white;

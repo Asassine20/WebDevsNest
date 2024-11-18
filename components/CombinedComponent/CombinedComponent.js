@@ -168,6 +168,10 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
             <Image src={require('../../public/logo.png')} alt="Logo" height="50" />
           </Link>
         </div>
+        <Link href="/all-pages" className={styles.categoryButton}>
+          Posts
+        </Link>
+
         <SearchBar placeholder="Search posts..." />
         <div className={styles.authButtons}>
           {isLoggedIn ? (
