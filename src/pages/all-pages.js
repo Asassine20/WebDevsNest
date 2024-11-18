@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import styles from '../Styles/PostsPage.module.css';
+import styles from '../styles/PostsPage.module.css';
 
 export default function AllPostsPage() {
   const [posts, setPosts] = useState([]);
