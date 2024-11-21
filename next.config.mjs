@@ -9,6 +9,9 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    domains: ['miro.medium.com'], // Add domains of your external image sources here
+  },
 };
 
 export default nextConfig;
