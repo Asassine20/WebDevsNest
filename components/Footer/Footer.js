@@ -91,9 +91,6 @@ const Footer = () => {
               <li>
                 <Link href="/data-structures/heaps" passHref>Heaps</Link>
               </li>
-              <li>
-                <Link href="/data-structures/matrices" passHref>Matrices</Link>
-              </li>
             </ul>
           </div>
           <div className={styles.section}>
@@ -135,13 +132,10 @@ const Footer = () => {
                 <Link href="/react/react-introduction" passHref>React</Link>
               </li>
               <li>
-                <Link href="/next/next-introduction" passHref>Next</Link>
+                <Link href="/nextjs/nextjs-introduction" passHref>Next.js</Link>
               </li>
               <li>
                 <Link href="/nodejs/nodejs-introduction" passHref>Node.js</Link>
-              </li>
-              <li>
-                <Link href="/bootstrap/bootstrap-introduction" passHref>Bootstrap</Link>
               </li>
             </ul>
           </div>

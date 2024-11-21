@@ -6,12 +6,12 @@ import Link from 'next/link';
 const Home = () => {
   const sections = [
     { title: 'Artificial Intelligence (AI)', link: '/ai', items: ['AI', 'Machine Learning', 'Deep Learning', 'Generative AI', 'Natural Language Processing', 'Computer Vision'] },
-    { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'PHP', 'R', 'Flutter', 'Golang'] },
-    { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Strings', 'Stacks', 'Queues', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables', 'Heaps', 'Matrix'] },
-    { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Pattern Searching', 'Mathematical Algorithms'] },
-    { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Next', 'Node.js', 'Vue','Frontend Development', 'Backend Development', 'Angular', 'Django', 'Bootstrap'] },
-    { title: 'DevOps', link: '/devops', items: ['GitHub', 'Git', 'Amazon Web Services', 'Azure', 'CI/CD', 'Docker', 'Kubernetes', 'Jenkins', 'Google Cloud Services'] },
-    { title: 'Databases', link: '/databases', items: ['SQL', 'MySQL', 'Microsoft SQL Server', 'MongoDB', 'PostgreSQL', 'PL/SQL', 'SQLite', 'MariaDB', 'IBM Db2']}
+    { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'PHP', 'Flutter', 'Golang'] },
+    { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Stacks', 'Queues', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables', 'Heaps', 'Matrix'] },
+    { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Mathematical Algorithms'] },
+    { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Next', 'Nodejs', 'VueJS', 'Backend Development', 'Angular', 'Django', 'Bootstrap'] },
+    { title: 'DevOps', link: '/devops', items: ['GitHub', 'Git', 'Amazon Web Services', 'Azure', 'Docker'] },
+    { title: 'Databases', link: '/databases', items: ['SQL', 'MySQL', 'MongoDB', 'PostgreSQL']}
   ];
 
   const bgColors = [

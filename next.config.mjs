@@ -10,7 +10,7 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['miro.medium.com'], // Add domains of your external image sources here
+    domains: ['miro.medium.com', 'res.cloudinary.com'], // Correctly formatted array of domains
   },
 };
 
