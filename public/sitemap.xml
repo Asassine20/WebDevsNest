@@ -787,4 +787,22 @@
               <priority>0.8</priority>
             </url>
           
+            <url>
+              <loc>https://webdevsnest.com/redis/getting-started-with-redis-installation-and-basic-commands</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/redis/using-redis-as-a-cache-for-your-application</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/redis/how-to-manage-user-sessions-with-redis</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
     </urlset>
