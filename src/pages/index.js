@@ -9,7 +9,7 @@ const Home = () => {
     { title: 'Languages', link: '/languages', items: ['Python', 'Java', 'C++', 'SQL', 'C', 'C#', 'PHP', 'Flutter', 'Golang'] },
     { title: 'Data Structures', link: '/data-structures', items: ['Arrays', 'Stacks', 'Queues', 'Linked Lists', 'Trees', 'Graphs', 'Hash Tables', 'Heaps', 'Matrix'] },
     { title: 'Algorithms', link: '/algorithms', items: ['Searching Algorithms', 'Sorting Algorithms', 'Recursion Algorithms', 'Greedy Algorithms', 'Dynamic Programming', 'Divide and Conquer', 'Backtracking Algorithms', 'Graph Algorithms', 'Mathematical Algorithms'] },
-    { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Next', 'Nodejs', 'VueJS', 'Backend Development', 'Angular', 'Django', 'Bootstrap'] },
+    { title: 'Web Development', link: '/web-development', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Next', 'Nodejs', 'VueJS', 'Backend Development', 'Angular', 'Django'] },
     { title: 'DevOps', link: '/devops', items: ['GitHub', 'Git', 'Amazon Web Services', 'Azure', 'Docker'] },
     { title: 'Databases', link: '/databases', items: ['SQL', 'MySQL', 'MongoDB', 'PostgreSQL']}
   ];
