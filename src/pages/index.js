@@ -44,7 +44,7 @@ const Home = () => {
     <div className={styles.pageContainer}>
       <Head>
         <title>WebDevsNest - Learn to Program</title>
-        <meta name="description" content="Grow from basic programming fundamentals to complex concepts with WebDevsNest. Learn Python, Java, C++, and more." />
+        <meta name="description" content="Master programming with WebDevsNest! Access expert tutorials, coding tips, and resources for Python, Java, C++, and more. Solve coding questions, learn algorithms, and boost your career with in-demand skills today." />
       </Head>
       <div className={styles.container}>
         <h1 className={styles.mainHeader}>Learn to program</h1>

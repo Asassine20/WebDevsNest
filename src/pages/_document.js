@@ -6,11 +6,7 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet="UTF-8" />
-          <meta
-            name="description"
-            content="WebDevsNest - Your platform to learn and grow as a programmer. Master Python, Java, C++, and more."
-          />
-
+          {/* Removed the static meta description */}
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             strategy="afterInteractive"

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
+import Head from 'next/head';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 
@@ -58,8 +59,23 @@ function MyApp({ Component, pageProps }) {
   const shouldShowNav = !['/login', '/signup'].includes(router.pathname) && !isAdminRoute;
   const shouldShowFooter = shouldShowNav;
 
+  // Determine if it's the home page
+  const isHomePage = router.pathname === '/';
+
   return (
     <>
+      <Head>
+        {isHomePage ? (
+          // Global meta description for the home page
+          <meta
+            name="description"
+            content="WebDevsNest - Your platform to learn and grow as a programmer. Master Python, Java, C++, and more."
+          />
+        ) : (
+          // Avoid setting a global meta description for other pages
+          null
+        )}
+      </Head>
       {shouldShowNav && (
         <CombinedComponent
           category={category}
