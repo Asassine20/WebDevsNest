@@ -2,6 +2,7 @@ import Head from 'next/head';
 import SearchBar from '../../components/SearchBar/SearchBar'; // Use the SearchBar component here
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
+import { GeistSans } from 'geist/font/sans'; // Import GeistSans font
 
 const Home = () => {
   const sections = [
@@ -41,7 +42,7 @@ const Home = () => {
   };
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={`${styles.pageContainer} ${GeistSans.className}`}>
       <Head>
         <title>WebDevsNest - Learn to Program</title>
         <meta name="description" content="Master programming with WebDevsNest! Access expert tutorials, coding tips, and resources for Python, Java, C++, and more. Solve coding questions, learn algorithms, and boost your career with in-demand skills today." />

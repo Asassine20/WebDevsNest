@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import fetcher from '../../lib/fetcher';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GeistSans } from 'geist/font/sans';
 
 export async function getStaticPaths() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
@@ -63,8 +64,8 @@ export async function getStaticProps({ params }) {
   const data = {
     id: post.Id,
     title: post.Title,
-    description: post.MetaDescription || post.Content.substring(0, 150), // Use metaDescription or a snippet from content
-    keywords: post.MetaKeywords || '', // Use metaKeywords from DB
+    description: post.MetaDescription || post.Content.substring(0, 150),
+    keywords: post.MetaKeywords || '',
     date: createdAtDate.toISOString(),
   };
   const content = post.Content;
@@ -75,11 +76,9 @@ export async function getStaticProps({ params }) {
   };
 }
 
-
 const VerticalAd = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Check if adsbygoogle is already defined, and if not, initialize it
       if (window.adsbygoogle && window.adsbygoogle.length === 0) {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
@@ -197,43 +196,29 @@ const Post = ({ data, content, category, slug }) => {
     }
   };
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": data.title,
-    "description": data.description,
-    "datePublished": data.date,
-    "author": {
-      "@type": "Person",
-      "name": "Andrew Sassine"
-    }
-  };
-
   return (
     <>
-<Head>
-  <title>{data.title}</title>
-  <meta name="description" content={data.description} />
-  <meta name="keywords" content={data.keywords} />
-  <meta name="date" content={data.date} />
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": data.title,
-      "description": data.description,
-      "datePublished": data.date,
-      "author": {
-        "@type": "Person",
-        "name": "Andrew Sassine" // Replace with dynamic author name if needed
-      }
-    })}
-  </script>
-</Head>
-
-
+      <Head>
+        <title>{data.title}</title>
+        <meta name="description" content={data.description} />
+        <meta name="keywords" content={data.keywords} />
+        <meta name="date" content={data.date} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": data.title,
+            "description": data.description,
+            "datePublished": data.date,
+            "author": {
+              "@type": "Person",
+              "name": "Andrew Sassine"
+            }
+          })}
+        </script>
+      </Head>
       <ToastContainer />
-      <div className={styles.pageContainer}>
+      <div className={`${styles.pageContainer} ${GeistSans.className}`}>
         {!isSmallScreen && (
           <div className={styles.sidePanel}>
             {categoryPosts && categoryPosts.length > 0 ? (

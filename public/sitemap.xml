@@ -853,4 +853,16 @@
               <priority>0.8</priority>
             </url>
           
+            <url>
+              <loc>https://webdevsnest.com/redis/redis-get-all-keys</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
+            <url>
+              <loc>https://webdevsnest.com/redis/redis-get-key-value-pairs</loc>
+              <changefreq>weekly</changefreq>
+              <priority>0.8</priority>
+            </url>
+          
     </urlset>

@@ -8,6 +8,7 @@ import Image from 'next/image';
 import SearchBar from '../SearchBar/SearchBar';
 import styles from './CombinedComponent.module.css';
 import categoryLinks from '../../links';
+import { GeistSans } from 'geist/font/sans'; // Import GeistSans font
 
 const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -161,7 +162,7 @@ const CombinedComponent = ({ category, slug, isSlugPage, onSidePanelToggle }) =>
   }, []);
 
   return (
-    <div className={styles.contentWrapper}>
+    <div className={`${styles.contentWrapper} ${GeistSans.className}`}>
       <div className={styles.navbarContainer}>
         <div className={styles.logo}>
           <Link href="/">

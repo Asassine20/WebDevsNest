@@ -1,20 +1,19 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { GeistSans } from 'geist/font/sans';
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="en" className={GeistSans.className}>
         <Head>
           <meta charSet="UTF-8" />
-          {/* Removed the static meta description */}
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
-            strategy="afterInteractive"
+            async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}
           />
           <script
             id="google-analytics"
-            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
@@ -24,7 +23,6 @@ export default class MyDocument extends Document {
               `,
             }}
           />
-
           {/* Google AdSense Script */}
           <script
             async

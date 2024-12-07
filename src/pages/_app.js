@@ -59,21 +59,21 @@ function MyApp({ Component, pageProps }) {
   const shouldShowNav = !['/login', '/signup'].includes(router.pathname) && !isAdminRoute;
   const shouldShowFooter = shouldShowNav;
 
-  // Determine if it's the home page
   const isHomePage = router.pathname === '/';
 
   return (
     <>
       <Head>
         {isHomePage ? (
-          // Global meta description for the home page
           <meta
             name="description"
-            content="WebDevsNest - Your platform to learn and grow as a programmer. Master Python, Java, C++, and more."
+            content="WebDevsNest - Learn programming and coding skills with in-depth tutorials on Python, Java, C++, JavaScript, and more. Build your career in tech today."
           />
         ) : (
-          // Avoid setting a global meta description for other pages
-          null
+          <meta
+            name="description"
+            content={`Explore ${category || 'coding'} tutorials and guides to master ${slug || 'programming'}. Learn with examples and grow your tech skills.`}
+          />
         )}
       </Head>
       {shouldShowNav && (
@@ -84,7 +84,9 @@ function MyApp({ Component, pageProps }) {
           onSidePanelToggle={handleSidePanelToggle}
         />
       )}
-      <Component {...pageProps} />
+      <main>
+        <Component {...pageProps} />
+      </main>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTAG_ID} />
       <GoogleAnalytics gaId={process.env.GA_TRACKING_ID} />
       {shouldShowFooter && <Footer />}
