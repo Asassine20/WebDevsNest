@@ -92,6 +92,11 @@
   cursor: pointer;
 }
 
+.bottomLink a{
+  color: #5fe1d5 ;
+  margin-top: 20px;
+}
+
 /* Media query for screens below 920px wide */
 @media (max-width: 920px) {
   .footer {

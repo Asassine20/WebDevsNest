@@ -11,7 +11,7 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['miro.medium.com', 'res.cloudinary.com'], // Correctly formatted array of domains
+    domains: ['miro.medium.com', 'res.cloudinary.com', 'utfs.io'], // Correctly formatted array of domains
   },
 };
 

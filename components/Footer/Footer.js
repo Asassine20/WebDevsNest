@@ -161,6 +161,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className={styles.bottomLink}>
+        <a href="https://targetrankseo.com" target="_blank" rel="noopener noreferrer">
+          Web Design & SEO by Target Rank SEO
+        </a>
+      </div>
     </footer>
   );
 };
